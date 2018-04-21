@@ -4,35 +4,80 @@ buildings.small_generator = {
     name = "Generator",
     size = { x = 1, z = 1 },
     asset = "small_generator",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "power",
+            value = 4,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -2,
+        },
+    },
 }
 
 buildings.medium_generator = {
     name = "Medium powerplant",
     size = { x = 1, z = 1},
     asset = "medium_generator",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "power",
+            value = 10,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -4,
+        },
+    },
 }
 
 buildings.wind_generator = {
     name = "Windmill",
     size = { x = 1, z = 1 },
     asset = "wind_generator",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "power",
+            value = 3,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -1,
+        },
+    },
 }
 
 buildings.small_office = {
     name = "Office building",
     size = { x = 1, z = 1 },
     asset = "small_office",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "work",
+            value = -4,
+        },
+    },
 }
 
 buildings.large_office = {
     name = "Headquarters",
     size = { x = 1, z = 1 },
     asset = "large_office",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "work",
+            value = -10,
+        },
+    },
 }
 
 buildings.small_residential = {
@@ -44,7 +89,7 @@ buildings.small_residential = {
             type = "resource",
             resource = "housing",
             value = 4,
-        }
+        },
     },
 }
 
@@ -52,7 +97,13 @@ buildings.medium_residential = {
     name = "Appartment building",
     size = { x = 1, z = 1 },
     asset = "medium_residential",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "housing",
+            value = 8,
+        },
+    },
 }
 
 for k, v in pairs(buildings) do
