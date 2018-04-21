@@ -31,8 +31,8 @@ function menu:update(dt, b)
     if love.keyboard.isDown("right") then
         CAMERA.x = CAMERA.x + dt * 20
     end
-
 end
+
 function menu:keypressed(key)
         if love.keyboard.isDown("1") then
             BUILDING = "medium_residential"
