@@ -35,12 +35,10 @@ end
 
 function menu:keypressed(key)
         if love.keyboard.isDown("1") then
-            BUILDING = "medium_residential"
-            Gamestate.push(scripts.states.addBuilding)
+            scripts.gameobjects.buildings.medium_residential:build(STATE)
         end
         if love.keyboard.isDown("2") then
-            BUILDING = "small_residential"
-            Gamestate.push(scripts.states.addBuilding)
+            scripts.gameobjects.buildings.small_residential:build(STATE)
         end
 end
 

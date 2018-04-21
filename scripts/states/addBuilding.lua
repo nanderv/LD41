@@ -6,9 +6,10 @@
 -- To change this template use File | Settings | File Templates.
 --
 local addBuilding = {} -- previously: Gamestate.new()
-function addBuilding:enter(prev)
-    print("Placing building".. BUILDING)
+function addBuilding:enter(prev, state, building)
     addBuilding.prev = prev
+    addBuilding.building = building
+    addBuilding.state = state
     -- setup entities here
 end
 
@@ -19,9 +20,9 @@ end
 
 function addBuilding:mousepressed(x, y, click)
     if CAMERA.focus then
-        if not scripts.helpers.calculations.hasBuilding(STATE, CAMERA.focus.x, CAMERA.focus.y) then
+        if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then
             print("Placed building")
-            STATE.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = BUILDING }
+            addBuilding.state.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = addBuilding.building }
             Gamestate.pop()
         end
     end
