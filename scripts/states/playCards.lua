@@ -44,6 +44,11 @@ function menu:keypressed(key)
             Gamestate.push(scripts.states.showCard, STATE, 2)
         end
     end
+    if love.keyboard.isDown("3") then
+        if STATE.hand[2] then
+            Gamestate.push(scripts.states.showCard, STATE, 3)
+        end
+    end
 end
 
 return menu
