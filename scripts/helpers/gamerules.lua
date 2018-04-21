@@ -12,6 +12,7 @@ function gamerules.getAvailableWork(state)
     local total_work = state.properties.population
 
     for _, building in ipairs(state.buildings) do
+        local building = scripts.gameobjects.buildings[building.building]
         for _, effect in ipairs(building.effects) do
             if effect.type == "resource" and effect.resource == "work" then
                 total_work = total_work + effect.value
@@ -34,6 +35,20 @@ function gamerules.getTotalHousing(state)
     end
 
     return housing
+end
+
+function gamerules.getExcessPower(state)
+    local power = 0
+    for _, building in ipairs(state.buildings) do
+        local building = scripts.gameobjects.buildings[building.building]
+        for _, effect in ipairs(building.effects) do
+            if effect.type == "resource" and effect.resource == "power" then
+                power = power + effect.value
+            end
+        end
+    end
+
+    return power
 end
 
 function gamerules.getAvailableHousing(state)
