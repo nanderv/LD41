@@ -8,7 +8,6 @@
 
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev, state, card)
-    print(card)
     menu.state = state
     menu.card = card
     menu.prev = prev
@@ -33,8 +32,6 @@ function menu:mousepressed(x,y,mouse_btn)
             if mx > x and mx < x + w and my > y and my < y + h then
                 Gamestate.pop()
                 Gamestate.push(scripts.states.showCard, STATE, k+ LOWEST)
-                print(k)
-
             end
         end
         local mx, my = love.mouse.getPosition()
@@ -51,7 +48,7 @@ function menu:keypressed(key)
 
 
     if love.keyboard.isDown("return") then
-        Gamestate.switch(scripts.states.runCard, STATE, menu.card+ LOWEST)
+        Gamestate.switch(scripts.states.runCard, STATE, menu.card)
     end
     if love.keyboard.isDown("p") then
         Gamestate.pop()

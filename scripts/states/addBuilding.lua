@@ -36,12 +36,15 @@ function addBuilding:mousepressed(x, y, click)
         end
     end
 end
+
 function addBuilding:mousereleased(x, y, mouse_btn)
     local prev = addBuilding.prev
     while prev.prev and not prev.mousepressed do
         prev = prev.prev
     end
-    prev:mousereleased(x, y, mouse_btn)
+    if prev.mousereleased then
+        prev:mousereleased(x, y, mouse_btn)
+    end
 end
 
 function addBuilding:update(dt)

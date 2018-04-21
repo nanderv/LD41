@@ -99,6 +99,7 @@ function menu:update(dt, wait)
             end
         else
             table.remove(STATE.hand, menu.card)
+            STATE.discardPile[#STATE.discardPile+1] = menu.card
             Gamestate.pop()
         end
     end

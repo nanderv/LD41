@@ -69,9 +69,7 @@ function menu:mousepressed(x, y, mouse_btn)
             local x, y = 100 + (k) * 200, 568
             local mx, my = love.mouse.getPosition()
             if mx > x and mx < x + w and my > y and my < y + h then
-                print(k, LOWEST)
                 Gamestate.push(scripts.states.showCard, STATE, (k+LOWEST))
-
             end
         end
         local mx, my = love.mouse.getPosition()
