@@ -15,7 +15,8 @@ function DRAWMAP(objects)
     local max = 0
     local min = 1000
     for k,v in pairs(objects) do
-        renderByLayers[v.position.z] =renderByLayers[v.position.z] or {}
+        v.position.z = v.position.z + (GFX[v.texture].z or 0)
+        renderByLayers[v.position.z] = renderByLayers[v.position.z] or {}
         renderByLayers[v.position.z][#renderByLayers[v.position.z]+1] = v
         max = math.max(v.position.z, max+GFX[v.texture].slides)
         min = math.min(v.position.z, min)
@@ -55,8 +56,10 @@ local function draw(self, x,y, z,layer, r, batch)
     local i = layer+1
     if not self.x  then self.x = 0 end
     if not self.y  then self.y = 0 end
+    if not self.z  then self.z = 0 end
     local x = x + self.x*math.cos(r)+  self.y*math.sin(r)
     local y = y - self.x*math.cos(r)+  self.y* math.sin(r)
+    -- local z = z + self.z
     local XX= (x -CAMERA.x )*math.cos(CAMERA.r)+  (y-CAMERA.y)*math.sin(CAMERA.r)
     local YY=  - (x -CAMERA.x)*math.sin(CAMERA.r) +  (y-CAMERA.y)*math.cos(CAMERA.r)
     batch:add(self.quads[i], XX+ 0.5*CAMERA.w,YY -i-z + 0.5*CAMERA.h,r-CAMERA.r,1,1,self.sizeX/2, self.sizeY/2)
