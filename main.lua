@@ -1,5 +1,6 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 pprint = require 'lib.pprint'
+
 STATE = {
     properties = { population = 5, housing = 9, nuisance = 4 },
     buildings = {
@@ -10,7 +11,6 @@ STATE = {
         { x = 1, y = 2, building = "medium_generator" },
         { x = 2, y = 2, building = "large_office" },
     },
-    UIState = "addBuilding",
     hand = { "small_office", "small_office" },
     discardPile = {},
     drawPile = {},
