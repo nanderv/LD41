@@ -41,6 +41,8 @@ mapView.draw = function()
     love.graphics.pop()
 
     scripts.rendering.renderUI.renderBackdrop()
+    scripts.rendering.renderUI.drawCards(STATE)
+
     love.graphics.pop()
 end
 return mapView
