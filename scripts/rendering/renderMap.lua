@@ -28,7 +28,7 @@ function DRAWMAP(objects)
             for k, v in ipairs(renderByLayers[i]) do
                 local xx = CAMERA.x - v.position.x
                 local yy = CAMERA.y - v.position.y
-                if xx * xx + yy * yy < 200 * 500 then
+                if xx * xx + yy * yy < 600 * 300 then
                     renderObjs[v] = v
                 end
             end
