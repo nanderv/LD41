@@ -38,6 +38,19 @@ cards.small_office = {
     is_creeper = false,
 }
 
+cards.large_office = {
+    name = "Headquarters",
+    effects = {
+        {
+            type = "place_building",
+            building = "large_office",
+        }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
 local function verifyResourceRequirement(requirement, state)
     if requirement.relation == "gt" then
         return state.properties[requirement.property] > requirement.value

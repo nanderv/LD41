@@ -93,9 +93,8 @@ function menu:update(dt, wait)
                 menu.showing = "RETURN"
             end
         else
-            STATE.hand[menu.card]  = nil
+            table.remove(STATE.hand, menu.card)
             Gamestate.pop()
-
         end
     end
 end
