@@ -7,15 +7,13 @@
 --
 
 local menu = {} -- previously: Gamestate.new()
-local textures = {}
-textures["appartment"] = "appartment"
 function menu:enter(prev)
 end
 
 function menu:draw()
     local objects = {}
     for k, v in ipairs(STATE.buildings) do
-        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = textures[v.building] }
+        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
     end
     for i = -8, 8 do
         for j = -8, 8 do

@@ -1,9 +1,16 @@
-buildings = buildings or {}
+local buildings = {}
 
 buildings.small_generator = {
     name = "Generator",
     size = { x = 1, z = 1 },
     asset = "small_generator",
+    effects = {},
+}
+
+buildings.medium_generator = {
+    name = "Medium powerplant",
+    size = { x = 1, z = 1},
+    asset = "medium_generator",
     effects = {},
 }
 
@@ -46,3 +53,5 @@ for _, v in pairs(buildings) do
         end
     end
 end
+
+return buildings
