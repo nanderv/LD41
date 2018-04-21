@@ -42,6 +42,7 @@ mapView.draw = function()
 
     scripts.rendering.renderUI.renderBackdrop()
     scripts.rendering.renderUI.drawCards(STATE)
+    scripts.rendering.renderUI.drawStats(STATE)
 
     love.graphics.pop()
 end

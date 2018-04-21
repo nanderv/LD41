@@ -9,8 +9,14 @@
 local R = {}
 
 R.renderBackdrop = function()
+    -- Draw top bar
+    love.graphics.rectangle("fill", 0, 0, 1366, 30)
+
+    -- Draw bottom UI component
     love.graphics.rectangle("fill", 0, 568, 1366, 200)
     love.graphics.rectangle("fill", -1000, 0, 1000, 1000)
+
+    -- Sharply cut off sides of screen
     love.graphics.setColor(0, 0, 0)
     love.graphics.rectangle("fill", 1366, 0, 2000, 1000)
     love.graphics.rectangle("fill", 0, 768, 2000, 1000)
@@ -28,5 +34,18 @@ end
 R.drawCard = function(state, card)
     love.graphics.scale(math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING)))
     love.graphics.print(scripts.gameobjects.cards[state.hand[card]].name, 50,50)
+end
+
+R.drawStats = function(state)
+    local gamerules = scripts.helpers.gamerules
+    love.graphics.getFont():setFilter("linear", "linear")
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print("Population: " .. state.properties.population, 200, 7)
+    love.graphics.print("Housing: " .. gamerules.getTotalHousing(state), 300, 7)
+    love.graphics.print("Happiness: " .. gamerules.getHappiness(state), 400, 7)
+--    love.graphics.print("Population: " .. state.properties.population, 200, 7)
+--    love.graphics.print("Population: " .. state.properties.population, 200, 7)
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.setDefaultFilter("nearest", "nearest")
 end
 return R
