@@ -37,9 +37,8 @@ buildings.medium_residential = {
 
 for _, v in pairs(buildings) do
     function v:build(state)
-        local GS = require"lib.gamestate"
-        require"scripts.states"
-        GS.push(scripts.states.addBuilding, self)
+        STATE.UIState = "addBuilding"
+        STATE.UIStateParams = { building = self }
     end
     function v:update(state)
         for _, effect in ipairs(self.effects) do
