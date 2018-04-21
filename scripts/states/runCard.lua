@@ -16,8 +16,8 @@
 
 local menu = {} -- previously: Gamestate.new()
 
-function menu:enter(a,state, card)
-
+function menu:enter(prev,state, card)
+    menu.prev = prev
     menu.state = state
     menu.card = card
     menu.showing = "costs"
@@ -57,6 +57,7 @@ effects.place_building = {
     duration = 0,
 }
 function menu:update(dt, wait)
+    menu.prev:update(dt, true)
     if not wait then
         menu.time = menu.time + dt
 
@@ -99,7 +100,7 @@ function menu:update(dt, wait)
 end
 
 function menu:draw()
-    scripts.rendering.renderMapView.draw()
+    menu.prev:draw(true)
     scripts.rendering.renderUI.drawCard(menu.state, menu.card)
 end
 

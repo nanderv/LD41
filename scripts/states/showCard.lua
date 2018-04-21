@@ -10,30 +10,18 @@ local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev, state, card)
     menu.state = state
     menu.card = card
+    menu.lowest = 0
+    menu.prev = prev
 end
 
 function menu:draw()
-    scripts.rendering.renderMapView.draw()
+    menu.prev:draw(true)
     scripts.rendering.renderUI.drawCard(menu.state, menu.card)
 end
 
 function menu:update(dt, b)
-    if love.keyboard.isDown("r") then
-        CAMERA.r = CAMERA.r + 0.1 * dt
-    end
+    menu.prev:update(dt, true)
 
-    if love.keyboard.isDown("up") then
-        CAMERA.y = CAMERA.y - dt * 20
-    end
-    if love.keyboard.isDown("down") then
-        CAMERA.y = CAMERA.y + dt * 20
-    end
-    if love.keyboard.isDown("left") then
-        CAMERA.x = CAMERA.x - dt * 20
-    end
-    if love.keyboard.isDown("right") then
-        CAMERA.x = CAMERA.x + dt * 20
-    end
 end
 
 function menu:keypressed(key)
