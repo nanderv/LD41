@@ -23,7 +23,7 @@ mapView.draw = function()
     love.graphics.setColor(1,1,1)
     if CAMERA.focus then
         local v = CAMERA.focus
-        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 1, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = "underConstruction" }
+        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = "underConstruction" }
     end
     for k, v in ipairs(STATE.buildings) do
         objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
