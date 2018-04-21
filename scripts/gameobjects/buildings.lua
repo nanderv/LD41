@@ -14,6 +14,13 @@ buildings.medium_generator = {
     effects = {},
 }
 
+buildings.wind_generator = {
+    name = "Windmill",
+    size = { x = 1, z = 1 },
+    asset = "wind_generator",
+    effects = {},
+}
+
 buildings.small_office = {
     name = "Office building",
     size = { x = 1, z = 1 },
