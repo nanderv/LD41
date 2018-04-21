@@ -1,6 +1,12 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 pprint = require 'lib.pprint'
-STATE = { properties = { population = 5, housing = 9, nuisance = 4 }, buildings = {{ x = 1, y = 2, building = "medium_generator" }}, UIState = "addBuilding" }
+STATE = { properties = { population = 5, housing = 9, nuisance = 4 }, buildings = {
+    { x = 1, y = 1, building = "wind_generator" },
+    { x = 2, y = 1, building = "medium_residential" },
+    { x = 3, y = 1, building = "small_office" },
+    { x = 4, y = 1, building = "small_residential" },
+    { x = 1, y = 2, building = "medium_generator" },
+}, UIState = "addBuilding" }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
 require 'lib.load_all_scripts'
