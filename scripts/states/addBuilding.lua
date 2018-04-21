@@ -6,16 +6,17 @@
 -- To change this template use File | Settings | File Templates.
 --
 local addBuilding = {} -- previously: Gamestate.new()
-function addBuilding:enter(prev, state, building)
+function addBuilding:enter(prev, state, building, card)
     addBuilding.prev = prev
     addBuilding.building = building
     addBuilding.state = state
+    addBuilding.card = card
     -- setup entities here
 end
 
 function addBuilding:draw()
-    addBuilding.prev:draw(true)
-    love.graphics.print(love.timer.getFPS(), 20, 20)
+    addBuilding.prev.prev:draw(true)
+    scripts.rendering.renderUI.drawMessage("Place building .. " .. addBuilding.building)
 end
 
 function addBuilding:mousepressed(x, y, click)
