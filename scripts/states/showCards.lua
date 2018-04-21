@@ -12,8 +12,7 @@ function menu:enter(prev)
 end
 
 function menu:draw()
-    love.graphics.print("Place building npow", 10, 10)
-    if menu.prev then menu.prev:draw() end
+    menu.prev:draw()
 end
 
 function menu:keyreleased(key, code)
