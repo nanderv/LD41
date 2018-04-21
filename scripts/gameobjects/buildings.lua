@@ -30,7 +30,7 @@ buildings.small_office = {
 
 buildings.large_office = {
     name = "Headquarters",
-    size = { x = 2, z = 2 },
+    size = { x = 1, z = 1 },
     asset = "large_office",
     effects = {},
 }

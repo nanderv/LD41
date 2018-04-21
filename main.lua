@@ -6,6 +6,7 @@ STATE = { properties = { population = 5, housing = 9, nuisance = 4 }, buildings 
     { x = 3, y = 1, building = "small_office" },
     { x = 4, y = 1, building = "small_residential" },
     { x = 1, y = 2, building = "medium_generator" },
+    { x = 2, y = 2, building = "large_office" },
 }, UIState = "addBuilding", hand={"small_office", "small_office"} }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
