@@ -1,6 +1,6 @@
 cards = cards or {}
 
-cards.generator = {
+cards.small_generator = {
     name = "Generator",
     effects = {
         {
