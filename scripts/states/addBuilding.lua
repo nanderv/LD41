@@ -5,26 +5,30 @@
 -- Time: 14:09
 -- To change this template use File | Settings | File Templates.
 --
-local menu = {} -- previously: Gamestate.new()
-function menu:enter(prev)
-    menu.prev = prev
+local addBuilding = {} -- previously: Gamestate.new()
+function addBuilding:enter(prev)
+    print("Placing building".. BUILDING)
+    addBuilding.prev = prev
     -- setup entities here
 end
 
-function menu:draw()
-    local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
-    if y then
-        love.graphics.print("Place building npow" .. x .. "  " .. y, 10, 10)
-    else
-        love.graphics.print("Place building npow: COORDINATES Not AVAILABLE", 10, 10)
+function addBuilding:draw()
+    scripts.rendering.renderMapView.draw()
+    love.graphics.print(love.timer.getFPS(), 20, 20)
+end
+
+function addBuilding:mousepressed(x, y, click)
+    if CAMERA.focus then
+        if not scripts.helpers.calculations.hasBuilding(STATE, CAMERA.focus.x, CAMERA.focus.y) then
+            print("Placed building")
+            STATE.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = BUILDING }
+            Gamestate.pop()
+        end
     end
-    love.graphics.print(love.timer.getFPS(), 20,20)
-
-
-    if menu.prev then menu.prev:draw() end
+end
+function addBuilding:update(dt)
+    addBuilding.prev:update(dt, true)
 end
 
-function menu:keyreleased(key, code)
-end
 
-return menu
+return addBuilding

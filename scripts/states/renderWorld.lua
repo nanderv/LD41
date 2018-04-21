@@ -11,25 +11,10 @@ function menu:enter(prev)
 end
 
 function menu:draw()
-    local objects = {}
-    for k, v in ipairs(STATE.buildings) do
-        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
-    end
-    for i = -8, 8 do
-        for j = -8, 8 do
-            objects[#objects + 1] = { position = { x = i * 64, y = j * 64, z = 0, r = 0 }, texture = "street" }
-            objects[#objects + 1] = { position = { x = i * 64 + 32, y = j * 64 + 32, z = 0, r = 0.5 * math.pi }, texture = "street" }
-            objects[#objects + 1] = { position = { x = i * 64, y = j * 64 + 32, z = 0, r = 0.5 * math.pi }, texture = "crossing" }
-        end
-    end
-    love.graphics.push()
-    love.graphics.scale(SCALING)
-    DRAWMAP(objects)
-    love.graphics.pop()
-    scripts.states[STATE.UIState].draw()
+    scripts.rendering.renderMapView.draw()
 end
 
-function menu:update(dt)
+function menu:update(dt, b)
     if love.keyboard.isDown("r") then
         CAMERA.r = CAMERA.r + 0.1 * dt
     end
@@ -46,9 +31,18 @@ function menu:update(dt)
     if love.keyboard.isDown("right") then
         CAMERA.x = CAMERA.x + dt * 20
     end
+    if not b then
+        if love.keyboard.isDown("1") then
+            BUILDING = "medium_residential"
+            Gamestate.push(scripts.states.addBuilding)
+        end
+        if love.keyboard.isDown("2") then
+            BUILDING = "small_residential"
+            Gamestate.push(scripts.states.addBuilding)
+        end
+    end
 end
 
-function menu:keyreleased(key, code)
-end
+
 
 return menu

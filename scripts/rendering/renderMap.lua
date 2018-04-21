@@ -7,7 +7,7 @@
 --
 
 GFX = {}
-SCALING = 4
+SCALING = 2
 CAMERA = {x=32+64,y=128-32,r=0, w=love.graphics.getWidth()/SCALING,h=love.graphics.getHeight()/SCALING }
 
 function DRAWMAP(objects)
@@ -53,9 +53,11 @@ local function addQuads(format)
 end
 local function draw(self, x,y, z,layer, r, batch)
     local i = layer+1
-    local x = (self.x or 0) + x
-    local y = (self.y or 0) + y
-    local XX= (x -CAMERA.x)*math.cos(CAMERA.r)+  (y-CAMERA.y)*math.sin(CAMERA.r)
+    if not self.x  then self.x = 0 end
+    if not self.y  then self.y = 0 end
+    local x = x + self.x*math.cos(r)+  self.y*math.sin(r)
+    local y = y - self.x*math.cos(r)+  self.y* math.sin(r)
+    local XX= (x -CAMERA.x )*math.cos(CAMERA.r)+  (y-CAMERA.y)*math.sin(CAMERA.r)
     local YY=  - (x -CAMERA.x)*math.sin(CAMERA.r) +  (y-CAMERA.y)*math.cos(CAMERA.r)
     batch:add(self.quads[i], XX+ 0.5*CAMERA.w,YY -i-z + 0.5*CAMERA.h,r-CAMERA.r,1,1,self.sizeX/2, self.sizeY/2)
 end
