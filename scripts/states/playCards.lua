@@ -34,19 +34,11 @@ function menu:update(dt, b)
 end
 
 function menu:keypressed(key)
-    if love.keyboard.isDown("1") then
-        if STATE.hand[1] then
-            Gamestate.push(scripts.states.showCard, STATE, 1)
-        end
-    end
-    if love.keyboard.isDown("2") then
-        if STATE.hand[2] then
-            Gamestate.push(scripts.states.showCard, STATE, 2)
-        end
-    end
-    if love.keyboard.isDown("3") then
-        if STATE.hand[2] then
-            Gamestate.push(scripts.states.showCard, STATE, 3)
+    for k, v in ipairs({"1", "2", "3", "4", "5", "6", "7", "8", "9"}) do
+        if love.keyboard.isDown(v) then
+            if STATE.hand[k] then
+                Gamestate.push(scripts.states.showCard, STATE, k)
+            end
         end
     end
 end
