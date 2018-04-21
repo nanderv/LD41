@@ -12,6 +12,7 @@ end
 
 function menu:draw()
     scripts.rendering.renderMapView.draw()
+    scripts.rendering.renderUI.drawCards(STATE)
 end
 
 function menu:update(dt, b)

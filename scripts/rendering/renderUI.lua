@@ -16,4 +16,13 @@ R.renderBackdrop = function()
     love.graphics.rectangle("fill", 0, 768, 2000, 1000)
     love.graphics.setColor(1, 1, 1)
 end
+
+R.drawCards = function(state)
+    for k,v in ipairs(state.hand) do
+        print(scripts.gameobjects.cards[v].name)
+        love.graphics.setColor(0, 0, 0)
+        love.graphics.print(k..": "..scripts.gameobjects.cards[v].name, 200,568+k*20)
+        love.graphics.setColor(1, 1, 1)
+    end
+end
 return R
