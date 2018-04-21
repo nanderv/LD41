@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 local mapView = {}
-mapView.draw = function()
+mapView.draw = function(lowest)
     require("lib.lovebird").update()
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
     if y then
@@ -41,7 +41,7 @@ mapView.draw = function()
     love.graphics.pop()
 
     scripts.rendering.renderUI.renderBackdrop()
-    scripts.rendering.renderUI.drawCards(STATE)
+    scripts.rendering.renderUI.drawCards(STATE, lowest)
 
     love.graphics.pop()
 end

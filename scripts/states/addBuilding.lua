@@ -14,7 +14,7 @@ function addBuilding:enter(prev, state, building)
 end
 
 function addBuilding:draw()
-    scripts.rendering.renderMapView.draw()
+    addBuilding.prev:draw(true)
     love.graphics.print(love.timer.getFPS(), 20, 20)
 end
 

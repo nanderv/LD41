@@ -11,7 +11,7 @@ STATE = {
         { x = 1, y = 2, building = "medium_generator" },
         { x = 2, y = 2, building = "large_office" },
     },
-    hand = { "small_office", "small_office" },
+    hand = { "small_office", "small_office",  "small_office", "small_office" },
     discardPile = {},
     drawPile = {},
 }
