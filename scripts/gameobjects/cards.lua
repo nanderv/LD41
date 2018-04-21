@@ -1,4 +1,4 @@
-cards = cards or {}
+local cards = {}
 
 cards.small_generator = {
     name = "Generator",
@@ -75,8 +75,7 @@ for _, card in pairs(cards) do
             if effect.type == "add_card" then
                 -- TODO: Pushing a card to the deck.
             elseif effect.type == "place_building" then
-                require"scripts.buildings"
-                scripts.buildings[effect.building]:build(state)
+                scripts.gameobjects.buildings[effect.building]:build(state)
             end
         end
     end
@@ -86,3 +85,5 @@ for _, card in pairs(cards) do
         self:runEffects(state)
     end
 end
+
+return cards
