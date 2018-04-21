@@ -7,8 +7,8 @@
 --
 
 GFX = {}
-
-CAMERA = {x=0,y=0,r=0, w=love.graphics.getWidth()/1.5,h=love.graphics.getHeight()/1.5 }
+SCALING = 4
+CAMERA = {x=32+64,y=128-32,r=0, w=love.graphics.getWidth()/SCALING,h=love.graphics.getHeight()/SCALING }
 
 function DRAWMAP(objects)
     local renderByLayers = {}
@@ -49,9 +49,11 @@ local function addQuads(format)
 end
 local function draw(self, x,y, z,layer, r, batch)
     local i = layer+1
-    local XX= x*math.cos(CAMERA.r)+  y*math.sin(CAMERA.r)
-    local YY=  - x*math.sin(CAMERA.r) +  y*math.cos(CAMERA.r)
-    batch:add(self.quads[i], -CAMERA.x +XX+ 0.5*CAMERA.w,-CAMERA.y+ YY -i-z + 0.5*CAMERA.h,r-CAMERA.r,1,1,self.sizeX/2, self.sizeY/2)
+    local x = (self.x or 0) + x
+    local y = (self.y or 0) + y
+    local XX= (x -CAMERA.x)*math.cos(CAMERA.r)+  (y-CAMERA.y)*math.sin(CAMERA.r)
+    local YY=  - (x -CAMERA.x)*math.sin(CAMERA.r) +  (y-CAMERA.y)*math.cos(CAMERA.r)
+    batch:add(self.quads[i], XX+ 0.5*CAMERA.w,YY -i-z + 0.5*CAMERA.h,r-CAMERA.r,1,1,self.sizeX/2, self.sizeY/2)
 end
 return function()
     local f = require 'assets.25d.formats'
