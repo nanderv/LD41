@@ -19,14 +19,30 @@ function addBuilding:draw()
 end
 
 function addBuilding:mousepressed(x, y, click)
-    if CAMERA.focus then
-        if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then
-            print("Placed building")
-            addBuilding.state.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = addBuilding.building }
-            Gamestate.pop()
+    local prev = addBuilding.prev
+    while prev.prev and not prev.mousepressed do
+        prev = prev.prev
+    end
+    prev:mousepressed(x, y, click)
+
+    if click == 1 then
+        if CAMERA.focus then
+            if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then
+                print("Placed building")
+                addBuilding.state.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = addBuilding.building }
+                Gamestate.pop()
+            end
         end
     end
 end
+function addBuilding:mousereleased(x, y, mouse_btn)
+    local prev = addBuilding.prev
+    while prev.prev and not prev.mousepressed do
+        prev = prev.prev
+    end
+    prev:mousereleased(x, y, mouse_btn)
+end
+
 function addBuilding:update(dt)
     addBuilding.prev:update(dt, true)
 end

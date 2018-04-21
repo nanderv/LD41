@@ -26,7 +26,7 @@ function menu:update(dt, b)
         local x,y = love.mouse.getPosition()
         CAMERA.x = menu.cX + (-y + menu.orY ) * math.sin(CAMERA.r) + (x - menu.orX ) * math.cos(CAMERA.r)
         CAMERA.y = menu.cY - (-y + menu.orY ) * math.cos(CAMERA.r) + (x - menu.orX ) * math.sin(CAMERA.r)
-    else
+    end
         if love.keyboard.isDown("q") then
             CAMERA.r = CAMERA.r - 0.3 * dt
         end
@@ -49,7 +49,6 @@ function menu:update(dt, b)
         end
         CAMERA.x = CAMERA.x + ly * math.sin(CAMERA.r) + lx * math.cos(CAMERA.r)
         CAMERA.y = CAMERA.y - ly * math.cos(CAMERA.r) + lx * math.sin(CAMERA.r)
-    end
 end
 
 function menu:keypressed(key)
