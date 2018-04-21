@@ -7,6 +7,7 @@
 --
 local mapView = {}
 mapView.draw = function()
+
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
     if y then
         CAMERA.focus = { x = x, y = y }
@@ -17,6 +18,9 @@ mapView.draw = function()
     local objects = {}
     love.graphics.push()
     love.graphics.scale(math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING)))
+    love.graphics.setColor(0.2,0.3,0.2)
+    love.graphics.rectangle("fill",0,0,1366,768)
+    love.graphics.setColor(1,1,1)
     if CAMERA.focus then
         local v = CAMERA.focus
         objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 1, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = "underConstruction" }
