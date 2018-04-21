@@ -2,16 +2,19 @@
 -- Created by IntelliJ IDEA.
 -- User: nander
 -- Date: 21/04/2018
--- Time: 14:54
+-- Time: 18:25
 -- To change this template use File | Settings | File Templates.
 --
 
 local menu = {} -- previously: Gamestate.new()
-function menu:enter(prev)
+function menu:enter(prev, state, card)
+    menu.state = state
+    menu.card = card
 end
 
 function menu:draw()
     scripts.rendering.renderMapView.draw()
+    scripts.rendering.renderUI.drawCard(menu.state, menu.card)
 end
 
 function menu:update(dt, b)
@@ -34,16 +37,13 @@ function menu:update(dt, b)
 end
 
 function menu:keypressed(key)
-    if love.keyboard.isDown("1") then
-        if STATE.hand[1] then
-            Gamestate.push(scripts.states.showCard, STATE, 1)
-        end
+    if love.keyboard.isDown("return") then
+        Gamestate.switch(scripts.states.runCard, STATE, menu.card)
     end
-    if love.keyboard.isDown("2") then
-        if STATE.hand[2] then
-            Gamestate.push(scripts.states.showCard, STATE, 2)
-        end
+    if love.keyboard.isDown("p") then
+        Gamestate.pop()
     end
 end
+
 
 return menu

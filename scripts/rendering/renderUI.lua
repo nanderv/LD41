@@ -18,11 +18,15 @@ R.renderBackdrop = function()
 end
 
 R.drawCards = function(state)
-    for k,v in ipairs(state.hand) do
-        print(scripts.gameobjects.cards[v].name)
+    for k,v in pairs(state.hand) do
         love.graphics.setColor(0, 0, 0)
         love.graphics.print(k..": "..scripts.gameobjects.cards[v].name, 200,568+k*20)
         love.graphics.setColor(1, 1, 1)
     end
+end
+
+R.drawCard = function(state, card)
+    love.graphics.scale(math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING)))
+    love.graphics.print(scripts.gameobjects.cards[state.hand[card]].name, 50,50)
 end
 return R

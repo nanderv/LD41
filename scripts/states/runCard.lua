@@ -6,3 +6,102 @@
 -- To change this template use File | Settings | File Templates.
 --
 
+--
+-- Created by IntelliJ IDEA.
+-- User: nander
+-- Date: 21/04/2018
+-- Time: 18:25
+-- To change this template use File | Settings | File Templates.
+--
+
+local menu = {} -- previously: Gamestate.new()
+
+function menu:enter(a,state, card)
+
+    menu.state = state
+    menu.card = card
+    menu.showing = "costs"
+    menu.item = 1
+    menu.time = 0
+end
+
+local effects = {}
+effects.add_cost = {
+    exec = function(card, index)
+        local c = scripts.gameobjects.cards[STATE.hand[card]]
+        local cost = c.costs[index]
+        STATE.properties[c.costs[index].property] = STATE.properties[c.costs[index].property] + cost.value
+    end,
+    draw = function(card, index, time)
+    end,
+    duration = 1
+}
+effects.add_card = {
+    exec = function(card, index)
+        local c = scripts.gameobjects.cards[STATE.hand[card]]
+        local effect = c.effects[index]
+        STATE.discardPile[#STATE.discardPile + 1] = effect.card
+    end,
+    draw = function(card, time)
+    end,
+    duration = 1,
+}
+effects.place_building = {
+    exec = function(card, index)
+        local c = scripts.gameobjects.cards[STATE.hand[card]]
+        local effect = c.effects[index]
+        scripts.gameobjects.buildings[effect.building]:build(STATE)
+    end,
+    draw = function(card, time)
+    end,
+    duration = 0,
+}
+function menu:update(dt, wait)
+    if not wait then
+        menu.time = menu.time + dt
+
+        if menu.showing == "costs" then
+            local card = scripts.gameobjects.cards[menu.state.hand[menu.card]]
+            if #card.costs < menu.item then
+                menu.item = 1
+                menu.showing = "effects"
+            end
+            if menu.time > effects.add_cost.duration then
+                menu.time = 0
+                effects.add_cost.exec(menu.card, menu.item)
+                menu.item = menu.item + 1
+            end
+            if #card.costs < menu.item then
+                menu.item = 1
+                menu.showing = "effects"
+            end
+        elseif menu.showing == "effects" then
+            local card = scripts.gameobjects.cards[menu.state.hand[menu.card]]
+            if #card.effects < menu.item then
+                menu.item = 1
+                menu.showing = "RETURN"
+            end
+            local effect = card.effects[menu.item]
+            if menu.time > effects[card.effects[menu.item].type].duration then
+                menu.time = 0
+                effects[card.effects[menu.item].type].exec(menu.card, menu.item)
+                menu.item = menu.item + 1
+            end
+            if #card.effects < menu.item then
+                menu.item = 1
+                menu.showing = "RETURN"
+            end
+        else
+            STATE.hand[menu.card]  = nil
+            Gamestate.pop()
+
+        end
+    end
+end
+
+function menu:draw()
+    scripts.rendering.renderMapView.draw()
+    scripts.rendering.renderUI.drawCard(menu.state, menu.card)
+end
+
+return menu

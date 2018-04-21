@@ -34,7 +34,7 @@ cards.small_office = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = {{property="population", value=-4}},
     is_creeper = false,
 }
 
