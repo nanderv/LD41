@@ -1,9 +1,9 @@
 love.conf = function(t)
     t.title = "Card Houses"
-    t.window.width = 1920
-    t.window.height = 1080
+    t.window.width = 1366
+    t.window.height = 768
     t.version = "11.0"
-    t.window.resizable = false
+    t.window.resizable = true
     --t.console = true
     t.fullscreen=true
     t.window.vsync = false
