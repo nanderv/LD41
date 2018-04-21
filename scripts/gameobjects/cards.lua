@@ -21,6 +21,31 @@ cards.small_generator = {
     is_creeper = false,
 }
 
+cards.medium_generator = {
+    name = "Power plant",
+    effects = {
+        {
+            type = "place_building",
+            buildig = "medium_generator",
+        },
+    },
+    requirements = {},
+    costs = {},
+}
+
+cards.wind_generator = {
+    name = "Windmills",
+    effects = {
+        {
+            type = "place_building",
+            building = "wind_generator",
+        },
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
 cards.small_office = {
     name = "Office building",
     effects = {
@@ -34,7 +59,7 @@ cards.small_office = {
         }
     },
     requirements = {},
-    costs = {{property="population", value=-4}},
+    costs = {},
     is_creeper = false,
 }
 
@@ -45,6 +70,32 @@ cards.large_office = {
             type = "place_building",
             building = "large_office",
         }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.small_residential = {
+    name = "Small house",
+    effects = {
+        {
+            type = "place_building",
+            building = "small_residential",
+        },
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.medium_residential = {
+    name = "Appartment building",
+    effects = {
+        {
+            type = "place_building",
+            building = "medium_residential",
+        },
     },
     requirements = {},
     costs = {},

@@ -8,7 +8,7 @@
 local z = {}
 function z.getCoordinatesFromScreenPosition(x, y)
     local iscale = math.min(love.graphics.getWidth() / (CAMERA.w*SCALING),love.graphics.getHeight() / (CAMERA.h*SCALING))
-    print(y / iscale)
+--    print(y / iscale)
     if y / iscale > 568 then return nil end
 
     for i = -6 + math.floor(CAMERA.x/ 64), 6 + math.floor(CAMERA.x/ 64) do

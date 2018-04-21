@@ -37,6 +37,20 @@ function gamerules.getTotalHousing(state)
     return housing
 end
 
+function gamerules.getExcessPower(state)
+    local power = 0
+    for _, building in ipairs(state.buildings) do
+        local building = scripts.gameobjects.buildings[building.building]
+        for _, effect in ipairs(building.effects) do
+            if effect.type == "resource" and effect.resource == "power" then
+                power = power + effect.value
+            end
+        end
+    end
+
+    return power
+end
+
 function gamerules.getAvailableHousing(state)
     return gamerules.getTotalHousing(state) - state.properties.population
 end

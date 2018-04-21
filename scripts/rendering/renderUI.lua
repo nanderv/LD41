@@ -47,7 +47,7 @@ R.drawStats = function(state)
     love.graphics.print("Available housing: " .. gamerules.getAvailableHousing(state), 400, 7)
     love.graphics.print("Happiness: " .. gamerules.getHappiness(state), 600, 7)
     love.graphics.print("Leftover work: " .. gamerules.getAvailableWork(state), 800, 7)
---    love.graphics.print("Population: " .. state.properties.population, 200, 7)
+    love.graphics.print("Power: " .. gamerules.getExcessPower(state), 1000, 7)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
 end

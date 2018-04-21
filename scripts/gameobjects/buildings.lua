@@ -64,6 +64,11 @@ buildings.small_office = {
             resource = "work",
             value = -4,
         },
+        {
+            type = "resource",
+            resource = "power",
+            value = -2,
+        },
     },
 }
 
@@ -76,6 +81,11 @@ buildings.large_office = {
             type = "resource",
             resource = "work",
             value = -10,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -5,
         },
     },
 }
@@ -90,6 +100,11 @@ buildings.small_residential = {
             resource = "housing",
             value = 4,
         },
+        {
+            type = "resource",
+            resource = "power",
+            value = -1,
+        },
     },
 }
 
@@ -102,6 +117,11 @@ buildings.medium_residential = {
             type = "resource",
             resource = "housing",
             value = 8,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -3,
         },
     },
 }
