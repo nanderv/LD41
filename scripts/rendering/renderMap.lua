@@ -25,8 +25,12 @@ function DRAWMAP(objects)
         atlas.spritebatch:clear()
 
         if(renderByLayers[i]) then
-            for k,v in ipairs(renderByLayers[i]) do
-                renderObjs[v] = v
+            for k, v in ipairs(renderByLayers[i]) do
+                local xx = CAMERA.x - v.position.x
+                local yy = CAMERA.y - v.position.y
+                if xx * xx + yy * yy < 200 * 500 then
+                    renderObjs[v] = v
+                end
             end
         end
         for k,v in pairs(renderObjs) do
