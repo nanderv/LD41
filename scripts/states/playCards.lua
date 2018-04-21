@@ -12,7 +12,6 @@ end
 
 function menu:draw()
     scripts.rendering.renderMapView.draw()
-    scripts.rendering.renderUI.drawCards(STATE)
 end
 
 function menu:update(dt, b)
@@ -32,18 +31,16 @@ function menu:update(dt, b)
     if love.keyboard.isDown("right") then
         CAMERA.x = CAMERA.x + dt * 20
     end
-    if not b then
-        if love.keyboard.isDown("1") then
-            BUILDING = "medium_residential"
-            Gamestate.push(scripts.states.addBuilding)
-        end
-        if love.keyboard.isDown("2") then
-            BUILDING = "small_residential"
-            Gamestate.push(scripts.states.addBuilding)
-        end
-    end
 end
 
+function menu:keypressed(key)
+        if love.keyboard.isDown("1") then
+            scripts.gameobjects.buildings.medium_residential:build(STATE)
+        end
+        if love.keyboard.isDown("2") then
+            scripts.gameobjects.buildings.small_residential:build(STATE)
+        end
+end
 
 
 return menu

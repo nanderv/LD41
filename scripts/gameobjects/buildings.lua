@@ -49,10 +49,9 @@ buildings.medium_residential = {
     effects = {},
 }
 
-for _, v in pairs(buildings) do
+for k, v in pairs(buildings) do
     function v:build(state)
-        STATE.UIState = "addBuilding"
-        STATE.UIStateParams = { building = self }
+        Gamestate.push(scripts.states.addBuilding, state, k)
     end
     function v:update(state)
         for _, effect in ipairs(self.effects) do
