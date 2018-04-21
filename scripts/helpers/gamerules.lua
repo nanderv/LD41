@@ -25,6 +25,7 @@ end
 function gamerules.getTotalHousing(state)
     local housing = 0
     for _, building in ipairs(state.buildings) do
+        local building = scripts.gameobjects.buildings[building.building]
         for _, effect in ipairs(building.effects) do
             if effect.type == "resource" and effect.resource == "housing" then
                 housing = housing + effect.value

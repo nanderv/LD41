@@ -39,7 +39,13 @@ buildings.small_residential = {
     name = "Small house",
     size = { x = 1, z = 1 },
     asset = "small_residential",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "housing",
+            value = 4,
+        }
+    },
 }
 
 buildings.medium_residential = {
