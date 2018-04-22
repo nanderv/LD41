@@ -46,8 +46,6 @@ function menu:update(dt, bo)
         end
 
     end
-    menu.prev:update(dt, bo)
-
 end
 
 function menu:keyreleased(key, code)
