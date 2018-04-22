@@ -6,7 +6,7 @@ end
 
 DEBUG = true
 STATE = {
-    properties = { population = 20, money = 0 },
+    properties = { population = 20, money = 40 },
     buildings = {
         { x = 1, y = 1, building = "wind_generator" },
         { x = 2, y = 1, building = "medium_residential" },

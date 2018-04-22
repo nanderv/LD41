@@ -31,8 +31,11 @@ local effects = {}
 effects.add_cost = {
     exec = function(card, index)
         local c = scripts.gameobjects.cards[menu.cardData]
-        print(c.costs.type)
-        STATE.properties[c.costs.type] = STATE.properties[c.costs.type] + c.costs.value
+
+        if c.costs and c.costs.type then
+            print(c.costs.type)
+            STATE.properties[c.costs.type] = STATE.properties[c.costs.type] - c.costs.value
+        end
     end,
     draw = function(card, index, time)
     end,

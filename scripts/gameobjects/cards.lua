@@ -17,7 +17,7 @@ cards.small_generator = {
         }
     },
     requirements = { { type = "resource", property = "power", relation = "gt", value = 5 } },
-    costs = { type = "money", value = 40 },
+    costs = { type = "money", value = 4 },
     is_creeper = false,
 }
 
@@ -30,7 +30,7 @@ cards.medium_generator = {
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 8 },
 }
 
 cards.wind_generator = {
@@ -42,7 +42,7 @@ cards.wind_generator = {
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 10 },
     is_creeper = false,
 }
 
@@ -111,7 +111,7 @@ cards.small_park = {
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 3 },
     is_creeper = false,
 }
 

@@ -71,5 +71,20 @@ function z.neighbouring(state, x,y)
     end
     return false
 end
+local opTable = {
+    gt = "greater than",
+    gte = "greater than or equal",
+    lt = "loewr than",
+    lte = "lower than or equal",
+    eq = "equal to",
+}
+function z.requirementToString(requirement)
+    if requirement.type =="resource" then
+            --{ type = "resource", property = "power", relation = "gt", value = 5 }
+        return requirement.property .. " ".. opTable[requirement.relation].. " " .. requirement.value
+    end
+
+
+    end
 
 return z
