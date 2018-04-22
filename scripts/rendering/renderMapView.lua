@@ -25,6 +25,10 @@ mapView.draw = function(lowest)
     love.graphics.setColor(0.2,0.3,0.2)
     love.graphics.rectangle("fill",0,0,1366,768)
     love.graphics.setColor(1,1,1)
+    for _, v in ipairs(STATE.cars) do
+        objects[#objects + 1] = { position = { x = v.x * 64, y = v.y * 64, z=0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = v.sprite }
+
+    end
     if CAMERA.focus then
         local v = CAMERA.focus
         if not scripts.helpers.calculations.hasBuilding(STATE, CAMERA.focus.x, CAMERA.focus.y) and scripts.helpers.calculations.neighbouring(STATE, CAMERA.focus.x, CAMERA.focus.y) then

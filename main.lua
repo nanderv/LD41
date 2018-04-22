@@ -18,6 +18,7 @@ STATE = {
     discardPile = { "small_office", "small_generator",  "small_residential", "small_park" },
     drawPile = {},
     currentTurnEffects = {},
+    cars = {{x=4,y=4, direction = 1, sprite="small_office"}},
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'

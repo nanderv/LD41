@@ -74,5 +74,17 @@ R.drawStats = function(state)
     love.graphics.print(gamerules.getHappiness(state), 525, 7)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
+    local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
+    local b =scripts.helpers.calculations.hasBuilding(state, x, y)
+    if b then
+        love.graphics.setColor(0, 1, 0)
+        local building = scripts.gameobjects.buildings[b.building]
+
+
+        love.graphics.print(building.name, 30,30)
+        love.graphics.setColor(1, 1, 1)
+
+    end
+
 end
 return R

@@ -27,7 +27,7 @@ end
 
 function z.hasBuilding(state, x, y)
     for _, v in ipairs(state.buildings) do
-        if v.x == x and v.y == y then return true end
+        if v.x == x and v.y == y then return v end
     end
     return false
 end
