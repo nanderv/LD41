@@ -39,9 +39,9 @@ function love.load()
     end
     Gamestate.registerEvents()
     Gamestate.switch(scripts.states.dealHand)
-    if debug then
+    if DEBUG then
+        local inspect = require "lib.inspect"
         require "lib.lovebird".monfn = function()
-            local inspect = require "lib.inspect"
             return "<b>Draw: </b>" .. inspect(STATE.drawPile) ..
                     "<br/><b>Discard: </b>" .. inspect(STATE.discardPile) ..
                     "<br/><b>Hand: </b>" .. inspect(STATE.hand)
