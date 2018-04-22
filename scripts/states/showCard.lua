@@ -25,7 +25,7 @@ function menu:update(dt, b)
 end
 function menu:mousepressed(x,y,mouse_btn)
     if mouse_btn == 1 then
-        local k = scripts.helpers.calculations.getCardNumber(x,y)
+        local k = scripts.helpers.calculations.getCardNumber(x,y, true)
         if k then
             Gamestate.pop()
             Gamestate.push(scripts.states.showCard, STATE, k)

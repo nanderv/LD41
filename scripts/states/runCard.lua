@@ -59,6 +59,7 @@ effects.place_building = {
     duration = 0,
     small = true,
 }
+menu.effects = effects
 function menu:update(dt, wait)
     menu.prev:update(dt, true)
     if not wait then

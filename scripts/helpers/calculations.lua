@@ -32,10 +32,10 @@ function z.hasBuilding(state, x, y)
     return false
 end
 
-function z.getCardNumber(mx, my)
+function z.getCardNumber(mx, my, var)
     local iscale = math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
 
-    local w, h = 160, 240
+    local w, h = 160*iscale, 240*iscale
     for k = 1, 4 do
         local x, y = (100 + k * 200) * iscale, 568 * iscale
 
@@ -45,11 +45,18 @@ function z.getCardNumber(mx, my)
             end
         end
     end
+    mx, my = mx/iscale, my/iscale
     if mx > 150 and mx < 250 and my > 550 and my < 750 then
         LOWEST = LOWEST - 1
     end
     if mx > 1100 and mx < 1200 and my > 550 and my < 750 then
         LOWEST = LOWEST + 1
+    end
+    if mx > 1210  and my > 550 then
+        if var then
+            Gamestate.pop()
+        end
+        Gamestate.switch(scripts.states.endOfTurn)
     end
     if LOWEST < 0 then LOWEST = 0 end
     if LOWEST >= #STATE.hand-3 then LOWEST = math.max(0,#STATE.hand - 4) end

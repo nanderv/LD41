@@ -5,7 +5,7 @@ cards.small_generator = {
     effects = {
         {
             type = "add_card",
-            card = "nuclear_generator", -- Autoloads id from `cards`
+            card = "wind_generator", -- Autoloads id from `cards`
         },
         {
             type = "add_card",
