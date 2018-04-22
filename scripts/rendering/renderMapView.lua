@@ -5,6 +5,10 @@
 -- Time: 17:44
 -- To change this template use File | Settings | File Templates.
 --
+function GLOBSCALE()
+    return math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
+end
+
 local mapView = {}
 mapView.draw = function(lowest)
     if DEBUG then require("lib.lovebird").update() end
@@ -17,7 +21,7 @@ mapView.draw = function(lowest)
     end
     local objects = {}
     love.graphics.push()
-    love.graphics.scale(math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING)))
+    love.graphics.scale(GLOBSCALE())
     love.graphics.setColor(0.2,0.3,0.2)
     love.graphics.rectangle("fill",0,0,1366,768)
     love.graphics.setColor(1,1,1)

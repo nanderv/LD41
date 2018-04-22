@@ -2,7 +2,7 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 pprint = require 'lib.pprint'
 DEBUG = true
 STATE = {
-    properties = { population = 20, nuisance = 4, relaxation=6 },
+    properties = { population = 20 },
     buildings = {
         { x = 1, y = 1, building = "wind_generator" },
         { x = 2, y = 1, building = "medium_residential" },
@@ -17,6 +17,7 @@ STATE = {
     hand = {},
     discardPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
     drawPile = {},
+    currentTurnEffects = {},
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
@@ -25,6 +26,7 @@ require 'lib.load_all_scripts'
 Gamestate = require "lib.gamestate"
 function love.load()
     scripts.rendering.renderMap()
+    scripts.rendering.loadAssets()
     atlas = Atlas(1, 1, true, '', nil, false, false)
     for _, v in pairs(GFX) do
         v:addQuads()

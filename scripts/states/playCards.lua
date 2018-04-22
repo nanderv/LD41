@@ -24,8 +24,9 @@ function menu:update(dt, b)
 
     if menu.mouseDown then
         local x, y = love.mouse.getPosition()
-        CAMERA.x = menu.cX + (-y + menu.orY) * math.sin(CAMERA.r) + (x - menu.orX) * math.cos(CAMERA.r)
-        CAMERA.y = menu.cY - (-y + menu.orY) * math.cos(CAMERA.r) + (x - menu.orX) * math.sin(CAMERA.r)
+        local correction = 1 / SCALING / GLOBSCALE()
+        CAMERA.x = menu.cX - (-y + menu.orY) * math.sin(CAMERA.r) * correction - (x - menu.orX) * math.cos(CAMERA.r) * correction
+        CAMERA.y = menu.cY + (-y + menu.orY) * math.cos(CAMERA.r) * correction - (x - menu.orX) * math.sin(CAMERA.r) * correction
     end
     if love.keyboard.isDown("q") then
         CAMERA.r = CAMERA.r - 0.3 * dt
@@ -62,8 +63,10 @@ function menu:keypressed(key)
 end
 
 function menu:mousepressed(x, y, mouse_btn)
+    x = x / GLOBSCALE()
+    y = y / GLOBSCALE()
     if mouse_btn == 1 then
-        local k = scripts.helpers.calculations.getCardNumber(x,y)
+        local k = scripts.helpers.calculations.getCardNumber(x, y)
         if k then
             Gamestate.push(scripts.states.showCard, STATE, k)
         end
