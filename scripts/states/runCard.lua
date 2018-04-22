@@ -66,7 +66,7 @@ effects.next_turn = {
     exec = function(card, index)
         local c = scripts.gameobjects.cards[STATE.hand[card]]
         local effect = c.effects[index]
-        table.insert(STATE.currentTurnEffects, effect)
+        table.insert(STATE.currentTurnEffects, table.clone(effect))
     end,
     draw = function(card, time) end,
     duration = 0,
@@ -75,6 +75,7 @@ effects.next_turn = {
 menu.effects = effects
 function menu:update(dt, wait)
     menu.prev:update(dt, true)
+    scripts.rendering.renderUI.updateMove(dt)
     if not wait then
         menu.time = menu.time + dt
 
@@ -128,6 +129,13 @@ function menu:draw()
     if scripts.gameobjects.cards[menu.cardData].is_creeper then
         scripts.rendering.renderUI.drawMessage("Drew creeper  .. " .. scripts.gameobjects.cards[menu.cardData].name .. "; a disaster occured.")
     end
+end
+function menu:mousepressed(x, y, click)
+    scripts.rendering.renderUI.mousePressed(x, y, click)
+end
+
+function menu:mousereleased(x, y, mouse_btn)
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 return menu

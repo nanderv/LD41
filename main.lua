@@ -1,5 +1,8 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 pprint = require 'lib.pprint'
+function table.clone(org)
+    return {table.unpack(org)}
+end
 DEBUG = true
 STATE = {
     properties = { population = 20 },

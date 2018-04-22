@@ -136,9 +136,13 @@ function gamerules.startTurn(state)
 
     local newEffects = {}
     for _, effect in ipairs(state.currentTurnEffects) do
-        if effect.type == "nextTurn" then
-            for _, n in ipairs(effect.effects) do
-                table.insert(newEffects, n)
+        if effect.type == "next_turn" then
+            if effect.counter ~= nil and effect.counter > 0 then
+                effect.counter = effect.counter - 1
+            else
+                for _, n in ipairs(effect.effects) do
+                    table.insert(newEffects, n)
+                end
             end
         end
     end

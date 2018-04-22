@@ -27,7 +27,8 @@ function menu:enter(prev, state, cardIndex, card)
 end
 
 function menu:update(dt, wait)
-   menu.time = menu.time - dt
+    scripts.rendering.renderUI.updateMove(dt)
+    menu.time = menu.time - dt
     if menu.time < 0 then
         Gamestate.pop()
     end
@@ -38,6 +39,14 @@ function menu:draw()
     scripts.rendering.renderUI.drawCard(menu.state, menu.cardData,false, true)
     scripts.rendering.renderUI.drawMessage("Drew creeper  .. " .. scripts.gameobjects.cards[menu.cardData].name ..", but nothing happened")
 
+end
+
+function menu:mousepressed(x, y, click)
+    scripts.rendering.renderUI.mousePressed(x, y, click)
+end
+
+function menu:mousereleased(x, y, mouse_btn)
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 return menu

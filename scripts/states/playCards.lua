@@ -9,11 +9,7 @@ LOWEST = 0
 
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
-    menu.orX = 0
-    menu.orY = 0
-    menu.cX = 0
-    menu.cY = 0
-    menu.mouseDown = false
+    menu.prev = prev
 end
 
 function menu:draw()
@@ -21,35 +17,7 @@ function menu:draw()
 end
 
 function menu:update(dt, b)
-
-    if menu.mouseDown then
-        local x, y = love.mouse.getPosition()
-        local correction = 1 / SCALING / GLOBSCALE()
-        CAMERA.x = menu.cX - (-y + menu.orY) * math.sin(CAMERA.r) * correction - (x - menu.orX) * math.cos(CAMERA.r) * correction
-        CAMERA.y = menu.cY + (-y + menu.orY) * math.cos(CAMERA.r) * correction - (x - menu.orX) * math.sin(CAMERA.r) * correction
-    end
-    if love.keyboard.isDown("q") then
-        CAMERA.r = CAMERA.r - 0.3 * dt
-    end
-    if love.keyboard.isDown("e") then
-        CAMERA.r = CAMERA.r + 0.3 * dt
-    end
-    lx = 0
-    ly = 0
-    if love.keyboard.isDown("w") then
-        ly = ly + dt * 30
-    end
-    if love.keyboard.isDown("s") then
-        ly = ly - dt * 30
-    end
-    if love.keyboard.isDown("a") then
-        lx = lx - dt * 30
-    end
-    if love.keyboard.isDown("d") then
-        lx = lx + dt * 30
-    end
-    CAMERA.x = CAMERA.x + ly * math.sin(CAMERA.r) + lx * math.cos(CAMERA.r)
-    CAMERA.y = CAMERA.y - ly * math.cos(CAMERA.r) + lx * math.sin(CAMERA.r)
+    scripts.rendering.renderUI.updateMove(dt)
 end
 
 function menu:keypressed(key)
@@ -69,18 +37,11 @@ function menu:mousepressed(x, y, mouse_btn)
             Gamestate.push(scripts.states.showCard, STATE, k)
         end
     end
-    if mouse_btn == 2 then
-        menu.mouseDown = true
-        menu.orX, menu.orY = love.mouse.getPosition()
-        menu.cX = CAMERA.x
-        menu.cY = CAMERA.y
-    end
+    scripts.rendering.renderUI.mousePressed(x, y, mouse_btn)
 end
 
 function menu:mousereleased(x, y, mouse_btn)
-    if mouse_btn == 2 then
-        menu.mouseDown = false
-    end
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 return menu

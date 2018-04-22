@@ -21,6 +21,7 @@ function menu:draw(b)
 end
 
 function menu:update(dt, b)
+    scripts.rendering.renderUI.updateMove(dt)
     menu.prev:update(dt, true)
 end
 function menu:mousepressed(x,y,mouse_btn)
@@ -31,6 +32,11 @@ function menu:mousepressed(x,y,mouse_btn)
             Gamestate.push(scripts.states.showCard, STATE, k)
         end
     end
+    scripts.rendering.renderUI.mousePressed(x, y, mouse_btn)
+end
+
+function menu:mousereleased(x, y, mouse_btn)
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 function menu:keypressed(key)

@@ -13,6 +13,7 @@ function menu:enter(prev)
     -- setup entities here
 end
 function menu:update(dt, bo)
+    scripts.rendering.renderUI.updateMove(dt)
     if not bo then
         if menu.counter > #STATE.hand then Gamestate.switch(scripts.states.playCards) end
         if #STATE.hand >= HAND then
@@ -28,6 +29,14 @@ function menu:draw(bo)
 end
 
 function menu:keyreleased(key, code)
+end
+
+function menu:mousepressed(x, y, click)
+    scripts.rendering.renderUI.mousePressed(x, y, click)
+end
+
+function menu:mousereleased(x, y, mouse_btn)
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 return menu
