@@ -153,11 +153,6 @@ for k, v in pairs(buildings) do
     function v:build(state)
         Gamestate.push(scripts.states.addBuilding, state, k)
     end
-    function v:update(state)
-        for _, effect in ipairs(self.effects) do
-            -- TODO: Write logic for each of the effects
-        end
-    end
 end
 
 return buildings
