@@ -16,8 +16,8 @@ cards.small_generator = {
             building = "small_generator",
         }
     },
-    requirements = {{type="resource", property="power", relation="gt", value=5}},
-    costs = {},
+    requirements = { { type = "resource", property = "power", relation = "gt", value = 5 } },
+    costs = { type = "money", value = 40 },
     is_creeper = false,
 }
 
@@ -143,11 +143,13 @@ for _, card in pairs(cards) do
         end
         return true
     end
+
     function card:applyCosts(state)
         for _, cost in ipairs(self.costs) do
             state.properties[cost.property] = state.properties[cost.property] + cost.value
         end
     end
+
     function card:runEffects(state)
         for _, effect in ipairs(self.effects) do
             if effect.type == "place_building" then
@@ -155,6 +157,7 @@ for _, card in pairs(cards) do
             end
         end
     end
+
     function card:run(state)
         if not self:verifyRequirements(state) then return false end
         self:applyCosts(state)

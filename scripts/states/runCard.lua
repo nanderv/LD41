@@ -31,8 +31,8 @@ local effects = {}
 effects.add_cost = {
     exec = function(card, index)
         local c = scripts.gameobjects.cards[menu.cardData]
-        local cost = c.costs[index]
-        STATE.properties[c.costs[index].property] = STATE.properties[c.costs[index].property] + cost.value
+        print(c.costs.type)
+        STATE.properties[c.costs.type] = STATE.properties[c.costs.type] + c.costs.value
     end,
     draw = function(card, index, time)
     end,
@@ -79,20 +79,12 @@ function menu:update(dt, wait)
         menu.time = menu.time + dt
 
         if menu.showing == "costs" then
-            local card = scripts.gameobjects.cards[menu.cardData]
-            if #card.costs < menu.item then
-                menu.item = 1
-                menu.showing = "effects"
-            end
-            if menu.time > effects.add_cost.duration then
+            if menu.time > 0 then
                 menu.time = 0
-                effects.add_cost.exec(menu.cardData, menu.item)
-                menu.item = menu.item + 1
+                effects.add_cost.exec(menu.cardData)
             end
-            if #card.costs < menu.item then
-                menu.item = 1
-                menu.showing = "effects"
-            end
+            menu.item = 1
+            menu.showing = "effects"
         elseif menu.showing == "effects" then
             local card = scripts.gameobjects.cards[menu.cardData]
             if #card.effects < menu.item then
@@ -132,6 +124,7 @@ function menu:draw()
     end
     love.graphics.pop()
 end
+
 function menu:mousepressed(x, y, click)
     scripts.rendering.renderUI.mousePressed(x, y, click)
 end

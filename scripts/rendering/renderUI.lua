@@ -30,12 +30,12 @@ R.drawCards = function(state, lowest)
     love.graphics.setColor(0, 0, 0)
     for k, v in pairs(state.hand) do
         if not (k <= lowest) and not (k > (lowest + 4)) then
-            scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[v], 100 + (k - lowest) * 200, 568, 0.8)
+            scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[v], 100 + (k - lowest) * 200, 568, 0.5)
         end
     end
     love.graphics.setColor(1, 1, 1)
-    scripts.rendering.renderCard.renderCard({ name = "" }, 10, 568, 0.8)
-    scripts.rendering.renderCard.renderCard({ name = "" }, 1210, 568, 0.8)
+    scripts.rendering.renderCard.renderCard({ name = "" }, 10, 568, 0.5)
+    scripts.rendering.renderCard.renderCard({ name = "" }, 1210, 568, 0.5)
 end
 
 R.drawCard = function(state, card, running, fromTheAir)
@@ -44,9 +44,9 @@ R.drawCard = function(state, card, running, fromTheAir)
         c = card
     end
     if running then
-        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 50, 50, 0.5)
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 50, 50, 0.75)
     else
-        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 500, 100, 1.5)
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 500, 100, 1)
     end
 end
 R.drawMessage = function(message)
