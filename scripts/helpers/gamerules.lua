@@ -69,6 +69,10 @@ function gamerules.getAvailableWork(state)
     return state.properties.population + gamerules.getTotalResource(state, "work")
 end
 
+function gamerules.getAvailableJobs(state)
+    return -gamerules.getAvailableWork(state)
+end
+
 function gamerules.getTotalHousing(state)
     return gamerules.getTotalResource(state, "housing")
 end
@@ -145,7 +149,7 @@ function gamerules.startTurn(state)
     state.currentTurnEffects = newEffects
     state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state)
 
-    beforeTurn.housing = gamerules.getAvailableHousing(state)
+    beforeTurn.housing = gamerules.getTotalHousing(state)
     beforeTurn.happiness = gamerules.getHappiness(state)
     beforeTurn.work = gamerules.getAvailableWork(state)
     beforeTurn.power = gamerules.getExcessPower(state)
@@ -164,7 +168,7 @@ function gamerules.endTurn(state)
         state.properties.population = nextPop
     end
 
-    local nextHousing = gamerules.getAvailableHousing(state)
+    local nextHousing = gamerules.getTotalHousing(state)
     if beforeTurn.housing > nextHousing then
         table.insert(changed, "housing_down_red")
     elseif beforeTurn.housing < nextHousing then
@@ -180,9 +184,9 @@ function gamerules.endTurn(state)
 
     local nextWork = gamerules.getAvailableWork(state)
     if beforeTurn.work > nextWork then
-        table.insert(changed, "work_down_green")
+        table.insert(changed, "work_up_green")
     elseif beforeTurn.work < nextWork then
-        table.insert(changed, "work_up_red")
+        table.insert(changed, "work_down_red")
     end
 
     local nextPower = gamerules.getExcessPower(state)
@@ -194,9 +198,9 @@ function gamerules.endTurn(state)
 
     local nextMoney = gamerules.getMoneyPerTurn(state) + state.properties.money
     if beforeTurn.money > nextMoney then
-        table.insert(changed, "money_down_red_")
+        table.insert(changed, "money_down_red")
     elseif beforeTurn.power < nextMoney then
-        table.insert(changed, "money_up_green_")
+        table.insert(changed, "money_up_green")
     end
 
     return changed
