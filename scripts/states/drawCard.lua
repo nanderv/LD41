@@ -32,9 +32,21 @@ function menu:update(dt, bo)
         end
         local c = STATE.drawPile[1]
         if c then
-            STATE.hand[#STATE.hand + 1] = c
-            table.remove(STATE.drawPile, 1)
-            menu.showCardDrawAnim = 1
+            local card = scripts.gameobjects.cards[c]
+
+            if card.is_creeper then
+                if card:verifyRequirements(STATE) then
+                    Gamestate.push(scripts.states.creeperNothingHappened, STATE, nil,  c)
+                else
+                    Gamestate.push(scripts.states.runCard, STATE, nil,  c)
+                end
+                table.remove(STATE.drawPile, 1)
+            else
+                STATE.hand[#STATE.hand + 1] = c
+                table.remove(STATE.drawPile, 1)
+                menu.showCardDrawAnim = 1
+            end
+
         else
             -- TODO: ADD DISCARD PILE SHUFFLING
             if menu.hasShuffled then
@@ -44,10 +56,22 @@ function menu:update(dt, bo)
             c = STATE.drawPile[1]
             menu.hasShuffled = true
         end
-
+    end
+end
+function menu:mousepressed(x, y, mouse_btn)
+    if mouse_btn == 2 then
+        menu.mouseDown = true
+        menu.orX, menu.orY = love.mouse.getPosition()
+        menu.cX = CAMERA.x
+        menu.cY = CAMERA.y
     end
 end
 
+function menu:mousereleased(x, y, mouse_btn)
+    if mouse_btn == 2 then
+        menu.mouseDown = false
+    end
+end
 function menu:keyreleased(key, code)
 end
 

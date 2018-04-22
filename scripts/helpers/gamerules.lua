@@ -1,13 +1,13 @@
 local gamerules = {}
-
 local function shuffle(list)
     local new = {}
     while #list > 0 do
-        new[#new + 1] = table.remove(math.random(#list))
+        new[#new + 1] = table.remove(list, math.random(#list))
     end
     return new
 end
 
+gamerules.shuffle = shuffle
 local function list_contains(tab, val)
     for index, value in ipairs(tab) do
         if value == val then
@@ -187,5 +187,20 @@ function gamerules.endTurn(state)
 
     return changed
 end
+gamerules.resources = {}
+
+gamerules.resources.power = gamerules.getExcessPower
+gamerules.resources.totalPower = function(state) return gamerules.getTotalResource(state, "power") end
+
+gamerules.resources.population = function(state) return state.properties.population end
+
+gamerules.resources.work = gamerules.getAvailableWork
+gamerules.resources.totalWork = function(state) return gamerules.getTotalResource(state, "work") end
+
+gamerules.resources.happiness = gamerules.getHappiness
+gamerules.resources.relaxation = gamerules.getRelaxation
+gamerules.resources.nuisance = gamerules.getNuisance
+
+
 
 return gamerules

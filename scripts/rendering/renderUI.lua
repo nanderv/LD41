@@ -39,11 +39,15 @@ R.drawCards = function(state, lowest)
 
 end
 
-R.drawCard = function(state, card, running)
+R.drawCard = function(state, card, running, fromTheAir)
+    local c = state.hand[card]
+    if fromTheAir then
+        c = card
+    end
     if running then
-        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[state.hand[card]], 50,50, 0.5)
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 50,50, 0.5)
     else
-        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[state.hand[card]], 500,100, 1.5)
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c], 500,100, 1.5)
     end
 end
 R.drawMessage = function(message)

@@ -16,9 +16,9 @@ cards.small_generator = {
             building = "small_generator",
         }
     },
-    requirements = {},
+    requirements = {{type="resource", property="power", relation="gt", value=5}},
     costs = {},
-    is_creeper = false,
+    is_creeper = true,
 }
 
 cards.medium_generator = {
@@ -116,20 +116,21 @@ cards.small_park = {
 }
 
 local function verifyResourceRequirement(requirement, state)
+    local S = scripts.helpers.gamerules.resources
     if requirement.relation == "gt" then
-        return state.properties[requirement.property] > requirement.value
+        return S[requirement.property](state) > requirement.value
     end
     if requirement.relation == "lt" then
-        return state.properties[requirement.property] < requirement.value
+        return S[requirement.property](state) < requirement.value
     end
     if requirement.relation == "gte" then
-        return state.properties[requirement.property] >= requirement.value
+        return S[requirement.property](state) >= requirement.value
     end
     if requirement.relation == "lte" then
-        return state.properties[requirement.property] <= requirement.value
+        return S[requirement.property](state) <= requirement.value
     end
     if requirement.relation == "eq" then
-        return state.properties[requirement.property] == requirement.value
+        return S[requirement.property](state) == requirement.value
     end
 end
 
