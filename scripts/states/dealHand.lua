@@ -14,7 +14,7 @@ function menu:enter(prev)
 end
 function menu:update(dt, bo)
     if not bo then
-        if menu.counter > #STATE.hand then Gamestate.push(scripts.states.drawCard) end
+        if menu.counter > #STATE.hand then Gamestate.switch(scripts.states.playCards) end
         if #STATE.hand >= HAND then
             Gamestate.switch(scripts.states.playCards)
 
@@ -25,7 +25,7 @@ function menu:update(dt, bo)
     end
 end
 function menu:draw(bo)
-    --menu.prev:draw(bo)
+    scripts.rendering.renderMapView.draw(LOWEST)
 end
 
 function menu:keyreleased(key, code)

@@ -15,8 +15,8 @@ STATE = {
         { x = 5, y = 2, building = "small_park" },
     },
     hand = {},
-    discardPile = {},
-    drawPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
+    discardPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
+    drawPile = {},
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
