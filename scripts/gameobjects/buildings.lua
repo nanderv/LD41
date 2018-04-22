@@ -214,6 +214,30 @@ buildings.casino = {
     },
 }
 
+buildings.metro = {
+    name = "Metro",
+    size = { x = 1, y = 1 },
+    asset = "metro",
+    effects = {
+    },
+}
+
+buildings.industrial_1 = {
+    name = "Steel mill",
+    size = { x = 1, y = 1 },
+    asset = "steelmill",
+    effects = {
+    },
+}
+
+buildings.industrial_2 = {
+    name = "Factory",
+    size = { x = 1, y = 1 },
+    asset = "factory",
+    effects = {
+    },
+}
+
 for k, v in pairs(buildings) do
     v.key = k
     function v:build(state)
