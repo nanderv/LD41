@@ -8,7 +8,6 @@
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
-    print(">>> ")
     -- setup entities here
     -- TODO: Make this take time.
     menu.hasShuffled = false
