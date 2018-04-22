@@ -101,10 +101,11 @@ function menu:update(dt, wait)
                 menu.showing = "RETURN"
             end
         else
-            print(menu.fromHand)
             if menu.fromHand then
-                STATE.discardPile[#STATE.discardPile + 1] = menu.cardData
-                table.remove(STATE.hand, menu.card)
+                if scripts.gameobjects.cards[menu.cardData].dont_recycle ~= true then
+                    STATE.discardPile[#STATE.discardPile + 1] = menu.cardData
+                    table.remove(STATE.hand, menu.card)
+                end
             end
             Gamestate.pop()
         end
