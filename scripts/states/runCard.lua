@@ -59,6 +59,16 @@ effects.place_building = {
     duration = 0,
     small = true,
 }
+effects.next_turn = {
+    exec = function(card, index)
+        local c = scripts.gameobjects.cards[STATE.hand[card]]
+        local effect = c.effects[index]
+        table.insert(STATE.currentTurnEffects, effect)
+    end,
+    draw = function(card, time) end,
+    duration = 0,
+    small = true,
+}
 menu.effects = effects
 function menu:update(dt, wait)
     menu.prev:update(dt, true)

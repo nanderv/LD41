@@ -6,13 +6,13 @@ STATE = {
     buildings = {
         { x = 1, y = 1, building = "wind_generator" },
         { x = 2, y = 1, building = "medium_residential" },
-        { x = 3, y = 1, building = "small_office" },
+        { x = 3, y = 1, building = "small_park" },
         { x = 4, y = 1, building = "medium_residential" },
         { x = 1, y = 2, building = "medium_generator" },
         { x = 2, y = 2, building = "large_office" },
         { x = 3, y = 2, building = "small_residential" },
         { x = 4, y = 2, building = "small_generator" },
-        { x = 5, y = 2, building = "small_park" },
+        { x = 5, y = 2, building = "small_office" },
     },
     hand = {},
     discardPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
@@ -37,9 +37,8 @@ function love.load()
         require"lib.lovebird".monfn = function()
             local inspect = require"lib.inspect"
             return "<b>Draw: </b>" .. inspect(STATE.drawPile) ..
-                    "<b> Discard: </b>" .. inspect(STATE.discardPile) ..
-                    "<b> Hand: </b>" .. inspect(STATE.hand) ..
-                    "<b> Props: </b>" .. inspect(STATE.properties)
+                    "<br/><b>Discard: </b>" .. inspect(STATE.discardPile) ..
+                    "<br/><b>Hand: </b>" .. inspect(STATE.hand)
         end
     end
 end

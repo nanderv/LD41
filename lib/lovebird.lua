@@ -218,7 +218,7 @@ end
     </div>
     <div id="main">
       <div id="console" class="greybordered">
-        <div id="monitor"> <?lua echo(lovebird.monitor) ?> </div>
+        <div id="monitor"><?lua echo(lovebird.monitor) ?></div>
         <div id="output"> <?lua echo(lovebird.buffer) ?> </div>
         <div id="input">
           <form method="post"
@@ -403,7 +403,7 @@ end
 
 
 lovebird.pages["buffer"] = [[ <?lua echo(lovebird.buffer) ?> ]]
-lovebird.pages["monitor"] = [[ <?lua echo(lovebird.monitor) ?> ]]
+lovebird.pages["monitor"] = [[<?lua echo(lovebird.monitor) ?>]]
 
 
 lovebird.pages["env.json"] = [[
