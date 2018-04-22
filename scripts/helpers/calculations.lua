@@ -51,6 +51,8 @@ function z.getCardNumber(mx, my)
     if mx > 1100 and mx < 1200 and my > 550 and my < 750 then
         LOWEST = LOWEST + 1
     end
+    if LOWEST < 0 then LOWEST = 0 end
+    if LOWEST >= #STATE.hand-3 then LOWEST = math.max(0,#STATE.hand - 4) end
 end
 
 return z

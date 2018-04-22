@@ -5,7 +5,7 @@
 -- Time: 14:09
 -- To change this template use File | Settings | File Templates.
 --
-HAND = 3
+HAND = 5
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
@@ -17,7 +17,6 @@ function menu:update(dt, bo)
         if menu.counter > #STATE.hand then Gamestate.switch(scripts.states.playCards) end
         if #STATE.hand >= HAND then
             Gamestate.switch(scripts.states.playCards)
-
             return
         end
         Gamestate.push(scripts.states.drawCard)
