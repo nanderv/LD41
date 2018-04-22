@@ -23,14 +23,6 @@ STATE = {
     drawPile = {},
     currentTurnEffects = {},
     cars = {
-        { lifetime = 60, x = 1, y = 1, direction = 1, sprite = "movable_lorry" },
-        { lifetime = 60, x = 1, y = 1, direction = 2, sprite = "movable_lorry" },
-        { lifetime = 60, x = 1, y = 1, direction = 3, sprite = "movable_lorry" },
-        { lifetime = 60, x = 1, y = 1, direction = 4, sprite = "movable_lorry" },
-        { lifetime = 60, x = 2, y = 1, direction = 1, sprite = "movable_car" },
-        { lifetime = 60, x = 2, y = 1, direction = 2, sprite = "movable_car" },
-        { lifetime = 60, x = 2, y = 1, direction = 3, sprite = "movable_car" },
-        { lifetime = 60, x = 2, y = 1, direction = 4, sprite = "movable_car" },
     },
 }
 require 'lib.atlas'

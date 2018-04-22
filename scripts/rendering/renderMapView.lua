@@ -27,29 +27,29 @@ mapView.draw = function(lowest)
     love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do
         if v.direction == 1 then
-            objects[#objects + 1] = { position = { x = v.x * 64+40, y = v.y * 64 + 36, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64+40, y = v.y * 64 + 35, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 2 then
-            objects[#objects + 1] = { position = { x = v.x * 64 + 60, y = v.y * 64+4, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 61, y = v.y * 64, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 3 then
-            objects[#objects + 1] = { position = { x = v.x * 64+30, y = v.y * 64 - 34, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64+30, y = v.y * 64 - 34, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 4 then
-            objects[#objects + 1] = { position = { x = v.x  * 64+ 4, y = v.y * 64, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x  * 64+ 3, y = v.y * 64, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
     end
     if CAMERA.focus then
         local v = CAMERA.focus
         if not scripts.helpers.calculations.hasBuilding(STATE, CAMERA.focus.x, CAMERA.focus.y) and scripts.helpers.calculations.neighbouring(STATE, CAMERA.focus.x, CAMERA.focus.y) then
-            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = "underConstruction" }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 3 * v.y * 5) % 4 * math.pi / 2 }, texture = "underConstruction" }
         else
 
-            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = "normalCursor" }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 3 * v.y * 5) % 4 * math.pi / 2 }, texture = "normalCursor" }
         end
     end
     for k, v in ipairs(STATE.buildings) do
-        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
+        objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 3 * v.y * 5) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
     end
     for i = -6 + math.floor(CAMERA.x / 64), 6 + math.floor(CAMERA.x / 64) do
         for j = -6 + math.floor(CAMERA.y / 64), 6 + math.floor(CAMERA.y / 64) do

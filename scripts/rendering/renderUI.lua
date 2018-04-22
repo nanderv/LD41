@@ -92,7 +92,7 @@ local prev_update_frame = 0
 local prev_press_frame = 0
 local prev_release_frame = 0
 local function addCar(x, y, sprite)
-    local direction = (x * 371 * y * 129 - 1) % 4 + 1
+    local direction = (x * 5 * y * 3 - 1) % 4 + 1
     STATE.cars[#STATE.cars + 1] = { x = x, y = y, direction = direction, sprite = sprite, lifetime = 60 }
 end
 
@@ -121,7 +121,7 @@ R.updateMove = function(dt)
     end
 
     for _, building in ipairs(STATE.buildings) do
-        if math.random() > 0.9 then
+        if math.random() > 0.99 and math.random() < dt then
             addCar(building.x, building.y, "movable_car")
         end
     end
