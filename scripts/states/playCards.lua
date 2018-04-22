@@ -63,8 +63,6 @@ function menu:keypressed(key)
 end
 
 function menu:mousepressed(x, y, mouse_btn)
-    x = x / GLOBSCALE()
-    y = y / GLOBSCALE()
     if mouse_btn == 1 then
         local k = scripts.helpers.calculations.getCardNumber(x, y)
         if k then

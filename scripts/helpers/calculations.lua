@@ -33,7 +33,7 @@ function z.hasBuilding(state, x, y)
 end
 
 function z.getCardNumber(mx, my, var)
-    local iscale = math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
+    local iscale = GLOBSCALE()
 
     local w, h = 160*iscale, 240*iscale
     for k = 1, 4 do
