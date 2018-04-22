@@ -34,18 +34,43 @@ R.renderCard = function(card, x, y, scale)
             love.graphics.draw(ICONS["happiness"].image, x / scale, y / scale, 0, 0.2)
         end
 
-        love.graphics.print(card.costs.value, ( x) / scale+30, (y) / scale + 8 )
+        love.graphics.print(card.costs.value, (x) / scale + 30, (y) / scale + 8)
     end
     love.graphics.setColor(0, 0, 0)
 
     if card.requirements then
-        love.graphics.print("Requires", (x) / scale + 15, (y) / scale+33)
+        love.graphics.print("Requires", (x) / scale + 15, (y) / scale + 33)
 
         for i, requirement in ipairs(card.requirements) do
-            love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 15, (y) / scale + 30+ 20 * i)
+            love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 15, (y) / scale + 30 + 20 * i)
         end
     end
-    love.graphics.print(card.name, x / scale+80, (y) / scale+5)
+
+
+    if card.effects then
+        love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
+
+        for i, effect in ipairs(card.effects) do
+            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
+        end
+    end
+    if card.effects then
+
+        local building
+        for i, effect in ipairs(card.effects) do
+            if effect.type == "place_building" then building = effect.building end
+        end
+        if building then
+            love.graphics.setColor(1, 1, 1)
+            local b = scripts.gameobjects.buildings[building]
+            love.graphics.push()
+            love.graphics.scale(1.5)
+            GFX[b.asset]:drawDirect(x / scale/1.5 +100, y / scale/1.5 + 120, 0)
+            love.graphics.pop()
+            love.graphics.setColor(0, 0, 0)
+        end
+    end
+    love.graphics.print(card.name, x / scale + 80, (y) / scale + 5)
     love.graphics.pop()
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
