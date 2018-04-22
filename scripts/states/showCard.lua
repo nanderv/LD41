@@ -21,7 +21,6 @@ function menu:draw(b)
 end
 
 function menu:update(dt, b)
-    scripts.rendering.renderUI.updateMove(dt)
     menu.prev:update(dt, true)
 end
 function menu:mousepressed(x,y,mouse_btn)

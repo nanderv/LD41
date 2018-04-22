@@ -40,7 +40,6 @@ function addBuilding:mousepressed(x, y, click)
 end
 
 function addBuilding:mousereleased(x, y, mouse_btn)
-    scripts.rendering.renderUI.updateMove(dt)
     local prev = addBuilding.prev
     while prev.prev and not prev.mousepressed do
         prev = prev.prev
@@ -52,6 +51,7 @@ function addBuilding:mousereleased(x, y, mouse_btn)
 end
 
 function addBuilding:update(dt)
+
     addBuilding.prev:update(dt, true)
 end
 

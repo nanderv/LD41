@@ -22,12 +22,22 @@ mapView.draw = function(lowest)
     local objects = {}
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    love.graphics.setColor(0.2,0.3,0.2)
-    love.graphics.rectangle("fill",0,0,1366,768)
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(0.2, 0.3, 0.2)
+    love.graphics.rectangle("fill", 0, 0, 1366, 768)
+    love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do
-        objects[#objects + 1] = { position = { x = v.x * 64, y = v.y * 64, z=0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = v.sprite }
-
+        if v.direction == 1 then
+            objects[#objects + 1] = { position = { x = v.x * 64+40, y = v.y * 64 + 36, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+        end
+        if v.direction == 2 then
+            objects[#objects + 1] = { position = { x = v.x * 64 + 60, y = v.y * 64+4, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+        end
+        if v.direction == 3 then
+            objects[#objects + 1] = { position = { x = v.x * 64+30, y = v.y * 64 - 34, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+        end
+        if v.direction == 4 then
+            objects[#objects + 1] = { position = { x = v.x  * 64+ 4, y = v.y * 64, z = 1, r = v.direction * math.pi / 2 }, texture = v.sprite }
+        end
     end
     if CAMERA.focus then
         local v = CAMERA.focus
@@ -41,8 +51,8 @@ mapView.draw = function(lowest)
     for k, v in ipairs(STATE.buildings) do
         objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 371 * v.y * 129) % 4 * math.pi / 2 }, texture = scripts.gameobjects.buildings[v.building].asset }
     end
-    for i = -6 + math.floor(CAMERA.x/ 64), 6 + math.floor(CAMERA.x/ 64) do
-        for j = -6 + math.floor(CAMERA.y/ 64), 6 + math.floor(CAMERA.y/ 64) do
+    for i = -6 + math.floor(CAMERA.x / 64), 6 + math.floor(CAMERA.x / 64) do
+        for j = -6 + math.floor(CAMERA.y / 64), 6 + math.floor(CAMERA.y / 64) do
             objects[#objects + 1] = { position = { x = i * 64, y = j * 64, z = 0, r = 0 }, texture = "street" }
             objects[#objects + 1] = { position = { x = i * 64 + 32, y = j * 64 + 32, z = 0, r = 0.5 * math.pi }, texture = "street" }
             objects[#objects + 1] = { position = { x = i * 64, y = j * 64 + 32, z = 0, r = 0.5 * math.pi }, texture = "crossing" }

@@ -1,8 +1,9 @@
 love.graphics.setDefaultFilter("nearest", "nearest")
 pprint = require 'lib.pprint'
 function table.clone(org)
-    return {table.unpack(org)}
+    return { table.unpack(org) }
 end
+
 DEBUG = true
 STATE = {
     properties = { population = 20 },
@@ -18,10 +19,19 @@ STATE = {
         { x = 5, y = 2, building = "small_office" },
     },
     hand = {},
-    discardPile = { "small_office", "small_generator",  "small_residential", "small_park" },
+    discardPile = { "small_office", "small_generator", "small_residential", "small_park" },
     drawPile = {},
     currentTurnEffects = {},
-    cars = {{x=4,y=4, direction = 1, sprite="small_office"}},
+    cars = {
+        { lifetime = 60, x = 1, y = 1, direction = 1, sprite = "movable_lorry" },
+        { lifetime = 60, x = 1, y = 1, direction = 2, sprite = "movable_lorry" },
+        { lifetime = 60, x = 1, y = 1, direction = 3, sprite = "movable_lorry" },
+        { lifetime = 60, x = 1, y = 1, direction = 4, sprite = "movable_lorry" },
+        { lifetime = 60, x = 2, y = 1, direction = 1, sprite = "movable_car" },
+        { lifetime = 60, x = 2, y = 1, direction = 2, sprite = "movable_car" },
+        { lifetime = 60, x = 2, y = 1, direction = 3, sprite = "movable_car" },
+        { lifetime = 60, x = 2, y = 1, direction = 4, sprite = "movable_car" },
+    },
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
@@ -38,8 +48,8 @@ function love.load()
     Gamestate.registerEvents()
     Gamestate.switch(scripts.states.dealHand)
     if debug then
-        require"lib.lovebird".monfn = function()
-            local inspect = require"lib.inspect"
+        require "lib.lovebird".monfn = function()
+            local inspect = require "lib.inspect"
             return "<b>Draw: </b>" .. inspect(STATE.drawPile) ..
                     "<br/><b>Discard: </b>" .. inspect(STATE.discardPile) ..
                     "<br/><b>Hand: </b>" .. inspect(STATE.hand)

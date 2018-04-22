@@ -22,7 +22,6 @@ function menu:draw()
 end
 
 function menu:update(dt)
-    scripts.rendering.renderUI.updateMove(dt)
     menu.animation = menu.animation - dt
     if menu.animation < 0 then
         Gamestate.pop()

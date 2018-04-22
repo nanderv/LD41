@@ -18,7 +18,7 @@ cards.small_generator = {
     },
     requirements = {{type="resource", property="power", relation="gt", value=5}},
     costs = {},
-    is_creeper = true,
+    is_creeper = false,
 }
 
 cards.medium_generator = {

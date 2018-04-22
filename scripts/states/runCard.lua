@@ -75,7 +75,6 @@ effects.next_turn = {
 menu.effects = effects
 function menu:update(dt, wait)
     menu.prev:update(dt, true)
-    scripts.rendering.renderUI.updateMove(dt)
     if not wait then
         menu.time = menu.time + dt
 
