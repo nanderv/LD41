@@ -10,10 +10,10 @@ local R = {}
 
 R.renderBackdrop = function()
     -- Draw top bar
-    love.graphics.rectangle("fill", 0, 0, 1366, 30)
+    love.graphics.draw(ICONS.backdrop_top.image, 0, 0)
 
     -- Draw bottom UI component
-    love.graphics.rectangle("fill", 0, 568, 1366, 200)
+    love.graphics.draw(ICONS.backdrop_bottom.image, 0, 568)
     love.graphics.rectangle("fill", -1000, 0, 1000, 1000)
 
     -- Sharply cut off sides of screen

@@ -101,7 +101,6 @@ function gamerules.getNextPopulation(state)
     else
         population = math.ceil(population * 1.1)
     end
-    print(population, gamerules.getTotalHousing(state))
     return math.min(population, gamerules.getTotalHousing(state))
 end
 
