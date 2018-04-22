@@ -31,5 +31,19 @@ function z.hasBuilding(state, x, y)
     end
     return false
 end
-
+function z.getCardNumber(mx,my)
+    local w, h = 160, 240
+    for k=1,4 do
+        local x, y = 100 + (k) * 200, 568
+        if mx > x and mx < x + w and my > y and my < y + h then
+            return k+LOWEST
+        end
+    end
+    if mx > 150 and mx < 250 and my > 550 and my < 750 then
+        LOWEST = LOWEST - 1
+    end
+    if mx > 1100 and mx < 1200 and my > 550 and my < 750 then
+        LOWEST = LOWEST + 1
+    end
+end
 return z

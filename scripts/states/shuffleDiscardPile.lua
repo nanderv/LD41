@@ -9,19 +9,8 @@ local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
     -- setup entities here
-    -- TODO: Make this take time.
-    local c = STATE.drawPile[1]
-    if c then
-        STATE.hand[#STATE.hand+1] = c
-        table.remove(STATE.drawPile, 1)
-    else
-        -- TODO: ADD DISCARD PILE SHUFFLING
-        c = STATE.drawPile[1]
-        if not c then
-            print("DECK EMPTY, so is discard pile, skipping")
-        end
-    end
-
+    STATE.drawPile = STATE.discardPile
+    STATE.discardPile = {}
     Gamestate.pop()
 end
 

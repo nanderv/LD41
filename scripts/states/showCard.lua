@@ -25,21 +25,9 @@ function menu:update(dt, b)
 end
 function menu:mousepressed(x,y,mouse_btn)
     if mouse_btn == 1 then
-        local w, h = 160, 240
-        for k=1,4 do
-            local x, y = 100 + (k) * 200, 568
-            local mx, my = love.mouse.getPosition()
-            if mx > x and mx < x + w and my > y and my < y + h then
-                Gamestate.pop()
-                Gamestate.push(scripts.states.showCard, STATE, k+ LOWEST)
-            end
-        end
-        local mx, my = love.mouse.getPosition()
-        if mx > 150 and mx < 250 and my > 550 and my < 750 then
-            LOWEST = LOWEST - 1
-        end
-        if mx > 1100 and mx < 1200 and my > 550 and my < 750 then
-            LOWEST = LOWEST + 1
+        local k = scripts.helpers.calculations.getCardNumber(x,y)
+        if k then
+            Gamestate.switch(scripts.states.showCard, STATE, (k+LOWEST))
         end
     end
 end
