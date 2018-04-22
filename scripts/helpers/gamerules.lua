@@ -8,15 +8,57 @@ local function shuffle(list)
     return new
 end
 
+local function list_contains(tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
+function getAdjacent(state, x, y)
+    local buildings = {}
+
+    for _, building in ipairs(state.buildings) do
+        if math.abs(building.x - x) == 1 and math.abs(building.y - y) < 2 or
+                math.abs(building.y - y) == 1 and math.abs(building.x - x) < 2 then
+            table.insert(buildings, building)
+        end
+    end
+
+    return buildings
+end
+
 function gamerules.getTotalResource(state, resource)
     local resource_count = 0
 
     for _, building in ipairs(state.buildings) do
+        local b = building
         local building = scripts.gameobjects.buildings[building.building]
         for _, effect in ipairs(building.effects) do
             if effect.type == "resource" and effect.resource == resource then
                 resource_count = resource_count + effect.value
             end
+        end
+        for _, adjacent in ipairs(getAdjacent(state, b.x, b.y)) do
+            local adj_building = scripts.gameobjects.buildings[adjacent.building]
+            for _, effect in ipairs(adj_building.effects) do
+                if effect.type == "adjacent" and (effect.filter == nil or list_contains(effect.filter, building.key)) then
+                    for _, e in ipairs(effect.effects) do
+                        if e.type == "resource" and e.resource == resource then
+                            resource_count = resource_count + e.value
+                        end
+                    end
+                end
+            end
+        end
+    end
+
+    for _, effect in ipairs(state.currentTurnEffects) do
+        if effect.type == "resource" and effect.resource == resource then
+            resource_count = resource_count + effect.value
         end
     end
 
@@ -48,13 +90,13 @@ function gamerules.getAvailableHousing(state)
 end
 
 function gamerules.getHappiness(state)
-    return state.properties.relaxation - state.properties.nuisance
+    return gamerules.getRelaxation(state) - gamerules.getNuisance(state) - state.properties.population
 end
 
 function gamerules.getNextPopulation(state)
     local population = state.properties.population
 
-    if gamerules.getHappiness(state) < 0 or gamerules.getAvailableWork(state) < 0 then
+    if gamerules.getHappiness(state) < 0 or gamerules.getAvailableWork(state) > 0 then
         population = math.floor(population * 0.9)
     else
         population = math.ceil(population * 1.1)
@@ -93,6 +135,16 @@ function gamerules.startTurn(state)
     beforeTurn.happiness = gamerules.getHappiness(state)
     beforeTurn.work = gamerules.getAvailableWork(state)
     beforeTurn.power = gamerules.getExcessPower(state)
+
+    local newEffects = {}
+    for _, effect in ipairs(state.currentTurnEffects) do
+        if effect.type == "nextTurn" then
+            for _, n in ipairs(effect.effects) do
+                table.insert(newEffects, n)
+            end
+        end
+    end
+    state.currentTurnEffects = newEffects
 end
 
 function gamerules.endTurn(state)

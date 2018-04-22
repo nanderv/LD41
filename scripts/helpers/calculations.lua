@@ -33,11 +33,9 @@ function z.hasBuilding(state, x, y)
 end
 
 function z.getCardNumber(mx, my)
-    local iscale = math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
-
     local w, h = 160, 240
     for k = 1, 4 do
-        local x, y = (100 + k * 200) * iscale, 568 * iscale
+        local x, y = 100 + k * 200, 568
 
         if mx > x and mx < x + w and my > y and my < y + h then
             if STATE.hand[k + LOWEST] then

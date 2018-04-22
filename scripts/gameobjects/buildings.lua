@@ -132,14 +132,24 @@ buildings.small_park = {
     asset = "small_park",
     effects = {
         {
-            type = "resource",
-            resource = "relaxation",
-            value = 6,
-        }
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "relaxation",
+                    value = 12,
+                },
+            },
+        },
     },
 }
 
 for k, v in pairs(buildings) do
+    v.key = k
     function v:build(state)
         Gamestate.push(scripts.states.addBuilding, state, k)
     end

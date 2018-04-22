@@ -34,10 +34,9 @@ function menu:mousepressed(x,y,mouse_btn)
 end
 
 function menu:keypressed(key)
-
-
     if love.keyboard.isDown("return") then
-        Gamestate.switch(scripts.states.runCard, STATE, menu.card)
+        Gamestate.pop()
+        Gamestate.push(scripts.states.runCard, STATE, menu.card)
     end
     if love.keyboard.isDown("p") then
         Gamestate.pop()

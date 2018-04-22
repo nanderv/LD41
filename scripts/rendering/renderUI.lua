@@ -24,16 +24,16 @@ R.renderBackdrop = function()
 end
 
 R.drawCards = function(state, lowest)
-    love.graphics.setColor(1,0,0)
-    love.graphics.rectangle("fill", 150, 568, 100,300 )
-    love.graphics.rectangle("fill", 1100, 568, 100,300 )
+    love.graphics.setColor(1,1, 1)
+    love.graphics.draw(ICONS.arrow_button.image, 274, 710, math.pi, 0.4)
+    love.graphics.draw(ICONS.arrow_button.image, 1097, 630, 0, 0.4)
+    love.graphics.setColor(0, 0, 0)
     for k, v in pairs(state.hand) do
         if not (k <= lowest) and not (k > (lowest + 4)) then
-            love.graphics.setColor(0, 0, 0)
             scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[v], 100 + (k-lowest) * 200, 568, 0.8)
-            love.graphics.setColor(1, 1, 1)
         end
     end
+    love.graphics.setColor(1, 1, 1)
     scripts.rendering.renderCard.renderCard({name=""}, 10, 568, 0.8)
     scripts.rendering.renderCard.renderCard({name=""}, 1210, 568, 0.8)
 
@@ -56,12 +56,17 @@ end
 R.drawStats = function(state)
     local gamerules = scripts.helpers.gamerules
     love.graphics.getFont():setFilter("linear", "linear")
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.draw(ICONS.population.image, 200, .5, 0, 0.15)
+    love.graphics.draw(ICONS.energy.image, 270, .5, 0, 0.15)
+    love.graphics.draw(ICONS.housing.image, 340, .5, 0, 0.15)
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print("Population: " .. state.properties.population, 200, 7)
-    love.graphics.print("Available housing: " .. gamerules.getAvailableHousing(state), 400, 7)
+    love.graphics.print(state.properties.population, 235, 7)
+    love.graphics.print(gamerules.getExcessPower(state), 305, 7)
+    love.graphics.print(gamerules.getAvailableHousing(state), 375, 7)
     love.graphics.print("Happiness: " .. gamerules.getHappiness(state), 600, 7)
     love.graphics.print("Leftover work: " .. gamerules.getAvailableWork(state), 800, 7)
-    love.graphics.print("Power: " .. gamerules.getExcessPower(state), 1000, 7)
+    love.graphics.print("Relaxation: " .. gamerules.getRelaxation(state), 1000, 7)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
 end
