@@ -190,6 +190,30 @@ buildings.small_park = {
     },
 }
 
+buildings.stadium = {
+    name = "Stadium",
+    size = { x = 1, y = 1 },
+    asset = "stadium",
+    effects = {
+    },
+}
+
+buildings.university = {
+    name = "University",
+    size = { x = 1, y = 1 },
+    asset = "university",
+    effects = {
+    },
+}
+
+buildings.casino = {
+    name = "Casino",
+    size = { x = 1, y = 1 },
+    asset = "casino",
+    effects = {
+    },
+}
+
 for k, v in pairs(buildings) do
     v.key = k
     function v:build(state)

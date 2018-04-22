@@ -115,6 +115,45 @@ cards.small_park = {
     is_creeper = false,
 }
 
+cards.stadium = {
+    name = "Stadium",
+    effects = {
+        {
+            type = "place_building",
+            building = "stadium",
+        }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.university = {
+    name = "University",
+    effects = {
+        {
+            type = "place_building",
+            building = "university",
+        }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.casino = {
+    name = "Casino",
+    effects = {
+        {
+            type = "place_building",
+            building = "casino",
+        }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
 local function verifyResourceRequirement(requirement, state)
     local S = scripts.helpers.gamerules.resources
     if requirement.relation == "gt" then
