@@ -34,7 +34,8 @@ effects.add_cost = {
     end,
     draw = function(card, index, time)
     end,
-    duration = 1
+    duration = 1,
+    small = false,
 }
 effects.add_card = {
     exec = function(card, index)
@@ -45,6 +46,7 @@ effects.add_card = {
     draw = function(card, time)
     end,
     duration = 1,
+    small = false,
 }
 effects.place_building = {
     exec = function(card, index)
@@ -55,6 +57,7 @@ effects.place_building = {
     draw = function(card, time)
     end,
     duration = 0,
+    small = true,
 }
 function menu:update(dt, wait)
     menu.prev:update(dt, true)
@@ -71,6 +74,7 @@ function menu:update(dt, wait)
                 menu.time = 0
                 effects.add_cost.exec(menu.card, menu.item)
                 menu.item = menu.item + 1
+
             end
             if #card.costs < menu.item then
                 menu.item = 1
@@ -83,9 +87,10 @@ function menu:update(dt, wait)
                 menu.showing = "RETURN"
             end
             local effect = card.effects[menu.item]
-            if menu.time > effects[card.effects[menu.item].type].duration then
+            if menu.time > effects[effect.type].duration then
                 menu.time = 0
-                effects[card.effects[menu.item].type].exec(menu.card, menu.item)
+
+                effects[effect.type].exec(menu.card, menu.item)
                 menu.item = menu.item + 1
             end
             if #card.effects < menu.item then
@@ -94,6 +99,7 @@ function menu:update(dt, wait)
             end
         else
             table.remove(STATE.hand, menu.card)
+            STATE.discardPile[#STATE.discardPile+1] = menu.card
             Gamestate.pop()
         end
     end

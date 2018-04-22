@@ -24,9 +24,11 @@ R.renderBackdrop = function()
 end
 
 R.drawCards = function(state, lowest)
+    love.graphics.setColor(1,0,0)
+    love.graphics.rectangle("fill", 150, 568, 100,300 )
+    love.graphics.rectangle("fill", 1100, 568, 100,300 )
     for k, v in pairs(state.hand) do
-
-        if not (k < lowest) and not (k > (lowest + 4)) then
+        if not (k <= lowest) and not (k > (lowest + 4)) then
             love.graphics.setColor(0, 0, 0)
             scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[v], 100 + (k-lowest) * 200, 568, 0.8)
             love.graphics.setColor(1, 1, 1)
@@ -34,11 +36,20 @@ R.drawCards = function(state, lowest)
     end
 end
 
-R.drawCard = function(state, card)
-    love.graphics.scale(math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING)))
-    love.graphics.print(scripts.gameobjects.cards[state.hand[card]].name, 50, 50)
+R.drawCard = function(state, card, running)
+    if running then
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[state.hand[card]], 50,50, 0.5)
+    else
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[state.hand[card]], 500,100, 1.5)
+    end
 end
+R.drawMessage = function(message)
+    love.graphics.rectangle("fill", 300, 538, 766, 30)
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print(message, 330, 548)
+    love.graphics.setColor(1, 1, 1)
 
+end
 R.drawStats = function(state)
     local gamerules = scripts.helpers.gamerules
     love.graphics.getFont():setFilter("linear", "linear")

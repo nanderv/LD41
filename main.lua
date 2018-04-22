@@ -14,9 +14,9 @@ STATE = {
         { x = 4, y = 2, building = "small_generator" },
         { x = 5, y = 2, building = "small_park" },
     },
-    hand = { "small_office", "small_office",  "small_office", "small_office" },
+    hand = {},
     discardPile = {},
-    drawPile = {},
+    drawPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
@@ -30,7 +30,7 @@ function love.load()
         v:addQuads()
     end
     Gamestate.registerEvents()
-    Gamestate.switch(scripts.states.playCards)
+    Gamestate.switch(scripts.states.dealHand)
     if debug then
         require"lib.lovebird".monfn = function()
             local inspect = require"lib.inspect"
