@@ -129,14 +129,10 @@ local beforeTurn = {
     happiness = 0,
     work = 0,
     power = 0,
+    money = 0,
 }
 
 function gamerules.startTurn(state)
-    beforeTurn.housing = gamerules.getAvailableHousing(state)
-    beforeTurn.happiness = gamerules.getHappiness(state)
-    beforeTurn.work = gamerules.getAvailableWork(state)
-    beforeTurn.power = gamerules.getExcessPower(state)
-
     local newEffects = {}
     for _, effect in ipairs(state.currentTurnEffects) do
         if effect.type == "next_turn" then
@@ -151,6 +147,12 @@ function gamerules.startTurn(state)
     end
     state.currentTurnEffects = newEffects
     state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state)
+
+    beforeTurn.housing = gamerules.getAvailableHousing(state)
+    beforeTurn.happiness = gamerules.getHappiness(state)
+    beforeTurn.work = gamerules.getAvailableWork(state)
+    beforeTurn.power = gamerules.getExcessPower(state)
+    beforeTurn.money = state.properties.money
 end
 
 function gamerules.endTurn(state)
@@ -167,30 +169,37 @@ function gamerules.endTurn(state)
 
     local nextHousing = gamerules.getAvailableHousing(state)
     if beforeTurn.housing > nextHousing then
-        table.insert(changed, "housing_down")
+        table.insert(changed, "housing_down_red")
     elseif beforeTurn.housing < nextHousing then
-        table.insert(changed, "housing_up")
+        table.insert(changed, "housing_up_green")
     end
 
     local nextHappiness = gamerules.getHappiness(state)
     if beforeTurn.happiness > nextHappiness then
-        table.insert(changed, "happiness_down")
+        table.insert(changed, "happiness_down_red")
     elseif beforeTurn.happiness < nextHappiness then
-        table.insert(changed, "happiness_up")
+        table.insert(changed, "happiness_up_green")
     end
 
     local nextWork = gamerules.getAvailableWork(state)
     if beforeTurn.work > nextWork then
-        table.insert(changed, "work_down")
+        table.insert(changed, "work_down_green")
     elseif beforeTurn.work < nextWork then
-        table.insert(changed, "work_up")
+        table.insert(changed, "work_up_red")
     end
 
     local nextPower = gamerules.getExcessPower(state)
     if beforeTurn.power > nextPower then
-        table.insert(changed, "power_down")
+        table.insert(changed, "energy_down_red")
     elseif beforeTurn.power < nextPower then
-        table.insert(changed, "power_up")
+        table.insert(changed, "energy_up_green")
+    end
+
+    local nextMoney = gamerules.getMoneyPerTurn(state) + state.properties.money
+    if beforeTurn.money > nextMoney then
+        table.insert(changed, "money_down_red")
+    elseif beforeTurn.power < nextMoney then
+        table.insert(changed, "money_up_green")
     end
 
     return changed

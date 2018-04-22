@@ -6,7 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 
-local R = {}
+local R = { updates = {} }
 
 R.renderBackdrop = function()
     -- Draw top bar
@@ -55,23 +55,28 @@ R.drawMessage = function(message)
     love.graphics.print(message, 330, 548)
     love.graphics.setColor(1, 1, 1)
 end
+
+local iconOffset = function(index)
+    return 200 + (70 * index)
+end
+
 R.drawStats = function(state)
     local gamerules = scripts.helpers.gamerules
     love.graphics.getFont():setFilter("linear", "linear")
     love.graphics.setColor(1, 1, 1)
-    love.graphics.draw(ICONS.population.image, 200, .5, 0, 0.15)
-    love.graphics.draw(ICONS.energy.image, 270, .5, 0, 0.15)
-    love.graphics.draw(ICONS.housing.image, 340, .5, 0, 0.15)
-    love.graphics.draw(ICONS.work.image, 410, .5, 0, 0.15)
-    love.graphics.draw(ICONS.happiness.image, 480, .5, 0, 0.15)
-    love.graphics.draw(ICONS.money.image, 550, .5, 0, 0.15)
+    love.graphics.draw(ICONS.population.image, iconOffset(0), .5, 0, 0.15)
+    love.graphics.draw(ICONS.energy.image, iconOffset(1), .5, 0, 0.15)
+    love.graphics.draw(ICONS.housing.image, iconOffset(2), .5, 0, 0.15)
+    love.graphics.draw(ICONS.work.image, iconOffset(3), .5, 0, 0.15)
+    love.graphics.draw(ICONS.happiness.image, iconOffset(4), .5, 0, 0.15)
+    love.graphics.draw(ICONS.money.image, iconOffset(5), .5, 0, 0.15)
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print(state.properties.population, 235, 7)
-    love.graphics.print(gamerules.getExcessPower(state), 305, 7)
-    love.graphics.print(gamerules.getAvailableHousing(state), 375, 7)
-    love.graphics.print(gamerules.getAvailableWork(state), 445, 7)
-    love.graphics.print(gamerules.getHappiness(state), 515, 7)
-    love.graphics.print(state.properties.money, 585, 7)
+    love.graphics.print(state.properties.population, iconOffset(0) + 35, 7)
+    love.graphics.print(gamerules.getExcessPower(state), iconOffset(1) + 35, 7)
+    love.graphics.print(gamerules.getAvailableHousing(state), iconOffset(2) + 35, 7)
+    love.graphics.print(gamerules.getAvailableWork(state), iconOffset(3) + 35, 7)
+    love.graphics.print(gamerules.getHappiness(state), iconOffset(4) + 35, 7)
+    love.graphics.print(state.properties.money, iconOffset(5) + 35, 7)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
@@ -79,20 +84,42 @@ R.drawStats = function(state)
     if b then
         love.graphics.setColor(0, 1, 0)
         local building = scripts.gameobjects.buildings[b.building]
-
-
         love.graphics.print(building.name, 30, 30)
         love.graphics.setColor(1, 1, 1)
     end
+    local offsets = { population = 0, energy = 1, housing = 2, work = 3, happiness = 4, money = 5 }
+    for _, update in ipairs(R.updates) do
+        local m = update:gmatch("[^_]+")
+        local type, direction, color = m(), m(), m()
+        local offsetX = iconOffset(offsets[type]) + 45
+        local offsetY = 0.5
+        local angle = 0
+        if color == "red" and direction == "up" then
+            angle = math.pi
+            offsetX = offsetX + (200 * 0.15)
+            offsetY = offsetY + (200 * 0.15)
+        elseif color == "green" and direction == "down" then
+            angle = math.pi
+            offsetX = offsetX + (200 * 0.15)
+            offsetY = offsetY + (200 * 0.15)
+        end
+        local icon
+        if color == "red" then icon = ICONS.red_arrow else icon = ICONS.green_arrow end
+
+        love.graphics.draw(icon.image, offsetX, offsetY, angle, 0.15)
+    end
+    R.updates = {}
+end
+
+R.drawUpdates = function(updates)
+    R.updates = updates
+    pprint(R.updates)
 end
 
 R.orX = 0
 R.orY = 0
 R.cX = 0
 R.cY = 0
-local prev_update_frame = 0
-local prev_press_frame = 0
-local prev_release_frame = 0
 local function addCar(x, y, sprite)
     local direction = (x * 5 * y * 3 - 1) % 4 + 1
     STATE.cars[#STATE.cars + 1] = { x = x, y = y, direction = direction, sprite = sprite, lifetime = 60 }

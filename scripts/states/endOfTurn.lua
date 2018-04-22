@@ -11,7 +11,7 @@ function menu:enter(prev)
     menu.changes = scripts.helpers.gamerules.endTurn(STATE)
     scripts.helpers.gamerules.startTurn(STATE)
     -- setup entities here
-    menu.t = 0.5
+    menu.t = 0.3
 end
 
 function menu:draw()
@@ -21,7 +21,7 @@ function menu:update(dt)
     scripts.rendering.renderUI.updateMove(dt)
     menu.t = menu.t - dt
     if menu.t< 0 then
-        menu.t = 0.5
+        menu.t = 2
         local c = STATE.hand[1]
         if not c then
             Gamestate.switch(scripts.states.dealHand)
@@ -30,6 +30,7 @@ function menu:update(dt)
             table.remove(STATE.hand, 1)
         end
     end
+    scripts.rendering.renderUI.drawUpdates(menu.changes)
 
 end
 function menu:keyreleased(key, code)
