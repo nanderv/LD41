@@ -10,7 +10,7 @@ local R = {}
 
 R.renderBackdrop = function()
     -- Draw top bar
-    love.graphics.rectangle("fill", 0, 0, 1366, 30)
+    love.graphics.draw(ICONS.backdrop_top.image, 0, 0)
 
     -- Draw bottom UI component
     love.graphics.draw(ICONS.backdrop_bottom.image, 0, 568)
