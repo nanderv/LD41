@@ -22,6 +22,7 @@ function menu:draw()
 end
 
 function menu:update(dt)
+    scripts.rendering.renderUI.updateMove(dt)
     menu.animation = menu.animation - dt
     if menu.animation < 0 then
         Gamestate.pop()
@@ -30,6 +31,14 @@ function menu:update(dt)
 end
 
 function menu:keyreleased(key, code)
+end
+
+function menu:mousepressed(x, y, click)
+    scripts.rendering.renderUI.mousePressed(x, y, click)
+end
+
+function menu:mousereleased(x, y, mouse_btn)
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
 return menu

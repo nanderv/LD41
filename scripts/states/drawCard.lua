@@ -22,6 +22,7 @@ function menu:draw()
 end
 
 function menu:update(dt, bo)
+    scripts.rendering.renderUI.updateMove(dt)
     if not bo then
         if menu.showCardDrawAnim then
             menu.showCardDrawAnim = menu.showCardDrawAnim - dt
@@ -58,20 +59,17 @@ function menu:update(dt, bo)
         end
     end
 end
-function menu:mousepressed(x, y, mouse_btn)
-    if mouse_btn == 2 then
-        menu.mouseDown = true
-        menu.orX, menu.orY = love.mouse.getPosition()
-        menu.cX = CAMERA.x
-        menu.cY = CAMERA.y
-    end
+function menu:mousepressed(x, y, click)
+    scripts.rendering.renderUI.mousePressed(x, y, click)
 end
 
 function menu:mousereleased(x, y, mouse_btn)
     if mouse_btn == 2 then
         menu.mouseDown = false
     end
+    scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
+
 function menu:keyreleased(key, code)
 end
 
