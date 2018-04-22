@@ -16,7 +16,13 @@ end
 function menu:draw(b)
     menu.prev:draw(true)
     if not b then
+        love.graphics.push()
+        love.graphics.scale(GLOBSCALE())
         scripts.rendering.renderUI.drawCard(menu.state, menu.card)
+
+        love.graphics.draw(ICONS["button-ok"].image, 750,500,0,0.25)
+        love.graphics.draw(ICONS["button-cancel"].image, 710,500,0,0.25)
+        love.graphics.pop()
     end
 end
 
@@ -24,7 +30,19 @@ function menu:update(dt, b)
     menu.prev:update(dt, true)
 end
 function menu:mousepressed(x,y,mouse_btn)
+
     if mouse_btn == 1 then
+        print(self, x,y)
+        local xg, yg = x/ GLOBSCALE(), y/GLOBSCALE()
+        print(xg, yg)
+        if xg > 750 and xg < 790 and yg > 500 and yg < 540 then
+            Gamestate.pop()
+            Gamestate.push(scripts.states.runCard, STATE, menu.card, false)
+        end
+        if xg > 710 and xg < 750 and yg > 500 and yg < 540 then
+            Gamestate.pop()
+
+        end
         local k = scripts.helpers.calculations.getCardNumber(x,y, true)
         if k then
             Gamestate.pop()

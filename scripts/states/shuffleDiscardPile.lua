@@ -16,8 +16,13 @@ end
 
 function menu:draw()
     local yy = math.abs(menu.animation-0.5)
+
     menu.prev:draw(true)
+
+    love.graphics.push()
+    love.graphics.scale(GLOBSCALE())
     scripts.rendering.renderCard.renderCard({name=""},100+800*menu.animation, 300+300*yy,0.7 )
+    love.graphics.pop()
 
 end
 

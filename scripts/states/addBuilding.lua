@@ -16,7 +16,10 @@ end
 
 function addBuilding:draw()
     addBuilding.prev.prev:draw(true)
+    love.graphics.push()
+    love.graphics.scale(GLOBSCALE())
     scripts.rendering.renderUI.drawMessage("Place building .. " .. addBuilding.building)
+    love.graphics.pop()
 end
 
 function addBuilding:mousepressed(x, y, click)

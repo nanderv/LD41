@@ -124,10 +124,13 @@ end
 
 function menu:draw()
     menu.prev:draw(true)
+    love.graphics.push()
+    love.graphics.scale(GLOBSCALE())
     scripts.rendering.renderUI.drawCard(menu.state, menu.cardData, false, true)
     if scripts.gameobjects.cards[menu.cardData].is_creeper then
         scripts.rendering.renderUI.drawMessage("Drew creeper  .. " .. scripts.gameobjects.cards[menu.cardData].name .. "; a disaster occured.")
     end
+    love.graphics.pop()
 end
 function menu:mousepressed(x, y, click)
     scripts.rendering.renderUI.mousePressed(x, y, click)
