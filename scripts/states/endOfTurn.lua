@@ -8,6 +8,8 @@
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
+    menu.changes = scripts.helpers.gamerules.endTurn(state)
+    scripts.helpers.gamerules.startTurn(state)
     -- setup entities here
     menu.t = 0.5
 end

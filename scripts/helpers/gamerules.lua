@@ -81,4 +81,61 @@ function gamerules.addCard(state, card)
     table.insert(state.discardPile, card)
 end
 
+local beforeTurn = {
+    housing = 0,
+    happiness = 0,
+    work = 0,
+    power = 0,
+}
+
+function gamerules.startTurn(state)
+    beforeTurn.housing = gamerules.getAvailableHousing(state)
+    beforeTurn.happiness = gamerules.getHappiness(state)
+    beforeTurn.work = gamerules.getAvailableWork(state)
+    beforeTurn.power = gamerules.getExcessPower(state)
+end
+
+function gamerules.endTurn(state)
+    local changed = {}
+    local nextPop = gamerules.getNextPopulation(state)
+    if nextPop ~= state.population then
+        if nextPop > state.population then
+            table.insert(changed, "population_up")
+        else
+            table.insert(changed, "population_down")
+        end
+        state.properties.population = nextPop
+    end
+
+    local nextHousing = gamerules.getAvailableHousing(state)
+    if beforeTurn.housing > nextHousing then
+        table.insert(changed, "housing_down")
+    elseif beforeTurn.housing < nextHousing then
+        table.insert(changed, "housing_up")
+    end
+
+    local nextHappiness = gamerules.getHappiness(state)
+    if beforeTurn.happiness > nextHappiness then
+        table.insert(changed, "happiness_down")
+    elseif beforeTurn.happiness < nextHappiness then
+        table.insert(changed, "happiness_up")
+    end
+
+    local nextWork = gamerules.getAvailableWork(state)
+    if beforeTurn.work > nextWork then
+        table.insert(changed, "work_down")
+    elseif beforeTurn.work < nextWork then
+        table.insert(changed, "work_up")
+    end
+
+    local nextPower = gamerules.getExcessPower(state)
+    if beforeTurn.power > nextPower then
+        table.insert(changed, "power_down")
+    elseif beforeTurn.power < nextPower then
+        table.insert(changed, "power_up")
+    end
+
+    return changed
+end
+
 return gamerules
