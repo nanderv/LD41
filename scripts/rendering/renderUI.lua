@@ -34,6 +34,9 @@ R.drawCards = function(state, lowest)
             love.graphics.setColor(1, 1, 1)
         end
     end
+    scripts.rendering.renderCard.renderCard({name=""}, 10, 568, 0.8)
+    scripts.rendering.renderCard.renderCard({name=""}, 1210, 568, 0.8)
+
 end
 
 R.drawCard = function(state, card, running)

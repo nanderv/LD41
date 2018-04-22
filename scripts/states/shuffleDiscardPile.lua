@@ -11,16 +11,25 @@ function menu:enter(prev)
     -- setup entities here
     STATE.drawPile = STATE.discardPile
     STATE.discardPile = {}
-    Gamestate.pop()
+    menu.animation = 1
 end
 
 function menu:draw()
+    local yy = math.abs(menu.animation-0.5)
     menu.prev:draw(true)
-end
-function menu:update(dt)
-    menu.prev:update(dt, true)
-end
-function menu:keyreleased(key, code)
+    scripts.rendering.renderCard.renderCard({name=""},100+800*menu.animation, 300+300*yy,0.7 )
 
 end
+
+function menu:update(dt)
+    menu.animation = menu.animation - dt
+    if menu.animation < 0 then
+        Gamestate.pop()
+    end
+    menu.prev:update(dt, true)
+end
+
+function menu:keyreleased(key, code)
+end
+
 return menu

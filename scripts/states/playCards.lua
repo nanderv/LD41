@@ -65,7 +65,7 @@ function menu:mousepressed(x, y, mouse_btn)
     if mouse_btn == 1 then
         local k = scripts.helpers.calculations.getCardNumber(x,y)
         if k then
-            Gamestate.push(scripts.states.showCard, STATE, (k+LOWEST))
+            Gamestate.push(scripts.states.showCard, STATE, k)
         end
     end
     if mouse_btn == 2 then

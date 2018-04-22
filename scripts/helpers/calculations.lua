@@ -7,11 +7,11 @@
 --
 local z = {}
 function z.getCoordinatesFromScreenPosition(x, y)
-    local iscale = math.min(love.graphics.getWidth() / (CAMERA.w*SCALING),love.graphics.getHeight() / (CAMERA.h*SCALING))
+    local iscale = math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
     if y / iscale > 568 then return nil end
 
-    for i = -6 + math.floor(CAMERA.x/ 64), 6 + math.floor(CAMERA.x/ 64) do
-        for j = -6 + math.floor(CAMERA.y/ 64), 6 + math.floor(CAMERA.y/ 64) do
+    for i = -6 + math.floor(CAMERA.x / 64), 6 + math.floor(CAMERA.x / 64) do
+        for j = -6 + math.floor(CAMERA.y / 64), 6 + math.floor(CAMERA.y / 64) do
             local XX = (i * 64 - CAMERA.x + 32) * math.cos(CAMERA.r) + (j * 64 - CAMERA.y) * math.sin(CAMERA.r)
             local YY = -(i * 64 - CAMERA.x + 32) * math.sin(CAMERA.r) + (j * 64 - CAMERA.y) * math.cos(CAMERA.r)
             local v = { x = XX + 0.5 * CAMERA.w, y = YY + 0.5 * CAMERA.h, xf = i, yf = j }
@@ -31,12 +31,18 @@ function z.hasBuilding(state, x, y)
     end
     return false
 end
-function z.getCardNumber(mx,my)
+
+function z.getCardNumber(mx, my)
+    local iscale = math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
+
     local w, h = 160, 240
-    for k=1,4 do
-        local x, y = 100 + (k) * 200, 568
+    for k = 1, 4 do
+        local x, y = (100 + k * 200) * iscale, 568 * iscale
+
         if mx > x and mx < x + w and my > y and my < y + h then
-            return k+LOWEST
+            if STATE.hand[k + LOWEST] then
+                return k + LOWEST
+            end
         end
     end
     if mx > 150 and mx < 250 and my > 550 and my < 750 then
@@ -46,4 +52,5 @@ function z.getCardNumber(mx,my)
         LOWEST = LOWEST + 1
     end
 end
+
 return z
