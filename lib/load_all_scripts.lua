@@ -47,10 +47,10 @@ local function recursiveEnumerate(folder, fileTree, first)
     local filesTable = lfs.getDirectoryItems(folder)
     for i, v in ipairs(filesTable) do
         local file = folder .. "/" .. v
-        if lfs.isFile(file) and not first then
+        if lfs.getInfo(file).type =="file" and not first then
             fileTree = fileTree .. "\n" .. string.gsub(string.gsub(file, "/", "."), ".lua", "")
             load_script(string.gsub(string.gsub(file, "/", "."), ".lua", ""))
-        elseif lfs.isDirectory(file) then
+        elseif lfs.getInfo(file).type =="directory" then
             fileTree = recursiveEnumerate(file, fileTree, false)
         end
     end
