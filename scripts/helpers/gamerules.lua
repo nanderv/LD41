@@ -59,10 +59,8 @@ function gamerules.getNextPopulation(state)
     else
         population = math.ceil(population * 1.1)
     end
-
-    if population > state.properties.housing then
-        return state.properties.housing
-    end
+    print(population, gamerules.getTotalHousing(state))
+    return math.min(population, gamerules.getTotalHousing(state))
 end
 
 function gamerules.shuffleDiscards(state)
@@ -98,8 +96,8 @@ end
 function gamerules.endTurn(state)
     local changed = {}
     local nextPop = gamerules.getNextPopulation(state)
-    if nextPop ~= state.population then
-        if nextPop > state.population then
+    if nextPop ~= state.properties.population then
+        if nextPop > state.properties.population then
             table.insert(changed, "population_up")
         else
             table.insert(changed, "population_down")

@@ -8,8 +8,8 @@
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
-    menu.changes = scripts.helpers.gamerules.endTurn(state)
-    scripts.helpers.gamerules.startTurn(state)
+    menu.changes = scripts.helpers.gamerules.endTurn(STATE)
+    scripts.helpers.gamerules.startTurn(STATE)
     -- setup entities here
     menu.t = 0.5
 end
@@ -22,7 +22,6 @@ function menu:update(dt)
     if menu.t< 0 then
         menu.t = 0.5
         local c = STATE.hand[1]
-        print(c)
         if not c then
             Gamestate.switch(scripts.states.dealHand)
         else
