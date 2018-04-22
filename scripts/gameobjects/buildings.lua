@@ -15,6 +15,20 @@ buildings.small_generator = {
             resource = "work",
             value = -2,
         },
+        {
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "nuisance",
+                    value = 2,
+                },
+            },
+        },
     },
 }
 
@@ -33,6 +47,20 @@ buildings.medium_generator = {
             resource = "work",
             value = -4,
         },
+        {
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "nuisance",
+                    value = 6,
+                },
+            },
+        },
     },
 }
 
@@ -50,6 +78,20 @@ buildings.wind_generator = {
             type = "resource",
             resource = "work",
             value = -1,
+        },
+        {
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "nuisance",
+                    value = 1,
+                },
+            },
         },
     },
 }
