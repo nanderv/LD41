@@ -150,9 +150,7 @@ for _, card in pairs(cards) do
     end
     function card:runEffects(state)
         for _, effect in ipairs(self.effects) do
-            if effect.type == "add_card" then
-                -- TODO: Pushing a card to the deck.
-            elseif effect.type == "place_building" then
+            if effect.type == "place_building" then
                 scripts.gameobjects.buildings[effect.building]:build(state)
             end
         end
