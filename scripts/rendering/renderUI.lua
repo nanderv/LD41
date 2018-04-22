@@ -113,7 +113,6 @@ end
 
 R.drawUpdates = function(updates)
     R.updates = updates
-    pprint(R.updates)
 end
 
 R.orX = 0

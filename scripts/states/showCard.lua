@@ -53,9 +53,7 @@ end
 function menu:mousepressed(x, y, mouse_btn)
 
     if mouse_btn == 1 then
-        print(self, x, y)
         local xg, yg = x / GLOBSCALE(), y / GLOBSCALE()
-        print(xg, yg)
         if xg > 750 and xg < 790 and yg > 500 and yg < 540 then
             startCard(STATE, menu.card, false)
         end

@@ -15,7 +15,7 @@ mapView.draw = function(lowest)
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
     if y then
         CAMERA.focus = { x = x, y = y }
-        love.graphics.print("Place building npow" .. x .. "  " .. y, 10, 10)
+        love.graphics.print("Place building now" .. x .. "  " .. y, 10, 10)
     else
         CAMERA.focus = nil
     end
