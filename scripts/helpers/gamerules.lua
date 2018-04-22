@@ -65,16 +65,16 @@ function gamerules.getNextPopulation(state)
     end
 end
 
-function gamerules.getNextCard(state)
+function gamerules.shuffleDiscards(state)
     if #state.drawPile == 0 then
         state.drawPile = shuffle(state.discardPile)
         state.discardPile = {}
     end
+end
 
-    local card = state.drawPile[#state.drawPile]
-    state.drawPile[#state.drawPile] = nil
-
-    return card
+function gamerules.getNextCard(state)
+    gamerules.shuffleDiscards(state)
+    return table.remove(state.drawPile, #state.drawPile)
 end
 
 function gamerules.addCard(state, card)
