@@ -2,7 +2,7 @@ local buildings = {}
 
 buildings.small_generator = {
     name = "Generator",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "small_generator",
     effects = {
         {
@@ -20,7 +20,7 @@ buildings.small_generator = {
 
 buildings.medium_generator = {
     name = "Medium powerplant",
-    size = { x = 1, z = 1},
+    size = { x = 1, y = 1},
     asset = "medium_generator",
     effects = {
         {
@@ -38,7 +38,7 @@ buildings.medium_generator = {
 
 buildings.wind_generator = {
     name = "Windmill",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "wind_generator",
     effects = {
         {
@@ -56,7 +56,7 @@ buildings.wind_generator = {
 
 buildings.small_office = {
     name = "Office building",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "small_office",
     effects = {
         {
@@ -74,7 +74,7 @@ buildings.small_office = {
 
 buildings.large_office = {
     name = "Headquarters",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "large_office",
     effects = {
         {
@@ -92,7 +92,7 @@ buildings.large_office = {
 
 buildings.small_residential = {
     name = "Small house",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "small_residential",
     effects = {
         {
@@ -110,7 +110,7 @@ buildings.small_residential = {
 
 buildings.medium_residential = {
     name = "Appartment building",
-    size = { x = 1, z = 1 },
+    size = { x = 1, y = 1 },
     asset = "medium_residential",
     effects = {
         {
@@ -123,6 +123,19 @@ buildings.medium_residential = {
             resource = "power",
             value = -3,
         },
+    },
+}
+
+buildings.small_park = {
+    name = "Small park",
+    size = { x = 1, y = 1 },
+    asset = "small_park",
+    effects = {
+        {
+            type = "resource",
+            resource = "relaxation",
+            value = 6,
+        }
     },
 }
 

@@ -7,7 +7,7 @@
 --
 local mapView = {}
 mapView.draw = function(lowest)
-    require("lib.lovebird").update()
+    if DEBUG then require("lib.lovebird").update() end
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
     if y then
         CAMERA.focus = { x = x, y = y }

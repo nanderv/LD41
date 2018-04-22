@@ -170,11 +170,25 @@ end
       font-size: 13px;
     }
     #output {
+      white-space: pre;
+      font-family: "Courier New", Courier, monospace;
       overflow-y: scroll;
       position: absolute;
       margin: 10px;
       line-height: 17px;
-      top: 0px; bottom: 36px; left: 0px; right: 0px;
+      top: 100px; bottom: 36px; left: 0px; right: 0px;
+    }
+    #monitor {
+      white-space: pre;
+      font-family: "Courier New", Courier, monospace;
+      overflow-y: scroll;
+      position: absolute;
+      margin: 10px;
+      line-height: 17px;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      height: 100px;
     }
     #env {
       position: absolute;
@@ -204,6 +218,7 @@ end
     </div>
     <div id="main">
       <div id="console" class="greybordered">
+        <div id="monitor"> <?lua echo(lovebird.monitor) ?> </div>
         <div id="output"> <?lua echo(lovebird.buffer) ?> </div>
         <div id="input">
           <form method="post"
@@ -299,6 +314,7 @@ end
 
       /* Output buffer and status */
       var refreshOutput = function() {
+        geturl("/monitor", function(text) { updateDivContent("monitor", text) });
         geturl("/buffer", function(text) {
           updateDivContent("status", "connected &#9679;");
           if (updateDivContent("output", text)) {
@@ -387,6 +403,7 @@ end
 
 
 lovebird.pages["buffer"] = [[ <?lua echo(lovebird.buffer) ?> ]]
+lovebird.pages["monitor"] = [[ <?lua echo(lovebird.monitor) ?> ]]
 
 
 lovebird.pages["env.json"] = [[
@@ -713,6 +730,7 @@ end
 
 function lovebird.update()
     if not lovebird.inited then lovebird.init() end
+    if lovebird.monfn then lovebird.monitor = lovebird.monfn() end
     -- Handle new connections
     while 1 do
         -- Accept new connections

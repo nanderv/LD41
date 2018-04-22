@@ -8,47 +8,39 @@ local function shuffle(list)
     return new
 end
 
-function gamerules.getAvailableWork(state)
-    local total_work = state.properties.population
+function gamerules.getTotalResource(state, resource)
+    local resource_count = 0
 
     for _, building in ipairs(state.buildings) do
         local building = scripts.gameobjects.buildings[building.building]
         for _, effect in ipairs(building.effects) do
-            if effect.type == "resource" and effect.resource == "work" then
-                total_work = total_work + effect.value
+            if effect.type == "resource" and effect.resource == resource then
+                resource_count = resource_count + effect.value
             end
         end
     end
 
-    return total_work
+    return resource_count
+end
+
+function gamerules.getAvailableWork(state)
+    return state.properties.population + gamerules.getTotalResource(state, "work")
 end
 
 function gamerules.getTotalHousing(state)
-    local housing = 0
-    for _, building in ipairs(state.buildings) do
-        local building = scripts.gameobjects.buildings[building.building]
-        for _, effect in ipairs(building.effects) do
-            if effect.type == "resource" and effect.resource == "housing" then
-                housing = housing + effect.value
-            end
-        end
-    end
-
-    return housing
+    return gamerules.getTotalResource(state, "housing")
 end
 
 function gamerules.getExcessPower(state)
-    local power = 0
-    for _, building in ipairs(state.buildings) do
-        local building = scripts.gameobjects.buildings[building.building]
-        for _, effect in ipairs(building.effects) do
-            if effect.type == "resource" and effect.resource == "power" then
-                power = power + effect.value
-            end
-        end
-    end
+    return gamerules.getTotalResource(state, "power")
+end
 
-    return power
+function gamerules.getRelaxation(state)
+    return gamerules.getTotalResource(state, "relaxation")
+end
+
+function gamerules.getNuisance(state)
+    return gamerules.getTotalResource(state, "nuisance")
 end
 
 function gamerules.getAvailableHousing(state)
@@ -83,6 +75,10 @@ function gamerules.getNextCard(state)
     state.drawPile[#state.drawPile] = nil
 
     return card
+end
+
+function gamerules.addCard(state, card)
+    table.insert(state.discardPile, card)
 end
 
 return gamerules
