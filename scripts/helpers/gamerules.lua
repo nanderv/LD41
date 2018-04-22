@@ -100,12 +100,9 @@ end
 function gamerules.getNextPopulation(state)
     local population = state.properties.population
 
-    if gamerules.getHappiness(state) < 0 or gamerules.getAvailableWork(state) > 0 then
-        population = math.floor(population * 0.9)
-    else
-        population = math.ceil(population * 1.1)
-    end
-    return math.min(population, gamerules.getTotalHousing(state))
+    population = population + math.min(gamerules.getHappiness(state), - gamerules.getAvailableWork(state)) * 0.25
+
+    return math.floor(math.min(population, gamerules.getTotalHousing(state)))
 end
 
 function gamerules.shuffleDiscards(state)
@@ -160,9 +157,9 @@ function gamerules.endTurn(state)
     local nextPop = gamerules.getNextPopulation(state)
     if nextPop ~= state.properties.population then
         if nextPop > state.properties.population then
-            table.insert(changed, "population_up")
+            table.insert(changed, "population_up_green")
         else
-            table.insert(changed, "population_down")
+            table.insert(changed, "population_down_red")
         end
         state.properties.population = nextPop
     end
@@ -197,9 +194,9 @@ function gamerules.endTurn(state)
 
     local nextMoney = gamerules.getMoneyPerTurn(state) + state.properties.money
     if beforeTurn.money > nextMoney then
-        table.insert(changed, "money_down_red")
+        table.insert(changed, "money_down_red_")
     elseif beforeTurn.power < nextMoney then
-        table.insert(changed, "money_up_green")
+        table.insert(changed, "money_up_green_")
     end
 
     return changed
