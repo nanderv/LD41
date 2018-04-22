@@ -15,7 +15,7 @@ STATE = {
         { x = 5, y = 2, building = "small_office" },
     },
     hand = {},
-    discardPile = { "small_office", "small_office",  "small_generator", "small_generator", "small_generator", "small_generator" },
+    discardPile = { "small_office", "small_generator",  "small_residential", "small_park" },
     drawPile = {},
     currentTurnEffects = {},
 }

@@ -18,7 +18,7 @@ local function list_contains(tab, val)
     return false
 end
 
-function getAdjacent(state, x, y)
+local function getAdjacent(state, x, y)
     local buildings = {}
 
     for _, building in ipairs(state.buildings) do
@@ -30,7 +30,7 @@ function getAdjacent(state, x, y)
 
     return buildings
 end
-
+gamerules.getAdjacent = getAdjacent
 function gamerules.getTotalResource(state, resource)
     local resource_count = 0
 

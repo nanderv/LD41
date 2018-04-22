@@ -29,7 +29,7 @@ function addBuilding:mousepressed(x, y, click)
     end
     if click == 1 then
         if CAMERA.focus then
-            if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then
+            if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) and scripts.helpers.calculations.neighbouring(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then
                 print("Placed building")
                 addBuilding.state.buildings[#STATE.buildings + 1] = { x = CAMERA.focus.x, y = CAMERA.focus.y, building = addBuilding.building }
                 Gamestate.pop()

@@ -62,4 +62,14 @@ function z.getCardNumber(mx, my, var)
     if LOWEST >= #STATE.hand-3 then LOWEST = math.max(0,#STATE.hand - 4) end
 end
 
+function z.neighbouring(state, x,y)
+    local neighs = {{1,0}, {0,1}, {-1,0}, {0,-1} }
+    for _, building in ipairs(state.buildings) do
+        for _,v in ipairs(neighs) do
+            if x+ v[1] == building.x and y+v[2] == building.y then return true end
+        end
+    end
+    return false
+end
+
 return z
