@@ -36,7 +36,7 @@ end
 function menu:keypressed(key)
     if love.keyboard.isDown("return") then
         Gamestate.pop()
-        Gamestate.push(scripts.states.runCard, STATE, menu.card)
+        Gamestate.push(scripts.states.runCard, STATE, menu.card, false)
     end
     if love.keyboard.isDown("p") then
         Gamestate.pop()

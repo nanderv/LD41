@@ -21,11 +21,12 @@ end
 
 function addBuilding:mousepressed(x, y, click)
     local prev = addBuilding.prev
-    while prev.prev and not prev.mousepressed do
-        prev = prev.prev
+    if prev then
+        while prev.prev and not prev.mousepressed do
+            prev = prev.prev
+        end
+        prev:mousepressed(x, y, click)
     end
-    prev:mousepressed(x, y, click)
-
     if click == 1 then
         if CAMERA.focus then
             if not scripts.helpers.calculations.hasBuilding(addBuilding.state, CAMERA.focus.x, CAMERA.focus.y) then

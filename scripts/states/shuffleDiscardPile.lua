@@ -9,7 +9,7 @@ local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
     -- setup entities here
-    STATE.drawPile = STATE.discardPile
+    STATE.drawPile = scripts.helpers.gamerules.shuffle(STATE.discardPile)
     STATE.discardPile = {}
     menu.animation = 1
 end
