@@ -102,6 +102,19 @@ cards.medium_residential = {
     is_creeper = false,
 }
 
+cards.small_park = {
+    name = "Small park",
+    effects = {
+        {
+            type = "place_building",
+            building = "small_park",
+        },
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
 local function verifyResourceRequirement(requirement, state)
     if requirement.relation == "gt" then
         return state.properties[requirement.property] > requirement.value
