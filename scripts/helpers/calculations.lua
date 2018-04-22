@@ -35,7 +35,7 @@ end
 function z.getCardNumber(mx, my, var)
     local iscale = GLOBSCALE()
 
-    local w, h = 160*iscale, 240*iscale
+    local w, h = 160 * iscale, 240 * iscale
     for k = 1, 4 do
         local x, y = (100 + k * 200) * iscale, 568 * iscale
 
@@ -45,32 +45,33 @@ function z.getCardNumber(mx, my, var)
             end
         end
     end
-    mx, my = mx/iscale, my/iscale
+    mx, my = mx / iscale, my / iscale
     if mx > 150 and mx < 250 and my > 550 and my < 750 then
         LOWEST = LOWEST - 1
     end
     if mx > 1100 and mx < 1200 and my > 550 and my < 750 then
         LOWEST = LOWEST + 1
     end
-    if mx > 1210  and my > 550 then
+    if mx > 1210 and my > 550 then
         if var then
             Gamestate.pop()
         end
         Gamestate.switch(scripts.states.endOfTurn)
     end
     if LOWEST < 0 then LOWEST = 0 end
-    if LOWEST >= #STATE.hand-3 then LOWEST = math.max(0,#STATE.hand - 4) end
+    if LOWEST >= #STATE.hand - 3 then LOWEST = math.max(0, #STATE.hand - 4) end
 end
 
-function z.neighbouring(state, x,y)
-    local neighs = {{1,0}, {0,1}, {-1,0}, {0,-1} }
+function z.neighbouring(state, x, y)
+    local neighs = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } }
     for _, building in ipairs(state.buildings) do
-        for _,v in ipairs(neighs) do
-            if x+ v[1] == building.x and y+v[2] == building.y then return true end
+        for _, v in ipairs(neighs) do
+            if x + v[1] == building.x and y + v[2] == building.y then return true end
         end
     end
     return false
 end
+
 local opTable = {
     gt = "greater than",
     gte = "greater than or equal",
@@ -79,12 +80,25 @@ local opTable = {
     eq = "equal to",
 }
 function z.requirementToString(requirement)
-    if requirement.type =="resource" then
-            --{ type = "resource", property = "power", relation = "gt", value = 5 }
-        return requirement.property .. " ".. opTable[requirement.relation].. " " .. requirement.value
+    if requirement.type == "resource" then
+        --{ type = "resource", property = "power", relation = "gt", value = 5 }
+        return requirement.property .. " " .. opTable[requirement.relation] .. " " .. requirement.value
     end
+end
 
-
+local effectTable = {
+    place_building = "Build ",
+    add_card = "Adds card "
+}
+function z.effectToString(effect)
+    if effect.type == "place_building" then
+        --{ type = "resource", property = "power", relation = "gt", value = 5 }
+        return "Build ".. effect.building
     end
-
+    if effect.type == "add_card" then
+        --{ type = "resource", property = "power", relation = "gt", value = 5 }
+        return "Adds card ".. scripts.gameobjects.cards[effect.card].name
+    end
+    return ".."
+end
 return z
