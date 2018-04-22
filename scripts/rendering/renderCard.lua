@@ -49,13 +49,11 @@ R.renderCard = function(card, x, y, scale)
 
     if card.effects then
         love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
-
         for i, effect in ipairs(card.effects) do
             love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
         end
     end
     if card.effects then
-
         local building
         for i, effect in ipairs(card.effects) do
             if effect.type == "place_building" then building = effect.building end
