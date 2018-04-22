@@ -6,7 +6,7 @@ end
 
 DEBUG = true
 STATE = {
-    properties = { population = 20 },
+    properties = { population = 20, money = 0 },
     buildings = {
         { x = 1, y = 1, building = "wind_generator" },
         { x = 2, y = 1, building = "medium_residential" },
@@ -22,8 +22,7 @@ STATE = {
     discardPile = { "small_office", "small_generator", "small_residential", "small_park" },
     drawPile = {},
     currentTurnEffects = {},
-    cars = {
-    },
+    cars = {},
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'

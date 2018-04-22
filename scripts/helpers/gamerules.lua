@@ -93,6 +93,10 @@ function gamerules.getHappiness(state)
     return gamerules.getRelaxation(state) - gamerules.getNuisance(state) - state.properties.population
 end
 
+function gamerules.getMoneyPerTurn(state)
+    return gamerules.getTotalResource(state, "money_per_turn")
+end
+
 function gamerules.getNextPopulation(state)
     local population = state.properties.population
 
@@ -146,6 +150,7 @@ function gamerules.startTurn(state)
         end
     end
     state.currentTurnEffects = newEffects
+    state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state)
 end
 
 function gamerules.endTurn(state)
