@@ -46,7 +46,7 @@ function menu:update(dt, bo)
         end
 
     end
-    --menu.prev:update(dt, bo)
+    menu.prev:update(dt, bo)
 
 end
 
