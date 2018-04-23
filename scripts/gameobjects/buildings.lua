@@ -228,7 +228,11 @@ buildings.university = {
     name = "University",
     size = { x = 1, y = 1 },
     asset = "university",
-    effects = {},
+    effects = { {
+        type = "resource",
+        resource = "draw",
+        value = 1,
+    },},
 }
 
 buildings.casino = {
