@@ -231,6 +231,29 @@ cards.industrial_2 = {
     is_creeper = false,
 }
 
+
+
+--
+-- Creep zone
+--
+
+cards.blackout = {
+    name = "Blackout",
+    effects = {
+        {
+            type = "resource",
+            resource="money",
+            value = -10,
+        },
+    },
+    requirements = {{type="resource", property="power", relation="gt", value=30}},
+    costs = {},
+    is_creeper = true,
+}
+
+--
+-- Additional functions
+--
 local function verifyResourceRequirement(requirement, state)
     local S = scripts.helpers.gamerules.resources
     if requirement.relation == "gt" then
