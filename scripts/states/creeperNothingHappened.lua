@@ -15,6 +15,7 @@
 --
 
 local menu = {} -- previously: Gamestate.new()
+menu.name = "creeperNothingHappened"
 
 function menu:enter(prev, state, cardIndex, card)
     menu.prev = prev

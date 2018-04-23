@@ -6,6 +6,8 @@
 -- To change this template use File | Settings | File Templates.
 --
 local addBuilding = {} -- previously: Gamestate.new()
+addBuilding.name = "addBuilding"
+
 function addBuilding:enter(prev, state, building, card)
     addBuilding.prev = prev
     addBuilding.building = building

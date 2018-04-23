@@ -6,31 +6,21 @@
 -- To change this template use File | Settings | File Templates.
 --
 local menu = {} -- previously: Gamestate.new()
+menu.name = "drawCard"
 function menu:enter(prev)
     menu.prev = prev
     -- setup entities here
     -- TODO: Make this take time.
     menu.hasShuffled = false
-    menu.showCardDrawAnim = false
 end
 
 function menu:draw()
     menu.prev:draw(true)
-
-    if menu.showCardDrawAnim then
-    end
 end
 
 function menu:update(dt, bo)
     scripts.rendering.renderUI.updateMove(dt)
     if not bo then
-        if menu.showCardDrawAnim then
-            menu.showCardDrawAnim = menu.showCardDrawAnim - dt
-            if menu.showCardDrawAnim < 0 then
-                Gamestate.pop()
-            end
-            return
-        end
         local c = STATE.drawPile[1]
         if c then
             local card = scripts.gameobjects.cards[c]
@@ -45,7 +35,6 @@ function menu:update(dt, bo)
             else
                 STATE.hand[#STATE.hand + 1] = c
                 table.remove(STATE.drawPile, 1)
-                menu.showCardDrawAnim = 0.5
             end
 
         else
@@ -63,7 +52,7 @@ function menu:update(dt, bo)
 end
 
 function menu:mousepressed(x, y, click)
-    scripts.rendering.renderUI.mousePressed(x, y, click)
+    Gamestate.pop()
 end
 
 function menu:mousereleased(x, y, mouse_btn)

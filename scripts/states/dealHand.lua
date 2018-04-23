@@ -7,6 +7,7 @@
 --
 HAND = 5
 local menu = {} -- previously: Gamestate.new()
+menu.name = "dealHand"
 function menu:enter(prev)
     menu.prev = prev
     menu.counter = 0
