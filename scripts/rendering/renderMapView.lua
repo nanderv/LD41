@@ -9,6 +9,26 @@ function GLOBSCALE()
     return math.min(love.graphics.getWidth() / (CAMERA.w * SCALING), love.graphics.getHeight() / (CAMERA.h * SCALING))
 end
 
+local helis = STATE.helis
+
+local function addHeli(buildingId)
+    local car = { x = STATE.buildings[buildingId].x, y = STATE.buildings[buildingId].y, direction = (STATE.buildings[buildingId].x * 3 * STATE.buildings[buildingId].y * 5) % 4, lifetime = 60, timer = 0 }
+    dt = -30
+    if car.direction == 1 then
+        car.y = car.y + dt * 0.3
+    end
+    if car.direction == 2 then
+        car.x = car.x + dt * 0.3
+    end
+    if car.direction == 3 then
+        car.y = car.y - dt * 0.3
+    end
+    if car.direction == 4 then
+        car.x = car.x - dt * 0.3
+    end
+    helis[buildingId] = car
+end
+
 local mapView = {}
 mapView.draw = function(lowest)
     if DEBUG then require("lib.lovebird").update() end
@@ -19,7 +39,25 @@ mapView.draw = function(lowest)
     else
         CAMERA.focus = nil
     end
+    for k, v in ipairs(STATE.buildings) do
+        if v.building == "tech_office" and not helis[k] then
+            addHeli(k)
+        end
+    end
+
     local objects = {}
+    for _, v in pairs(helis) do
+        if math.floor(v.timer) == 0 then
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 60, r = v.direction * math.pi / 2 }, texture = "heli1" }
+        elseif math.floor(v.timer) == 1 then
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 60, r = v.direction * math.pi / 2 }, texture = "heli2" }
+        elseif math.floor(v.timer) == 2 then
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 60, r = v.direction * math.pi / 2 }, texture = "heli3" }
+        elseif math.floor(v.timer) == 3 then
+            objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 60, r = v.direction * math.pi / 2 }, texture = "heli4" }
+        end
+    end
+
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
     love.graphics.setColor(0.2, 0.3, 0.2)
@@ -27,16 +65,16 @@ mapView.draw = function(lowest)
     love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do
         if v.direction == 1 then
-            objects[#objects + 1] = { position = { x = v.x * 64+40, y = v.y * 64 + 35, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 40, y = v.y * 64 + 35, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 2 then
             objects[#objects + 1] = { position = { x = v.x * 64 + 61, y = v.y * 64, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 3 then
-            objects[#objects + 1] = { position = { x = v.x * 64+30, y = v.y * 64 - 34, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 30, y = v.y * 64 - 34, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
         if v.direction == 4 then
-            objects[#objects + 1] = { position = { x = v.x  * 64+ 3, y = v.y * 64, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
+            objects[#objects + 1] = { position = { x = v.x * 64 + 3, y = v.y * 64, z = 0, r = v.direction * math.pi / 2 }, texture = v.sprite }
         end
     end
     if CAMERA.focus then

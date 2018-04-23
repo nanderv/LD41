@@ -55,7 +55,6 @@ R.drawMessage = function(message)
     love.graphics.print(message, 330, 548)
     love.graphics.setColor(1, 1, 1)
 end
-
 local iconOffset = function(index)
     return 200 + (70 * index)
 end
@@ -131,6 +130,34 @@ end
 
 R.updateMove = function(dt)
     local carsToRemove = {}
+    for i, car in ipairs(STATE.helis) do
+        if car.direction == 1 then
+            car.y = car.y + dt * 0.3
+        end
+        if car.direction == 2 then
+            car.x = car.x + dt * 0.3
+        end
+        if car.direction == 3 then
+            car.y = car.y - dt * 0.3
+        end
+        if car.direction == 4 then
+            car.x = car.x - dt * 0.3
+        end
+        car.lifetime = car.lifetime - dt
+        if car.lifetime < 0 then
+            carsToRemove[#carsToRemove + 1] = i
+        end
+        car.timer = car.timer + 20*dt
+        if car.timer > 4 then
+            car.timer = 0
+        end
+    end
+    for i, v in ipairs(carsToRemove) do
+        table.remove(STATE.helis, v - i + 1)
+    end
+
+
+    carsToRemove = {}
     for i, car in ipairs(STATE.cars) do
         if car.direction == 1 then
             car.x = car.x + dt * 0.1

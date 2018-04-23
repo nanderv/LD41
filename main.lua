@@ -8,7 +8,7 @@ DEBUG = true
 STATE = {
     properties = { population = 0, money = 40 },
     buildings = {
-        { x = 1, y = 1, building = "small_park" },
+        { x = 1, y = 1, building = "tech_office" },
 
     },
     hand = {},
@@ -16,6 +16,7 @@ STATE = {
     drawPile = {},
     currentTurnEffects = {},
     cars = {},
+    helis = {},
 }
 require 'lib.atlas'
 require 'lib.helpers.core_funcs'
