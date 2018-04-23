@@ -155,4 +155,8 @@ function menu:mousereleased(x, y, mouse_btn)
     scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
 
+function menu:wheelmoved(x, y)
+    scripts.rendering.renderUI.wheelmoved(x, y)
+end
+
 return menu

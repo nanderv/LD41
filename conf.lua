@@ -5,6 +5,6 @@ love.conf = function(t)
     t.version = "11.0"
     t.window.resizable = true
     --t.console = true
-    t.fullscreen=true
+    t.fullscreen=false
     t.window.vsync = true
 end

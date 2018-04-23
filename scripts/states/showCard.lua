@@ -82,7 +82,7 @@ function menu:keypressed(key)
     if love.keyboard.isDown("return") then
         startCard(STATE, menu.card, false)
     end
-    if love.keyboard.isDown("p") then
+    if love.keyboard.isDown("escape") then
         Gamestate.pop()
     end
 end
