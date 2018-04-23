@@ -203,4 +203,8 @@ function R.mouseReleased(x, y, mouse_btn)
     end
 end
 
+function R.wheelmoved(x, y)
+    CAMERA.r  = CAMERA.r + (y / 10)
+end
+
 return R

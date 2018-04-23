@@ -76,4 +76,8 @@ end
 function menu:keyreleased(key, code)
 end
 
+function menu:wheelmoved(x, y)
+    scripts.rendering.renderUI.wheelmoved(x, y)
+end
+
 return menu

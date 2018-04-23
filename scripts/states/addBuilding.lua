@@ -57,5 +57,9 @@ function addBuilding:update(dt)
     addBuilding.prev:update(dt, true)
 end
 
+function addBuilding:wheelmoved(x, y)
+    scripts.rendering.renderUI.wheelmoved(x, y)
+end
+
 
 return addBuilding
