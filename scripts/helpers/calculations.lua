@@ -122,7 +122,6 @@ local effectTable = {
 function z.effectToString(effect)
     if effect.type == "place_building" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
-        print(effect.building)
         return "Build " .. scripts.gameobjects.buildings[effect.building].name
     end
     if effect.type == "add_card" then
