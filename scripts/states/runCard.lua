@@ -47,8 +47,8 @@ effects.add_card = {
         local effect = c.effects[index]
         STATE.discardPile[#STATE.discardPile + 1] = effect.card
     end,
-    draw = function(c, index,  time)
-        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c.effects[index].card],1210-1200*(0.5-time), 568-800*(0.5-time), 0.5)
+    draw = function(c, index, time)
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c.effects[index].card], 1210 - 1200 * (0.5 - time), 568 - 800 * (0.5 - time), 0.5)
     end,
     duration = 0.5,
     small = false,
@@ -59,7 +59,7 @@ effects.place_building = {
         local effect = c.effects[index]
         scripts.gameobjects.buildings[effect.building]:build(STATE)
     end,
-    draw = function(card,  index, time)
+    draw = function(card, index, time)
     end,
     duration = 0,
     small = true,
@@ -74,6 +74,21 @@ effects.next_turn = {
     duration = 0,
     small = true,
 }
+
+effects.resource = {
+    exec = function(card, index)
+        local c = scripts.gameobjects.cards[menu.cardData]
+        local effect = c.effects[index]
+        pprint(STATE.properties)
+        pprint(effect)
+        STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
+    end,
+    draw = function(card, index, time)
+    end,
+    duration = 0.5,
+    small = false,
+}
+
 menu.effects = effects
 function menu:update(dt, wait)
     menu.prev:update(dt, true)
@@ -81,12 +96,13 @@ function menu:update(dt, wait)
         menu.time = menu.time + dt
 
         if menu.showing == "costs" then
-            if menu.time > 0 then
+            if menu.time > 1 then
                 menu.time = 0
+                menu.item = 1
+                menu.showing = "effects"
                 effects.add_cost.exec(menu.cardData)
             end
-            menu.item = 1
-            menu.showing = "effects"
+
         elseif menu.showing == "effects" then
             local card = scripts.gameobjects.cards[menu.cardData]
             if #card.effects < menu.item then
@@ -129,7 +145,6 @@ function menu:draw()
         effects[scripts.gameobjects.cards[menu.cardData].effects[menu.item].type].draw(scripts.gameobjects.cards[menu.cardData], menu.item, menu.time)
     end
     love.graphics.pop()
-
 end
 
 function menu:mousepressed(x, y, click)

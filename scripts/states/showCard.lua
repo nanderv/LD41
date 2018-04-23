@@ -41,6 +41,7 @@ function menu:draw(b)
             love.graphics.draw(ICONS["button-ok"].image, 750, 500, 0, 0.25)
         end
         love.graphics.draw(ICONS["button-cancel"].image, 710, 500, 0, 0.25)
+        love.graphics.draw(ICONS["button-trash"].image, 670, 500, 0, 0.25)
 
         love.graphics.pop()
     end
@@ -58,6 +59,10 @@ function menu:mousepressed(x, y, mouse_btn)
             startCard(STATE, menu.card, false)
         end
         if xg > 710 and xg < 750 and yg > 500 and yg < 540 then
+            Gamestate.pop()
+        end
+        if xg > 670 and xg < 710 and yg > 500 and yg < 540 then
+            table.remove(STATE.hand, menu.card)
             Gamestate.pop()
         end
         local k = scripts.helpers.calculations.getCardNumber(x, y, true)

@@ -36,7 +36,7 @@ function menu:update(dt, bo)
             local card = scripts.gameobjects.cards[c]
 
             if card.is_creeper then
-                if card:verifyRequirements(STATE) then
+                if not card:verifyRequirements(STATE) then
                     Gamestate.push(scripts.states.creeperNothingHappened, STATE, nil, c)
                 else
                     Gamestate.push(scripts.states.runCard, STATE, nil, c)
