@@ -18,13 +18,13 @@ local function addHeli(buildingId)
         car.y = car.y + dt * 0.3
     end
     if car.direction == 2 then
-        car.x = car.x + dt * 0.3
+        car.x = car.x - dt * 0.3
     end
     if car.direction == 3 then
         car.y = car.y - dt * 0.3
     end
-    if car.direction == 4 then
-        car.x = car.x - dt * 0.3
+    if car.direction == 0 then
+        car.x = car.x + dt * 0.3
     end
     helis[buildingId] = car
 end
@@ -60,7 +60,7 @@ mapView.draw = function(lowest)
 
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    love.graphics.setColor(0.2, 0.3, 0.2)
+    love.graphics.setColor(167/256, 188/256, 119/256)
     love.graphics.rectangle("fill", 0, 0, 1366, 768)
     love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do

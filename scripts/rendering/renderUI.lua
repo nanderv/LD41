@@ -34,8 +34,8 @@ R.drawCards = function(state, lowest)
         end
     end
     love.graphics.setColor(1, 1, 1)
-    scripts.rendering.renderCard.cardBack({ name = "Draw pile\n".. #state.drawPile .." cards" }, 10, 568, 0.5)
-    scripts.rendering.renderCard.cardBack({ name = "Discard pile\n".. #state.discardPile .." cards" }, 1210, 568, 0.5)
+    scripts.rendering.renderCard.cardBack({ name = "Draw pile\n" .. #state.drawPile .. " cards" }, 10, 568, 0.5)
+    scripts.rendering.renderCard.cardBack({ name = "Discard pile\n" .. #state.discardPile .. " cards" }, 1210, 568, 0.5)
 end
 
 R.drawCard = function(state, card, running, fromTheAir)
@@ -63,7 +63,7 @@ R.drawBuilding = function(state)
     local b = scripts.helpers.calculations.hasBuilding(state, x, y)
     if CAMERA.buildingFocus then
 
-        b = {building=CAMERA.buildingFocus}
+        b = { building = CAMERA.buildingFocus }
     end
 
     if b then
@@ -72,7 +72,6 @@ R.drawBuilding = function(state)
         local building = scripts.gameobjects.buildings[b.building]
 
         scripts.rendering.renderCard.renderCard(building, 10, 40, 0.5, true)
-
     end
 end
 R.drawStats = function(state)
@@ -117,6 +116,33 @@ R.drawStats = function(state)
 
         love.graphics.draw(icon.image, offsetX, offsetY, angle, 0.15)
     end
+    local x, y = love.mouse.getPosition()
+    local xg, yg = x/GLOBSCALE(),  y / GLOBSCALE()
+    if yg < 30 then
+        love.graphics.draw(ICONS.backdrop_top.image, 0, 30, 0, 1, 2)
+        local str = ""
+        if xg >200 and xg < 300 then
+            str = "Population increases if there's enough happiness and enough work"
+        end
+        if xg >300 and xg < 400 then
+            str = "Power is produced by power-generators and consumed by other buildings."
+        end
+        if xg >400 and xg < 500 then
+            str = "Housing is created by residential buildings and apartments."
+        end
+        if xg > 500 and xg < 600 then
+            str = "Work is the number of work not done by people. Negative means unemployment."
+        end
+        if xg > 600 and xg < 700 then
+            str = "Happiness is relaxation minus nuisance minus population."
+        end
+        if xg > 700 and xg < 800 then
+            str = "Money is created by population with work, and is used by buildings (money_per_turn)."
+        end
+        love.graphics.setColor(0,0,0)
+        love.graphics.print(str, 40, 45)
+        love.graphics.setColor(1,1,1)
+    end
     R.updates = {}
 end
 
@@ -140,19 +166,19 @@ R.updateMove = function(dt)
             car.y = car.y + dt * 0.3
         end
         if car.direction == 2 then
-            car.x = car.x + dt * 0.3
+            car.x = car.x - dt * 0.3
         end
         if car.direction == 3 then
             car.y = car.y - dt * 0.3
         end
-        if car.direction == 4 then
-            car.x = car.x - dt * 0.3
+        if car.direction == 0 then
+            car.x = car.x + dt * 0.3
         end
         car.lifetime = car.lifetime - dt
         if car.lifetime < 0 then
             carsToRemove[#carsToRemove + 1] = i
         end
-        car.timer = car.timer + 20*dt
+        car.timer = car.timer + 20 * dt
         if car.timer > 4 then
             car.timer = 0
         end
@@ -236,7 +262,7 @@ function R.mouseReleased(x, y, mouse_btn)
 end
 
 function R.wheelmoved(x, y)
-    CAMERA.r  = CAMERA.r + (y / 10)
+    CAMERA.r = CAMERA.r + (y / 10)
 end
 
 return R

@@ -43,9 +43,11 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
     love.graphics.setColor(0, 0, 0)
 
     if card.requirements then
+        love.graphics.setFont(fonts["cardSectionTitle"])
         if #card.requirements > 0 then
             love.graphics.print("Requires", (x) / scale + 40, (y) / scale + 38)
         end
+        love.graphics.setFont(fonts["cardText"])
 
         for i, requirement in ipairs(card.requirements) do
             if i == 1 then
@@ -55,7 +57,10 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
     end
 
     if card.effects then
+        love.graphics.setFont(fonts["cardSectionTitle"])
         love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
+        love.graphics.setFont(fonts["cardText"])
+
         for i, effect in ipairs(card.effects) do
             love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
         end
@@ -93,7 +98,10 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     local pfont = love.graphics.getFont()
     love.graphics.setFont(font)
     if card.effects then
+        love.graphics.setFont(fonts["cardSectionTitle"])
         love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 190)
+        love.graphics.setFont(fonts["cardText"])
+
         for i, effect in ipairs(card.effects) do
             love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 190 + 20 * i)
         end
@@ -129,8 +137,10 @@ R.renderCreeper = function(card, x, y, scale)
     if card.requirements then
 
         if #card.requirements > 0 then
+            love.graphics.setFont(fonts["cardSectionTitle"])
             love.graphics.print("Requires", (x) / scale + 40, (y) / scale + 38)
         end
+        love.graphics.setFont(fonts["cardText"])
 
         for i, requirement in ipairs(card.requirements) do
             if i == 1 then
@@ -140,7 +150,10 @@ R.renderCreeper = function(card, x, y, scale)
     end
 
     if card.effects then
+        love.graphics.setFont(fonts["cardSectionTitle"])
         love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
+        love.graphics.setFont(fonts["cardText"])
+
         for i, effect in ipairs(card.effects) do
             love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
         end
@@ -184,10 +197,14 @@ R.renderBuildingCard = function(card, x, y, scale, building)
     if card.requirements then
 
         if #card.requirements > 0 then
+            love.graphics.setFont(fonts["cardSectionTitle"])
             love.graphics.print("Requires", (x) / scale + 40, (y) / scale + 38)
+
         end
+        love.graphics.setFont(fonts["cardText"])
 
         for i, requirement in ipairs(card.requirements) do
+
             if i == 1 then
                 love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
             end
@@ -195,7 +212,10 @@ R.renderBuildingCard = function(card, x, y, scale, building)
     end
 
     if card.effects then
+        love.graphics.setFont(fonts["cardSectionTitle"])
         love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
+        love.graphics.setFont(fonts["cardText"])
+
         for i, effect in ipairs(card.effects) do
             love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
         end

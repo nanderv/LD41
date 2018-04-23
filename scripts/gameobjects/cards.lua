@@ -121,7 +121,7 @@ cards.small_residential = {
 }
 
 cards.medium_residential = {
-    name = "Appartments",
+    name = "Apartments",
     effects = {
         {
             type = "add_card",

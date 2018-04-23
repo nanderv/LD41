@@ -9,7 +9,6 @@ STATE = {
     properties = { population = 0, money = 40 },
     buildings = {
         { x = 1, y = 1, building = "small_park" },
-
     },
     hand = {},
     discardPile = { "small_office", "small_generator", "small_residential"},
