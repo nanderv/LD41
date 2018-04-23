@@ -15,6 +15,7 @@
 --
 
 local menu = {} -- previously: Gamestate.new()
+menu.name = "runCard"
 
 function menu:enter(prev, state, cardIndex, card)
     menu.prev = prev
@@ -127,7 +128,9 @@ function menu:update(dt, wait)
                     table.remove(STATE.hand, menu.card)
                 end
             end
-            Gamestate.pop()
+            if not scripts.gameobjects.cards[menu.cardData].is_creeper then
+                Gamestate.pop()
+            end
         end
     end
 end
@@ -148,7 +151,11 @@ function menu:draw()
 end
 
 function menu:mousepressed(x, y, click)
-    scripts.rendering.renderUI.mousePressed(x, y, click)
+    if scripts.gameobjects.cards[menu.cardData].is_creeper then
+        Gamestate.pop()
+    else
+        scripts.rendering.renderUI.mousePressed(x, y, click)
+    end
 end
 
 function menu:mousereleased(x, y, mouse_btn)

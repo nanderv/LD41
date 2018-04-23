@@ -41,7 +41,8 @@ function love.load()
         require "lib.lovebird".monfn = function()
             return "<b>Draw: </b>" .. inspect(STATE.drawPile) ..
                     "<br/><b>Discard: </b>" .. inspect(STATE.discardPile) ..
-                    "<br/><b>Hand: </b>" .. inspect(STATE.hand)
+                    "<br/><b>Hand: </b>" .. inspect(STATE.hand) ..
+                    "<br/><b>Gamestate: </b>" .. Gamestate.current().name
         end
     end
 end

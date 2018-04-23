@@ -157,7 +157,6 @@ function gamerules.startTurn(state)
         end
     end
     state.currentTurnEffects = newEffects
-print(state.population)
     state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state) + math.min ( -gamerules.getTotalResource(state, "work"), state.properties.population)
 
     beforeTurn.housing = gamerules.getTotalHousing(state)

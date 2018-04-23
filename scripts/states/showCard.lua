@@ -7,6 +7,7 @@
 --
 
 local menu = {} -- previously: Gamestate.new()
+menu.name = "showCard"
 function menu:enter(prev, state, card)
     menu.state = state
     menu.card = card

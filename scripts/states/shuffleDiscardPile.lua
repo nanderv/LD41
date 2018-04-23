@@ -6,6 +6,7 @@
 -- To change this template use File | Settings | File Templates.
 --
 local menu = {} -- previously: Gamestate.new()
+menu.name = "shuffleDiscardPile"
 function menu:enter(prev)
     menu.prev = prev
     -- setup entities here

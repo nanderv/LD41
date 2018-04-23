@@ -8,6 +8,7 @@
 LOWEST = 0
 
 local menu = {} -- previously: Gamestate.new()
+menu.name = "playCards"
 function menu:enter(prev)
     menu.prev = prev
 end
