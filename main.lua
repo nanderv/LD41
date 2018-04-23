@@ -8,15 +8,20 @@ DEBUG = true
 STATE = {
     properties = { population = 20, money = 40 },
     buildings = {
-        { x = 1, y = 1, building = "wind_generator" },
-        { x = 2, y = 1, building = "medium_residential" },
-        { x = 3, y = 1, building = "small_park" },
-        { x = 4, y = 1, building = "medium_residential" },
-        { x = 1, y = 2, building = "medium_generator" },
-        { x = 2, y = 2, building = "large_office" },
-        { x = 3, y = 2, building = "small_residential" },
-        { x = 4, y = 2, building = "small_generator" },
-        { x = 5, y = 2, building = "small_office" },
+        { x = 1, y = 1, building = "small_generator" },
+        { x = 2, y = 1, building = "medium_generator" },
+        { x = 3, y = 1, building = "wind_generator" },
+        { x = 4, y = 1, building = "small_office" },
+        { x = 5, y = 1, building = "large_office" },
+        { x = 6, y = 1, building = "industrial_1" },
+        { x = 7, y = 1, building = "industrial_2" },
+        { x = 1, y = 2, building = "small_residential" },
+        { x = 2, y = 2, building = "medium_residential" },
+        { x = 3, y = 2, building = "small_park" },
+        { x = 4, y = 2, building = "stadium" },
+        { x = 5, y = 2, building = "university" },
+        { x = 6, y = 2, building = "casino" },
+        { x = 7, y = 2, building = "metro" },
     },
     hand = {},
     discardPile = { "small_office", "small_generator", "small_residential", "small_park" },
@@ -32,6 +37,10 @@ Gamestate = require "lib.gamestate"
 function love.load()
     scripts.rendering.renderMap()
     scripts.rendering.loadAssets()
+    local music = love.audio.newSource("assets/main.mp3", "stream")
+    music:setVolume(0.7)
+    music:setLooping(true)
+    music:play()
     atlas = Atlas(1, 1, true, '', nil, false, false)
     for _, v in pairs(GFX) do
         v:addQuads()
