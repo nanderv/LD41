@@ -75,18 +75,22 @@ function menu:mousepressed(x, y, mouse_btn)
     if mouse_btn == 1 then
         local xg, yg = x / GLOBSCALE(), y / GLOBSCALE()
         if xg > 750 and xg < 790 and yg > 455 and yg < 495 then
+            CAMERA.buildingFocus = nil
             startCard(STATE, menu.card, false)
         end
         if xg > 710 and xg < 750 and yg > 455 and yg < 495 then
+            CAMERA.buildingFocus = nil
             Gamestate.pop()
         end
         if xg > 670 and xg < 710 and yg > 455 and yg < 495 then
             table.remove(STATE.hand, menu.card)
+            CAMERA.buildingFocus = nil
             Gamestate.pop()
         end
 
         local k = scripts.helpers.calculations.getCardNumber(x, y, true)
         if k then
+            CAMERA.buildingFocus = nil
             Gamestate.pop()
             Gamestate.push(scripts.states.showCard, STATE, k)
         end
@@ -103,6 +107,7 @@ function menu:keypressed(key)
         startCard(STATE, menu.card, false)
     end
     if love.keyboard.isDown("escape") then
+        CAMERA.buildingFocus = nil
         Gamestate.pop()
     end
 end

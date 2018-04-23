@@ -18,7 +18,7 @@ buildings.small_generator = {
         {
             type = "resource",
             resource = "money_per_turn",
-            value = -2,
+            value = -1,
         },
         {
             type = "adjacent",
@@ -32,7 +32,6 @@ buildings.small_generator = {
                     resource = "nuisance",
                     value = 2,
                 },
-
             },
         },
     },
@@ -54,15 +53,15 @@ buildings.medium_generator = {
             value = -4,
         },
         {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -2,
+        },
+        {
             type = "adjacent",
             filter = {
                 "small_residential",
                 "medium_residential",
-            },
-            {
-                type = "resource",
-                resource = "money_per_turn",
-                value = -4,
             },
             effects = {
                 {
@@ -83,11 +82,16 @@ buildings.wind_generator = {
         {
             type = "resource",
             resource = "power",
-            value = 3,
+            value = 5,
         },
         {
             type = "resource",
             resource = "work",
+            value = -1,
+        },
+        {
+            type = "resource",
+            resource = "money_per_turn",
             value = -1,
         },
         {
@@ -140,6 +144,21 @@ buildings.large_office = {
             resource = "power",
             value = -5,
         },
+        {
+            type = "adjacent",
+            filter = {
+                "small_office",
+                "tech_office",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "work",
+                    value = -5,
+                },
+            },
+        },
+
     },
 }
 buildings.tech_office = {
@@ -150,12 +169,12 @@ buildings.tech_office = {
         {
             type = "resource",
             resource = "work",
-            value = -10,
+            value = -15,
         },
         {
             type = "resource",
             resource = "power",
-            value = -5,
+            value = -3,
         },
     },
 }
@@ -201,6 +220,11 @@ buildings.small_park = {
     asset = "small_park",
     effects = {
         {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -1,
+        },
+        {
             type = "adjacent",
             filter = {
                 "small_residential",
@@ -210,7 +234,7 @@ buildings.small_park = {
                 {
                     type = "resource",
                     resource = "relaxation",
-                    value = 12,
+                    value = 4,
                 },
             },
         },
@@ -221,18 +245,60 @@ buildings.stadium = {
     name = "Stadium",
     size = { x = 1, y = 1 },
     asset = "stadium",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -4,
+        },
+        {
+            type = "resource",
+            resource = "relaxation",
+            value = 30,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -6,
+        },
+        {
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "nuisance",
+                    value = 15,
+                },
+            },
+        },
+    },
 }
 
 buildings.university = {
     name = "University",
     size = { x = 1, y = 1 },
     asset = "university",
-    effects = { {
-        type = "resource",
-        resource = "draw",
-        value = 1,
-    },},
+    effects = {
+        {
+            type = "resource",
+            resource = "draw",
+            value = 1,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -5,
+        },
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -5,
+        },
+    },
 }
 
 buildings.casino = {
@@ -242,7 +308,8 @@ buildings.casino = {
     effects = {},
 }
 
-buildings.industrial_1 = {--
+buildings.industrial_1 = {
+    --
     name = "Steel mill",
     size = { x = 1, y = 1 },
     asset = "steelmill",
@@ -255,7 +322,8 @@ buildings.industrial_2 = {
     asset = "factory",
     effects = {},
 }
-buildings.start = {--
+buildings.start = {
+    --
     name = "Start",
     size = { x = 1, y = 1 },
     asset = "start",
