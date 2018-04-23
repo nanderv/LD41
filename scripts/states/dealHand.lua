@@ -16,7 +16,7 @@ function menu:update(dt, bo)
     scripts.rendering.renderUI.updateMove(dt)
     if not bo then
         if menu.counter > #STATE.hand then Gamestate.switch(scripts.states.playCards) end
-        if #STATE.hand >= HAND then
+        if #STATE.hand >= scripts.helpers.gamerules.getCardDraw(STATE) then
             Gamestate.switch(scripts.states.playCards)
             return
         end

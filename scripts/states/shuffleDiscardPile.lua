@@ -20,7 +20,7 @@ function menu:draw()
 
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    scripts.rendering.renderCard.renderCard({name=""},100+800*menu.animation, 300+300*yy,0.7 )
+    scripts.rendering.renderCard.renderCard({name=""},100+1133*menu.animation, 300+300*yy,0.5 )
     love.graphics.pop()
 
 end

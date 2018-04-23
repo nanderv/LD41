@@ -86,6 +86,35 @@ function z.requirementToString(requirement)
     end
 end
 
+--
+--
+--
+-- {
+--type = "resource",
+--resource = "power",
+--value = 4,
+--},
+--    {
+--        type = "resource",
+--        resource = "work",
+--        value = -2,
+--    },
+--    {
+--        type = "adjacent",
+--        filter = {
+--            "small_residential",
+--            "medium_residential",
+--        },
+--        effects = {
+--            {
+--                type = "resource",
+--                resource = "nuisance",
+--                value = 2,
+--            },
+--        },
+--    },
+
+
 local effectTable = {
     place_building = "Build ",
     add_card = "Adds card "
@@ -93,12 +122,33 @@ local effectTable = {
 function z.effectToString(effect)
     if effect.type == "place_building" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
-        return "Build ".. scripts.gameobjects.buildings[effect.building].name
+        return "Build " .. scripts.gameobjects.buildings[effect.building].name
     end
     if effect.type == "add_card" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
-        return "Adds card ".. scripts.gameobjects.cards[effect.card].name
+        return "Adds card " .. scripts.gameobjects.cards[effect.card].name
+    end
+    if effect.type == "resource" then
+        return effect.resource .. ": " .. effect.value
+    end
+    if effect.type == "adjacent" then
+        local acount = 2
+        local str = "For every adjacent:\n"
+        for _, v in ipairs(effect.filter) do
+            str = str .. "> " .. scripts.gameobjects.buildings[v].name.."\n"
+            acount = acount + 1
+        end
+        str = str .. "do\n"
+        for _, v in ipairs(effect.effects) do
+            local strr, l = z.effectToString(v)
+            str = str .. "> " .. strr .. "\n"
+            acount = acount + 1 + (l or 0)
+        end
+        return str, acount
+
+
     end
     return ".."
 end
+
 return z

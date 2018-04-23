@@ -45,7 +45,7 @@ function menu:update(dt, bo)
             else
                 STATE.hand[#STATE.hand + 1] = c
                 table.remove(STATE.drawPile, 1)
-                menu.showCardDrawAnim = 1
+                menu.showCardDrawAnim = 0.5
             end
 
         else

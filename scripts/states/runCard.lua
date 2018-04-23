@@ -47,9 +47,11 @@ effects.add_card = {
         local effect = c.effects[index]
         STATE.discardPile[#STATE.discardPile + 1] = effect.card
     end,
-    draw = function(card, time)
+    draw = function(c, index,  time)
+        pprint(c.effects[index])
+        scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c.effects[index].card],1210-1200*(0.5-time), 568-800*(0.5-time), 0.5)
     end,
-    duration = 1,
+    duration = 0.5,
     small = false,
 }
 effects.place_building = {
@@ -58,7 +60,7 @@ effects.place_building = {
         local effect = c.effects[index]
         scripts.gameobjects.buildings[effect.building]:build(STATE)
     end,
-    draw = function(card, time)
+    draw = function(card,  index, time)
     end,
     duration = 0,
     small = true,
@@ -69,7 +71,7 @@ effects.next_turn = {
         local effect = c.effects[index]
         table.insert(STATE.currentTurnEffects, table.clone(effect))
     end,
-    draw = function(card, time) end,
+    draw = function(card, index, time) end,
     duration = 0,
     small = true,
 }
@@ -120,10 +122,14 @@ function menu:draw()
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
     scripts.rendering.renderUI.drawCard(menu.state, menu.cardData, false, true)
+
     if scripts.gameobjects.cards[menu.cardData].is_creeper then
         scripts.rendering.renderUI.drawMessage("Drew creeper  .. " .. scripts.gameobjects.cards[menu.cardData].name .. "; a disaster occured.")
     end
     love.graphics.pop()
+    if menu.showing == "effects" then
+        effects[scripts.gameobjects.cards[menu.cardData].effects[menu.item].type].draw(scripts.gameobjects.cards[menu.cardData], menu.item, menu.time)
+    end
 end
 
 function menu:mousepressed(x, y, click)

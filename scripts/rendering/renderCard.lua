@@ -8,7 +8,7 @@
 
 local R = {}
 local font = love.graphics.newFont(20)
-R.renderCard = function(card, x, y, scale)
+R.renderCard = function(card, x, y, scale, isBuilding)
 
     love.graphics.setDefaultFilter("linear", "linear", 2)
 
@@ -39,20 +39,36 @@ R.renderCard = function(card, x, y, scale)
     love.graphics.setColor(0, 0, 0)
 
     if card.requirements then
-        love.graphics.print("Requires", (x) / scale + 15, (y) / scale + 33)
+
+        if #card.requirements > 0 then
+            love.graphics.print("Requires", (x) / scale + 15, (y) / scale + 33)
+        end
 
         for i, requirement in ipairs(card.requirements) do
             love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 15, (y) / scale + 30 + 20 * i)
         end
     end
 
-
+    local move = 0
+    if isBuilding then
+        move = -130
+    end
     if card.effects then
-        love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250)
+        love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 250 + move)
         for i, effect in ipairs(card.effects) do
-            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i)
+            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 250 + 20 * i + move)
         end
     end
+    if isBuilding then
+        love.graphics.setColor(1, 1, 1)
+        local b = card
+        love.graphics.push()
+        love.graphics.scale(1.5)
+        GFX[b.asset]:drawDirect(x / scale / 1.5 + 100, y / scale / 1.5 + 70, 0)
+        love.graphics.pop()
+        love.graphics.setColor(0, 0, 0)
+    end
+
     if card.effects then
         local building
         for i, effect in ipairs(card.effects) do
@@ -63,7 +79,7 @@ R.renderCard = function(card, x, y, scale)
             local b = scripts.gameobjects.buildings[building]
             love.graphics.push()
             love.graphics.scale(1.5)
-            GFX[b.asset]:drawDirect(x / scale/1.5 +100, y / scale/1.5 + 120, 0)
+            GFX[b.asset]:drawDirect(x / scale / 1.5 + 100, y / scale / 1.5 + 120, 0)
             love.graphics.pop()
             love.graphics.setColor(0, 0, 0)
         end

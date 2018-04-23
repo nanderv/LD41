@@ -21,7 +21,7 @@ function menu:update(dt)
     scripts.rendering.renderUI.updateMove(dt)
     menu.t = menu.t - dt
     if menu.t< 0 then
-        menu.t = 2
+        menu.t = 0.7
         local c = STATE.hand[1]
         if not c then
             Gamestate.switch(scripts.states.dealHand)
@@ -44,5 +44,6 @@ end
 function menu:mousereleased(x, y, mouse_btn)
     scripts.rendering.renderUI.mouseReleased(x, y, mouse_btn)
 end
+
 
 return menu

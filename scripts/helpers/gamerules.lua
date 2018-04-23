@@ -97,6 +97,16 @@ function gamerules.getHappiness(state)
     return gamerules.getRelaxation(state) - gamerules.getNuisance(state) - state.properties.population
 end
 
+function gamerules.getCardDraw(state)
+    local c = 3
+    for _, building in ipairs(state.buildings) do
+        if building.building == "university" then
+            c = c + 1
+        end
+    end
+    return c
+end
+
 function gamerules.getMoneyPerTurn(state)
     return gamerules.getTotalResource(state, "money_per_turn")
 end

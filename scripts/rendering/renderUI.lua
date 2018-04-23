@@ -59,8 +59,20 @@ end
 local iconOffset = function(index)
     return 200 + (70 * index)
 end
+R.drawBuilding = function(state)
+    local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
+    local b = scripts.helpers.calculations.hasBuilding(state, x, y)
+    if b then
 
+        love.graphics.setColor(1, 1, 1)
+        local building = scripts.gameobjects.buildings[b.building]
+
+        scripts.rendering.renderCard.renderCard(building, 10, 40, 0.5, true)
+
+    end
+end
 R.drawStats = function(state)
+    R.drawBuilding(state)
     local gamerules = scripts.helpers.gamerules
     love.graphics.getFont():setFilter("linear", "linear")
     love.graphics.setColor(1, 1, 1)
@@ -79,14 +91,7 @@ R.drawStats = function(state)
     love.graphics.print(state.properties.money, iconOffset(5) + 35, 7)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
-    local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
-    local b = scripts.helpers.calculations.hasBuilding(state, x, y)
-    if b then
-        love.graphics.setColor(0, 1, 0)
-        local building = scripts.gameobjects.buildings[b.building]
-        love.graphics.print(building.name, 30, 30)
-        love.graphics.setColor(1, 1, 1)
-    end
+
     local offsets = { population = 0, energy = 1, housing = 2, work = 3, happiness = 4, money = 5 }
     for _, update in ipairs(R.updates) do
         local m = update:gmatch("[^_]+")
