@@ -64,7 +64,7 @@ local function draw(self, x, y, z, layer, r, batch)
     -- local z = z + self.z
     local XX = (x - CAMERA.x) * math.cos(CAMERA.r) + (y - CAMERA.y) * math.sin(CAMERA.r)
     local YY = -(x - CAMERA.x) * math.sin(CAMERA.r) + (y - CAMERA.y) * math.cos(CAMERA.r)
-    batch:add(self.quads[i], XX + 0.5 * CAMERA.w, YY - i - z + 0.5 * CAMERA.h, r - CAMERA.r, 1, 1, self.sizeX / 2, self.sizeY / 2)
+    batch:add(self.quads[i], XX + 0.5 * CAMERA.w, YY - i - z + 0.5 * CAMERA.h, r - CAMERA.r, -1, 1, self.sizeX / 2, self.sizeY / 2)
 end
 
 local function drawDirect(self, x, y, r)
@@ -73,7 +73,7 @@ local function drawDirect(self, x, y, r)
     for i = 1, self.slides do
 
 
-        love.graphics.draw(atlas.map, self.quads[i], x, y - i  , r - CAMERA.r, 1, 1, self.sizeX / 2, self.sizeY / 2)
+        love.graphics.draw(atlas.map, self.quads[i], x, y - i  , r - CAMERA.r, -1, 1, self.sizeX / 2, self.sizeY / 2)
     end
 end
 

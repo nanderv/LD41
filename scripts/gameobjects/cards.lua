@@ -281,6 +281,66 @@ cards.loan = {
     is_creeper = true,
 }
 
+cards.football_match = {
+    name = "Football match",
+    effects = {
+        {
+            type = "resource",
+            resource="happiness",
+            value = 30,
+        },
+    },
+    requirements = {{type="resource", property="happiness", relation="gt", value=30}},
+    costs = {},
+    autoadd=true,
+    is_creeper = true,
+}
+
+cards.demonstration = {
+    name = "Demonstration",
+    effects = {
+        {
+            type = "resource",
+            resource="nuisance",
+            value = 30,
+        },
+    },
+    requirements = {{type="building_count", filter={"small_generator", "medium_generator"}, relation="gt", value=9}},
+    costs = {},
+    autoadd=true,
+    is_creeper = true,
+}
+
+cards.vacancy = {
+    name = "Vacancy",
+    effects = {
+        {
+            type = "resource",
+            resource = "nuisance",
+            value = 30,
+        },
+    },
+    requirements = {{type="resource", property="excessHousing", relation="gt", value=20}},
+    costs = {},
+    autoadd=true,
+    is_creeper = true,
+}
+
+cards.lack_of_work = {
+    name = "Lack of workers",
+    effects = {
+        {
+            type = "resource",
+            resource = "money",
+            value = -30,
+        },
+    },
+    requirements = {{type="resource", property="work", relation="lt", value=-15}},
+    costs = {},
+    autoadd = true,
+    is_creeper = true,
+}
+
 --
 -- Additional functions
 --
@@ -303,11 +363,33 @@ local function verifyResourceRequirement(requirement, state)
     end
 end
 
+local function verifyBuildingCountRequirement(requirement, state)
+    local S = scripts.helpers.gamerules.countBuildingTypes
+    if requirement.relation == "gt" then
+        return S(state, requirement.filter) > requirement.value
+    end
+    if requirement.relation == "lt" then
+        return S(state, requirement.filter) < requirement.value
+    end
+    if requirement.relation == "gte" then
+        return S(state, requirement.filter) >= requirement.value
+    end
+    if requirement.relation == "lte" then
+        return S(state, requirement.filter) <= requirement.value
+    end
+    if requirement.relation == "eq" then
+        return S(state, requirement.filter) == requirement.value
+    end
+end
+
 for _, card in pairs(cards) do
     function card:verifyRequirements(state)
         for _, requirement in ipairs(self.requirements) do
             if requirement.type == "resource" then
                 if not verifyResourceRequirement(requirement, state) then return false end
+            end
+            if requirement.type == "building_count" then
+                if not verifyBuildingCountRequirement(requirement, state) then return false end
             end
         end
         return true

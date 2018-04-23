@@ -84,9 +84,10 @@ effects.resource = {
     exec = function(card, index)
         local c = scripts.gameobjects.cards[menu.cardData]
         local effect = c.effects[index]
-        pprint(STATE.properties)
-        pprint(effect)
-        STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
+--        pprint(STATE.properties)
+--        pprint(effect)
+        table.insert(STATE.currentTurnEffects, effect)
+--        STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
     end,
     draw = function(card, index, time)
     end,
