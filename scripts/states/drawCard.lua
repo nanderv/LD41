@@ -41,7 +41,7 @@ function menu:update(dt, bo)
                 if not card:verifyRequirements(STATE) then
                     Gamestate.push(scripts.states.creeperNothingHappened, STATE, nil, c)
                 else
-                    Gamestate.push(scripts.states.runCard, STATE, nil, c)
+                    Gamestate.push(scripts.states.creeperEffect, STATE, nil, c)
                 end
                 table.remove(STATE.drawPile, 1)
             else

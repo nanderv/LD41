@@ -77,7 +77,7 @@ local nameChanger = {
     nuisance = {"Nuisance", 1},
     relaxation = {"Relaxation", 1},
     housing = {"Housing", 1},
-    power = {"Nuisance", 1},
+    power = {"Power", 1},
     money_per_turn = {"Money per turn", 1},
     draw = {"Hand limit: ", 1},
 }
@@ -92,6 +92,7 @@ function z.requirementToString(requirement)
     if requirement.type == "resource" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
         local row = (nameChanger[requirement.property])
+        if not row then print(requirement.property) end
         return row[1] .. " " .. opTable[requirement.relation] .. " " .. row[2]*requirement.value
     end
 end

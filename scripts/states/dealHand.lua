@@ -10,20 +10,23 @@ local menu = {} -- previously: Gamestate.new()
 menu.name = "dealHand"
 function menu:enter(prev)
     menu.prev = prev
-    menu.counter = 0
+    menu.counter = -1
     -- setup entities here
 end
+
 function menu:update(dt, bo)
     scripts.rendering.renderUI.updateMove(dt)
     if not bo then
+        if menu.counter == #STATE.hand then Gamestate.switch(scripts.states.playCards) end
         if #STATE.hand >= scripts.helpers.gamerules.getCardDraw(STATE) then
             Gamestate.switch(scripts.states.playCards)
             return
         end
+        menu.counter = #STATE.hand
         Gamestate.push(scripts.states.drawCard)
-        menu.counter = menu.counter + 1
     end
 end
+
 function menu:draw(bo)
     scripts.rendering.renderMapView.draw(LOWEST)
 end

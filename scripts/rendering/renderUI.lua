@@ -52,7 +52,7 @@ end
 R.drawMessage = function(message)
     love.graphics.rectangle("fill", 300, 538, 766, 30)
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print(message, 330, 548)
+    love.graphics.print(message, 320, 538)
     love.graphics.setColor(1, 1, 1)
 end
 local iconOffset = function(index)
