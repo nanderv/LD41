@@ -60,7 +60,7 @@ mapView.draw = function(lowest)
 
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    love.graphics.setColor(0.2, 0.3, 0.2)
+    love.graphics.setColor(167/256, 188/256, 119/256)
     love.graphics.rectangle("fill", 0, 0, 1366, 768)
     love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do

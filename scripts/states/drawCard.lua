@@ -15,6 +15,7 @@ function menu:enter(prev)
     menu.showCardDrawAnim = false
 end
 
+
 function menu:draw()
     menu.prev:draw(true)
 

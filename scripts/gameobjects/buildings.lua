@@ -196,7 +196,7 @@ buildings.small_residential = {
 }
 
 buildings.medium_residential = {
-    name = "Appartments",
+    name = "Apartments",
     size = { x = 1, y = 1 },
     asset = "medium_residential",
     effects = {

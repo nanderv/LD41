@@ -117,6 +117,12 @@ R.drawStats = function(state)
 
         love.graphics.draw(icon.image, offsetX, offsetY, angle, 0.15)
     end
+    local x, y = love.mouse.getPosition()
+    local  yg = y / GLOBSCALE()
+    if yg < 30 then
+        love.graphics.draw(ICONS.backdrop_top.image, 0, 30,0,1,2)
+
+    end
     R.updates = {}
 end
 
