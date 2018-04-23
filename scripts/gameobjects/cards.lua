@@ -202,11 +202,11 @@ cards.industrial_1 = {
     effects = {
         {
             type = "add_card",
-            card = "industrial_2",
+            card = "industrial_1",
         },
         {
             type = "place_building",
-            building = "industrial_1",
+            building = "industrial_2",
         },
     },
     requirements = {},
@@ -219,7 +219,7 @@ cards.industrial_2 = {
     effects = {
         {
             type = "place_building",
-            building = "industrial_2",
+            building = "industrial_1",
         }
     },
     requirements = {},

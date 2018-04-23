@@ -8,7 +8,7 @@ DEBUG = true
 STATE = {
     properties = { population = 0, money = 40 },
     buildings = {
-        { x = 1, y = 1, building = "large_office" },
+        { x = 1, y = 1, building = "small_park" },
 
     },
     hand = {},

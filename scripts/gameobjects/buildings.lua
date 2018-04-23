@@ -137,7 +137,7 @@ buildings.large_office = {
         {
             type = "resource",
             resource = "work",
-            value = -10,
+            value = -2,
         },
         {
             type = "resource",
@@ -158,7 +158,6 @@ buildings.large_office = {
                 },
             },
         },
-
     },
 }
 buildings.tech_office = {
@@ -204,12 +203,12 @@ buildings.medium_residential = {
         {
             type = "resource",
             resource = "housing",
-            value = 8,
+            value = 10,
         },
         {
             type = "resource",
             resource = "power",
-            value = -3,
+            value = -2,
         },
     },
 }
@@ -219,11 +218,7 @@ buildings.small_park = {
     size = { x = 1, y = 1 },
     asset = "small_park",
     effects = {
-        {
-            type = "resource",
-            resource = "money_per_turn",
-            value = -1,
-        },
+
         {
             type = "adjacent",
             filter = {
@@ -305,7 +300,37 @@ buildings.casino = {
     name = "Casino",
     size = { x = 1, y = 1 },
     asset = "casino",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = 2,
+        },
+        {
+            type = "resource",
+            resource = "relaxation",
+            value = 5,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -10,
+        },
+        {
+            type = "adjacent",
+            filter = {
+                "small_residential",
+                "medium_residential",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "nuisance",
+                    value = 15,
+                },
+            },
+        },
+    }
 }
 
 buildings.industrial_1 = {
@@ -313,21 +338,73 @@ buildings.industrial_1 = {
     name = "Steel mill",
     size = { x = 1, y = 1 },
     asset = "steelmill",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = 1,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -12,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -10,
+        },
+    },
 }
 
 buildings.industrial_2 = {
-    name = "Factory",
+    name = "Steel mill",
     size = { x = 1, y = 1 },
-    asset = "factory",
-    effects = {},
+    asset = "steelmill",
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = 2,
+        },
+        {
+            type = "resource",
+            resource = "work",
+            value = -10,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -20,
+        },
+        {
+            type = "adjacent",
+            filter = {
+                "small_generator",
+                "medium_generator",
+            },
+            effects = {
+                {
+                    type = "resource",
+                    resource = "work",
+                    value = -5,
+                },
+            },
+        },
+    },
 }
 buildings.start = {
     --
     name = "Start",
     size = { x = 1, y = 1 },
     asset = "start",
-    effects = {},
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = 1,
+        },
+    },
 }
 
 for k, v in pairs(buildings) do
