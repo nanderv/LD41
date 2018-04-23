@@ -126,10 +126,11 @@ function menu:draw()
     if scripts.gameobjects.cards[menu.cardData].is_creeper then
         scripts.rendering.renderUI.drawMessage("Drew creeper  .. " .. scripts.gameobjects.cards[menu.cardData].name .. "; a disaster occured.")
     end
-    love.graphics.pop()
     if menu.showing == "effects" then
         effects[scripts.gameobjects.cards[menu.cardData].effects[menu.item].type].draw(scripts.gameobjects.cards[menu.cardData], menu.item, menu.time)
     end
+    love.graphics.pop()
+
 end
 
 function menu:mousepressed(x, y, click)
