@@ -10,8 +10,8 @@ local R = {}
 local font = love.graphics.newFont(20)
 local fonts = {}
 local fontData = require "assets.fonts.settings"
-for k,v in pairs(fontData) do
-    fonts[k] = love.graphics.newFont("assets/fonts/"..v.font, v.size)
+for k, v in pairs(fontData) do
+    fonts[k] = love.graphics.newFont("assets/fonts/" .. v.font, v.size)
 end
 R.renderEventCard = function(card, x, y, scale, building) --named card for copy-paste reasons.
     love.graphics.setDefaultFilter("linear", "linear", 2)
@@ -43,13 +43,14 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
     love.graphics.setColor(0, 0, 0)
 
     if card.requirements then
-
         if #card.requirements > 0 then
             love.graphics.print("Requires", (x) / scale + 40, (y) / scale + 38)
         end
 
         for i, requirement in ipairs(card.requirements) do
-            love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            if i == 1 then
+                love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            end
         end
     end
 
@@ -113,8 +114,6 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     love.graphics.pop()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.graphics.setFont(pfont)
-
-
 end
 R.renderCreeper = function(card, x, y, scale)
     love.graphics.setDefaultFilter("linear", "linear", 2)
@@ -134,7 +133,9 @@ R.renderCreeper = function(card, x, y, scale)
         end
 
         for i, requirement in ipairs(card.requirements) do
-            love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            if i == 1 then
+                love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            end
         end
     end
 
@@ -187,7 +188,9 @@ R.renderBuildingCard = function(card, x, y, scale, building)
         end
 
         for i, requirement in ipairs(card.requirements) do
-            love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            if i == 1 then
+                love.graphics.print(scripts.helpers.calculations.requirementToString(requirement), (x) / scale + 40, (y) / scale + 38 + 20 * i)
+            end
         end
     end
 

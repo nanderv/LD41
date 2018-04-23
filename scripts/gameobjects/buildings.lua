@@ -142,7 +142,23 @@ buildings.large_office = {
         },
     },
 }
-
+buildings.tech_office = {
+    name = "HiTech Company",
+    size = { x = 1, y = 1 },
+    asset = "hitech",
+    effects = {
+        {
+            type = "resource",
+            resource = "work",
+            value = -10,
+        },
+        {
+            type = "resource",
+            resource = "power",
+            value = -5,
+        },
+    },
+}
 buildings.small_residential = {
     name = "Small house",
     size = { x = 1, y = 1 },
@@ -162,7 +178,7 @@ buildings.small_residential = {
 }
 
 buildings.medium_residential = {
-    name = "Appartment building",
+    name = "Appartments",
     size = { x = 1, y = 1 },
     asset = "medium_residential",
     effects = {
@@ -222,14 +238,7 @@ buildings.casino = {
     effects = {},
 }
 
-buildings.metro = {
-    name = "Metro",
-    size = { x = 1, y = 1 },
-    asset = "metro",
-    effects = {},
-}
-
-buildings.industrial_1 = {
+buildings.industrial_1 = {--
     name = "Steel mill",
     size = { x = 1, y = 1 },
     asset = "steelmill",
@@ -240,6 +249,12 @@ buildings.industrial_2 = {
     name = "Factory",
     size = { x = 1, y = 1 },
     asset = "factory",
+    effects = {},
+}
+buildings.start = {--
+    name = "Start",
+    size = { x = 1, y = 1 },
+    asset = "start",
     effects = {},
 }
 
