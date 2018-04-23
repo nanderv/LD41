@@ -162,13 +162,14 @@ function gamerules.startTurn(state)
         end
     end
     state.currentTurnEffects = newEffects
-    state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state) + math.min ( -gamerules.getTotalResource(state, "work"), state.properties.population)
 
     beforeTurn.housing = gamerules.getTotalHousing(state)
     beforeTurn.happiness = gamerules.getHappiness(state)
     beforeTurn.work = gamerules.getAvailableWork(state)
     beforeTurn.power = gamerules.getExcessPower(state)
     beforeTurn.money = state.properties.money
+
+    state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state) + math.min ( -gamerules.getTotalResource(state, "work"), state.properties.population)
 end
 
 function gamerules.endTurn(state)
