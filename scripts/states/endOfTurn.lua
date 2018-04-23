@@ -7,10 +7,14 @@
 --
 local menu = {} -- previously: Gamestate.new()
 menu.name = "endOfTurn"
+menu.is_ran = false
 function menu:enter(prev)
     menu.prev = prev
-    menu.changes, menu.creepers = scripts.helpers.gamerules.endTurn(STATE)
-    scripts.helpers.gamerules.startTurn(STATE)
+    if not menu.is_ran then
+        menu.changes, menu.creepers = scripts.helpers.gamerules.endTurn(STATE)
+        scripts.helpers.gamerules.startTurn(STATE)
+        menu.is_ran = true
+    end
     -- setup entities here
     menu.t = 0.3
 end
@@ -31,6 +35,7 @@ function menu:update(dt)
         menu.t = 0.7
         local c = STATE.hand[1]
         if not c then
+            menu.is_ran = false
             Gamestate.switch(scripts.states.dealHand)
         else
             STATE.discardPile[#STATE.discardPile+1] = c
