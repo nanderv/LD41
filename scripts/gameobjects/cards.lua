@@ -26,15 +26,15 @@ cards.medium_generator = {
     effects = {
         {
             type = "add_card",
-            card = "medium_generator",
+            card = "industrial_1",
         },
         {
             type = "place_building",
-            building = "industrial_1",
+            building = "medium_generator",
         },
     },
     requirements = {},
-    costs = { type = "money", value = 8 },
+    costs = { type = "money", value = 10 },
 }
 
 cards.wind_generator = {
@@ -46,7 +46,7 @@ cards.wind_generator = {
         },
     },
     requirements = {},
-    costs = { type = "money", value = 10 },
+    costs = { type = "money", value = 8 },
     is_creeper = false,
 }
 
@@ -63,7 +63,7 @@ cards.small_office = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 6},
     is_creeper = false,
 }
 
@@ -81,7 +81,7 @@ cards.large_office = {
 
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 12},
     is_creeper = false,
 }
 
@@ -94,7 +94,7 @@ cards.tech_office = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 25},
     is_creeper = false,
 }
 
@@ -116,7 +116,7 @@ cards.small_residential = {
 
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 5},
     is_creeper = false,
 }
 
@@ -133,7 +133,7 @@ cards.medium_residential = {
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 10},
     is_creeper = false,
 }
 
@@ -150,7 +150,7 @@ cards.small_park = {
         },
     },
     requirements = {},
-    costs = { type = "money", value = 3 },
+    costs = { type = "money", value = 8 },
     is_creeper = false,
 }
 
@@ -163,7 +163,7 @@ cards.stadium = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 25},
     is_creeper = false,
 }
 
@@ -175,16 +175,12 @@ cards.university = {
             card = "tech_office", -- Autoloads from `cards`
         },
         {
-            type = "add_card",
-            card = "industrial_2", -- Autoloads from `cards`
-        },
-        {
             type = "place_building",
             building = "university",
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 35},
     is_creeper = false,
 }
 
@@ -197,7 +193,7 @@ cards.casino = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 25},
     is_creeper = false,
 }
 
@@ -214,7 +210,7 @@ cards.industrial_1 = {
         },
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 12},
     is_creeper = false,
 }
 
@@ -227,7 +223,7 @@ cards.industrial_2 = {
         }
     },
     requirements = {},
-    costs = {},
+    costs = { type = "money", value = 24},
     is_creeper = false,
 }
 
@@ -246,7 +242,40 @@ cards.blackout = {
             value = -10,
         },
     },
-    requirements = {{type="resource", property="power", relation="lt", value=30}},
+    requirements = {{type="resource", property="power", relation="lt", value=0}},
+    costs = {},
+    autoadd=true,
+    is_creeper = true,
+}
+
+cards.payback = {
+    name = "Payback",
+    effects = {
+        {
+            type = "resource",
+            resource="money",
+            value = -130,
+        },
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = true,
+}
+
+cards.loan = {
+    name = "Loan",
+    effects = {
+        {
+            type = "resource",
+            resource="money",
+            value = 100,
+        },
+        {
+            type = "add_card",
+            card="payback",
+        },
+    },
+    requirements = {{type="resource", property="money", relation="lt", value=-10}},
     costs = {},
     autoadd=true,
     is_creeper = true,

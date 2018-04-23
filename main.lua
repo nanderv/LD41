@@ -13,7 +13,7 @@ STATE = {
     },
     hand = {},
     discardPile = { "small_office", "small_generator", "small_residential"},
-    drawPile = {"blackout"},
+    drawPile = {},
     currentTurnEffects = {},
     cars = {},
 }
