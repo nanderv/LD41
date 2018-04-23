@@ -48,7 +48,6 @@ effects.add_card = {
         STATE.discardPile[#STATE.discardPile + 1] = effect.card
     end,
     draw = function(c, index,  time)
-        pprint(c.effects[index])
         scripts.rendering.renderCard.renderCard(scripts.gameobjects.cards[c.effects[index].card],1210-1200*(0.5-time), 568-800*(0.5-time), 0.5)
     end,
     duration = 0.5,
