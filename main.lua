@@ -6,13 +6,13 @@ end
 
 DEBUG = true
 STATE = {
-    properties = { population = 0, money = -50 },
+    properties = { population = 0, money = 50 },
     buildings = {
-        { x = 1, y = 1, building = "small_park" },
+        { x = 1, y = 1, building = "medium_generator" },
     },
     hand = {},
-    discardPile = { "small_office", "small_generator", "small_residential"},
-    drawPile = {"loan"},
+    discardPile = { },
+    drawPile = {"small_office", "small_generator", "small_residential"},
     currentTurnEffects = {},
     cars = {},
     helis = {},
