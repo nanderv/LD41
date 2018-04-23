@@ -130,6 +130,16 @@ function gamerules.addCard(state, card)
     table.insert(state.discardPile, card)
 end
 
+function gamerules.countBuildingTypes(state, types)
+    local i = 0
+    for _, building in ipairs(state.buildings) do
+        if list_contains(types, building.building) then
+            i = i + 1
+        end
+    end
+    return i
+end
+
 local beforeTurn = {
     housing = 0,
     happiness = 0,
@@ -232,5 +242,6 @@ gamerules.resources.nuisance = gamerules.getNuisance
 
 gamerules.resources.money = function(state) return state.properties.money end
 
+gamerules.resources.excessHousing = gamerules.getAvailableHousing
 
 return gamerules
