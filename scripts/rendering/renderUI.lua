@@ -34,8 +34,8 @@ R.drawCards = function(state, lowest)
         end
     end
     love.graphics.setColor(1, 1, 1)
-    scripts.rendering.renderCard.renderCard({ name = "Draw pile\n".. #state.drawPile .." cards" }, 10, 568, 0.5)
-    scripts.rendering.renderCard.renderCard({ name = "Discard pile\n".. #state.discardPile .." cards" }, 1210, 568, 0.5)
+    scripts.rendering.renderCard.cardBack({ name = "Draw pile\n".. #state.drawPile .." cards" }, 10, 568, 0.5)
+    scripts.rendering.renderCard.cardBack({ name = "Discard pile\n".. #state.discardPile .." cards" }, 1210, 568, 0.5)
 end
 
 R.drawCard = function(state, card, running, fromTheAir)
