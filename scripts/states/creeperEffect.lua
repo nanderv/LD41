@@ -81,12 +81,11 @@ effects.next_turn = {
 
 effects.resource = {
     exec = function(card, index)
-        pprint(STATE.currentTurnEffects)
         local c = scripts.gameobjects.cards[menu.cardData]
         local effect = c.effects[index]
         --        pprint(STATE.properties)
         --        pprint(effect)
-              STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
+        STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
     end,
     draw = function(card, index, time)
     end,
