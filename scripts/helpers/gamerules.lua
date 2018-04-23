@@ -157,7 +157,8 @@ function gamerules.startTurn(state)
         end
     end
     state.currentTurnEffects = newEffects
-    state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state)
+print(state.population)
+    state.properties.money = state.properties.money + gamerules.getMoneyPerTurn(state) + math.min ( -gamerules.getTotalResource(state, "work"), state.properties.population)
 
     beforeTurn.housing = gamerules.getTotalHousing(state)
     beforeTurn.happiness = gamerules.getHappiness(state)
@@ -206,10 +207,10 @@ function gamerules.endTurn(state)
         table.insert(changed, "energy_up_green")
     end
 
-    local nextMoney = gamerules.getMoneyPerTurn(state) + state.properties.money
+    local nextMoney = gamerules.getMoneyPerTurn(state) + state.properties.money + math.min ( gamerules.getTotalResource(state, "work"), state.properties.population)
     if beforeTurn.money > nextMoney then
         table.insert(changed, "money_down_red")
-    elseif beforeTurn.power < nextMoney then
+    elseif beforeTurn.money < nextMoney then
         table.insert(changed, "money_up_green")
     end
 

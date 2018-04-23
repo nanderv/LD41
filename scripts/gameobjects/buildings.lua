@@ -16,6 +16,11 @@ buildings.small_generator = {
             value = -2,
         },
         {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -2,
+        },
+        {
             type = "adjacent",
             filter = {
                 "small_residential",
@@ -27,6 +32,7 @@ buildings.small_generator = {
                     resource = "nuisance",
                     value = 2,
                 },
+
             },
         },
     },
@@ -34,7 +40,7 @@ buildings.small_generator = {
 
 buildings.medium_generator = {
     name = "Medium powerplant",
-    size = { x = 1, y = 1},
+    size = { x = 1, y = 1 },
     asset = "medium_generator",
     effects = {
         {
@@ -52,6 +58,11 @@ buildings.medium_generator = {
             filter = {
                 "small_residential",
                 "medium_residential",
+            },
+            {
+                type = "resource",
+                resource = "money_per_turn",
+                value = -4,
             },
             effects = {
                 {
@@ -194,48 +205,42 @@ buildings.stadium = {
     name = "Stadium",
     size = { x = 1, y = 1 },
     asset = "stadium",
-    effects = {
-    },
+    effects = {},
 }
 
 buildings.university = {
     name = "University",
     size = { x = 1, y = 1 },
     asset = "university",
-    effects = {
-    },
+    effects = {},
 }
 
 buildings.casino = {
     name = "Casino",
     size = { x = 1, y = 1 },
     asset = "casino",
-    effects = {
-    },
+    effects = {},
 }
 
 buildings.metro = {
     name = "Metro",
     size = { x = 1, y = 1 },
     asset = "metro",
-    effects = {
-    },
+    effects = {},
 }
 
 buildings.industrial_1 = {
     name = "Steel mill",
     size = { x = 1, y = 1 },
     asset = "steelmill",
-    effects = {
-    },
+    effects = {},
 }
 
 buildings.industrial_2 = {
     name = "Factory",
     size = { x = 1, y = 1 },
     asset = "factory",
-    effects = {
-    },
+    effects = {},
 }
 
 for k, v in pairs(buildings) do
