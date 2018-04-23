@@ -18,13 +18,13 @@ local function addHeli(buildingId)
         car.y = car.y + dt * 0.3
     end
     if car.direction == 2 then
-        car.x = car.x + dt * 0.3
+        car.x = car.x - dt * 0.3
     end
     if car.direction == 3 then
         car.y = car.y - dt * 0.3
     end
-    if car.direction == 4 then
-        car.x = car.x - dt * 0.3
+    if car.direction == 0 then
+        car.x = car.x + dt * 0.3
     end
     helis[buildingId] = car
 end
