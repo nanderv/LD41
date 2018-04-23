@@ -9,14 +9,14 @@ cards.small_generator = {
         },
         {
             type = "add_card",
-            card = "wind_generator",
+            card = "medium_generator",
         },
         {
             type = "place_building",
             building = "small_generator",
         }
     },
-    requirements = { { type = "resource", property = "power", relation = "gt", value = 15 } },
+    requirements = {},
     costs = { type = "money", value = 4 },
     is_creeper = false,
 }
@@ -25,8 +25,12 @@ cards.medium_generator = {
     name = "Power plant",
     effects = {
         {
+            type = "add_card",
+            card = "medium_generator",
+        },
+        {
             type = "place_building",
-            buildig = "medium_generator",
+            building = "industrial_1",
         },
     },
     requirements = {},
@@ -67,8 +71,26 @@ cards.large_office = {
     name = "Headquarters",
     effects = {
         {
+            type = "add_card",
+            card = "university", -- Autoloads from `cards`
+        },
+        {
             type = "place_building",
             building = "large_office",
+        },
+
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.tech_office = {
+    name = "HiTech Company",
+    effects = {
+        {
+            type = "place_building",
+            building = "tech_office",
         }
     },
     requirements = {},
@@ -80,9 +102,18 @@ cards.small_residential = {
     name = "Small house",
     effects = {
         {
+            type = "add_card",
+            card = "medium_residential",
+        },
+        {
+            type = "add_card",
+            card = "small_park",
+        },
+        {
             type = "place_building",
             building = "small_residential",
         },
+
     },
     requirements = {},
     costs = {},
@@ -90,8 +121,12 @@ cards.small_residential = {
 }
 
 cards.medium_residential = {
-    name = "Appartment building",
+    name = "Appartments",
     effects = {
+        {
+            type = "add_card",
+            card = "casino",
+        },
         {
             type = "place_building",
             building = "medium_residential",
@@ -105,6 +140,10 @@ cards.medium_residential = {
 cards.small_park = {
     name = "Small park",
     effects = {
+        {
+            type = "add_card",
+            card = "stadium",
+        },
         {
             type = "place_building",
             building = "small_park",
@@ -132,9 +171,17 @@ cards.university = {
     name = "University",
     effects = {
         {
+            type = "add_card",
+            card = "tech_office", -- Autoloads from `cards`
+        },
+        {
+            type = "add_card",
+            card = "industrial_2", -- Autoloads from `cards`
+        },
+        {
             type = "place_building",
             building = "university",
-        }
+        },
     },
     requirements = {},
     costs = {},
@@ -147,6 +194,36 @@ cards.casino = {
         {
             type = "place_building",
             building = "casino",
+        }
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.industrial_1 = {
+    name = "Steel mill",
+    effects = {
+        {
+            type = "add_card",
+            card = "industrial_2",
+        },
+        {
+            type = "place_building",
+            building = "industrial_1",
+        },
+    },
+    requirements = {},
+    costs = {},
+    is_creeper = false,
+}
+
+cards.industrial_2 = {
+    name = "Factory",
+    effects = {
+        {
+            type = "place_building",
+            building = "industrial_2",
         }
     },
     requirements = {},
