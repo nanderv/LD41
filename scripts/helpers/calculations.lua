@@ -71,18 +71,28 @@ function z.neighbouring(state, x, y)
     end
     return false
 end
-
+local nameChanger = {
+    money = {"Money", 1},
+    work = {"Work", -1},
+    nuisance = {"Nuisance", 1},
+    relaxation = {"Relaxation", 1},
+    housing = {"Housing", 1},
+    power = {"Nuisance", 1},
+    money_per_turn = {"Money per turn", 1},
+    draw = {"Hand limit: ", 1},
+}
 local opTable = {
     gt = "greater than",
     gte = "greater than or equal",
-    lt = "loewr than",
+    lt = "lower than",
     lte = "lower than or equal",
     eq = "equal to",
 }
 function z.requirementToString(requirement)
     if requirement.type == "resource" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
-        return requirement.property .. " " .. opTable[requirement.relation] .. " " .. requirement.value
+        local row = (nameChanger[requirement.property])
+        return row[1] .. " " .. opTable[requirement.relation] .. " " .. row[2]*requirement.value
     end
 end
 
@@ -129,7 +139,9 @@ function z.effectToString(effect)
         return "Adds card " .. scripts.gameobjects.cards[effect.card].name
     end
     if effect.type == "resource" then
-        return effect.resource .. ": " .. effect.value
+        local row = (nameChanger[effect.resource])
+
+        return row[1] .. ": " .. row[2]*effect.value
     end
     if effect.type == "adjacent" then
         local acount = 2

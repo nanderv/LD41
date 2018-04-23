@@ -116,17 +116,16 @@ R.drawStats = function(state)
         love.graphics.draw(icon.image, offsetX, offsetY, angle, 0.15)
     end
     local x, y = love.mouse.getPosition()
-    local xg, yg = x/GLOBSCALE(),  y / GLOBSCALE()
+    local xg, yg = x / GLOBSCALE(), y / GLOBSCALE()
     if yg < 30 then
-        love.graphics.draw(ICONS.backdrop_top.image, 0, 30, 0, 1, 2)
         local str = ""
-        if xg >200 and xg < 300 then
+        if xg > 200 and xg < 300 then
             str = "Population increases if there's enough happiness and enough work"
         end
-        if xg >300 and xg < 400 then
+        if xg > 300 and xg < 400 then
             str = "Power is produced by power-generators and consumed by other buildings."
         end
-        if xg >400 and xg < 500 then
+        if xg > 400 and xg < 500 then
             str = "Housing is created by residential buildings and apartments."
         end
         if xg > 500 and xg < 600 then
@@ -136,11 +135,14 @@ R.drawStats = function(state)
             str = "Happiness is relaxation minus nuisance minus population."
         end
         if xg > 700 and xg < 800 then
-            str = "Money is created by population with work, and is used by buildings (money_per_turn)."
+            str = "Money is created by the employed population, and is used by buildings (Money per turn)."
         end
-        love.graphics.setColor(0,0,0)
+        if str ~= "" then
+            love.graphics.draw(ICONS.backdrop_top.image, 0, 30, 0, 1, 2)
+        end
+        love.graphics.setColor(0, 0, 0)
         love.graphics.print(str, 40, 45)
-        love.graphics.setColor(1,1,1)
+        love.graphics.setColor(1, 1, 1)
     end
     R.updates = {}
 end

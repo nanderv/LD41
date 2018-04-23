@@ -111,7 +111,7 @@ function gamerules.getNextPopulation(state)
 
     population = population + math.min(gamerules.getHappiness(state), - gamerules.getAvailableWork(state)) * 0.25
 
-    return math.floor(math.min(population, gamerules.getTotalHousing(state)))
+    return math.max(0,math.floor(math.min(population, gamerules.getTotalHousing(state))))
 end
 
 function gamerules.shuffleDiscards(state)

@@ -99,11 +99,11 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     love.graphics.setFont(font)
     if card.effects then
         love.graphics.setFont(fonts["cardSectionTitle"])
-        love.graphics.print("Effects", (x) / scale + 15, (y) / scale + 190)
+        love.graphics.print("Effects", (x) / scale + 200, (y) / scale + 190)
         love.graphics.setFont(fonts["cardText"])
 
         for i, effect in ipairs(card.effects) do
-            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 15, (y) / scale + 190 + 20 * i)
+            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 10, (y) / scale + 170 + 20 * i)
         end
     end
     if building then

@@ -248,20 +248,6 @@ cards.blackout = {
     is_creeper = true,
 }
 
-cards.payback = {
-    name = "Payback",
-    effects = {
-        {
-            type = "resource",
-            resource="money",
-            value = -130,
-        },
-    },
-    requirements = {},
-    costs = {},
-    is_creeper = true,
-}
-
 cards.loan = {
     name = "Loan",
     effects = {
