@@ -99,12 +99,7 @@ end
 
 function gamerules.getCardDraw(state)
     local c = 3
-    for _, building in ipairs(state.buildings) do
-        if building.building == "university" then
-            c = c + 1
-        end
-    end
-    return c
+    return c + gamerules.getTotalResource(state, "draw")
 end
 
 function gamerules.getMoneyPerTurn(state)
