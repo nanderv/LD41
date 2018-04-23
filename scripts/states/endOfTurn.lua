@@ -25,7 +25,7 @@ end
 function menu:update(dt)
     scripts.rendering.renderUI.updateMove(dt)
     if #menu.creepers > 0 then
-        Gamestate.push(scripts.states.showCreepers, menu.creepers)
+        Gamestate.push(scripts.states.showCreepers, menu.creepers, menu.changes)
         menu.creepers = {}
     else
         menu.t = menu.t - dt

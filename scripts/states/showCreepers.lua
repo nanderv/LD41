@@ -1,8 +1,9 @@
 local menu = {} -- previously: Gamestate.new()
 menu.name = "showCreepers"
-function menu:enter(prev, cards)
+function menu:enter(prev, cards, changes)
     menu.prev = prev
     menu.cards = cards
+    menu.changes = changes
 end
 
 local offsets = {
@@ -24,6 +25,10 @@ function menu:draw()
     for i = 1, math.min(#offsets, #menu.cards) do
         scripts.rendering.renderCard.renderCard(menu.cards[i], offsets[i].x, offsets[i].y, 0.5)
     end
+end
+
+function menu:update()
+    scripts.rendering.renderUI.drawUpdates(menu.changes)
 end
 
 function menu:mousepressed(x, y, click)

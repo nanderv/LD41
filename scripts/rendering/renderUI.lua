@@ -57,7 +57,7 @@ R.drawMessage = function(message)
 end
 
 local iconOffset = function(index)
-    return 200 + (70 * index)
+    return 200 + (100 * index)
 end
 R.drawBuilding = function(state)
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
@@ -83,12 +83,12 @@ R.drawStats = function(state)
     love.graphics.draw(ICONS.happiness.image, iconOffset(4), .5, 0, 0.15)
     love.graphics.draw(ICONS.money.image, iconOffset(5), .5, 0, 0.15)
     love.graphics.setColor(0, 0, 0)
-    love.graphics.print(state.properties.population, iconOffset(0) + 35, 7)
-    love.graphics.print(gamerules.getExcessPower(state), iconOffset(1) + 35, 7)
-    love.graphics.print(gamerules.getTotalHousing(state), iconOffset(2) + 35, 7)
-    love.graphics.print(gamerules.getAvailableJobs(state), iconOffset(3) + 35, 7)
-    love.graphics.print(gamerules.getHappiness(state), iconOffset(4) + 35, 7)
-    love.graphics.print(state.properties.money, iconOffset(5) + 35, 7)
+    love.graphics.print(state.properties.population, iconOffset(0) + 35, 1)
+    love.graphics.print(gamerules.getExcessPower(state), iconOffset(1) + 35, 1)
+    love.graphics.print(gamerules.getTotalHousing(state), iconOffset(2) + 35, 1)
+    love.graphics.print(gamerules.getAvailableJobs(state), iconOffset(3) + 35, 1)
+    love.graphics.print(gamerules.getHappiness(state), iconOffset(4) + 35, 1)
+    love.graphics.print(state.properties.money, iconOffset(5) + 35, 1)
     love.graphics.setColor(1, 1, 1)
     love.graphics.setDefaultFilter("nearest", "nearest")
 
@@ -96,7 +96,7 @@ R.drawStats = function(state)
     for _, update in ipairs(R.updates) do
         local m = update:gmatch("[^_]+")
         local type, direction, color = m(), m(), m()
-        local offsetX = iconOffset(offsets[type]) + 45
+        local offsetX = iconOffset(offsets[type]) + 60
         local offsetY = 0.5
         local angle = 0
         if color == "red" and direction == "up" then
