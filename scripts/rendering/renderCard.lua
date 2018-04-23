@@ -19,7 +19,7 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(0.8, 0.8, 0.8)
+    love.graphics.setColor(1,1,1)
 
     love.graphics.draw(ICONS["eventCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
@@ -77,7 +77,7 @@ R.cardBack = function(card, x, y, scale, building) --named card for copy-paste r
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(0.8, 0.8, 0.8)
+    love.graphics.setColor(1,1,1)
 
     love.graphics.draw(ICONS["backCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(1, 1, 1)
@@ -91,7 +91,7 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(0.8, 0.8, 0.8)
+    love.graphics.setColor(1,1,1)
 
     love.graphics.draw(ICONS["buildingHover"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
@@ -171,7 +171,7 @@ R.renderBuildingCard = function(card, x, y, scale, building)
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(0.8, 0.8, 0.8)
+    love.graphics.setColor(1,1,1)
 
     love.graphics.draw(ICONS["buildingCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
