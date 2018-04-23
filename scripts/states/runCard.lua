@@ -26,6 +26,8 @@ function menu:enter(prev, state, cardIndex, card)
     menu.item = 1
     menu.time = 0
     menu.fromHand = not card
+    menu.cardDone = false
+    menu.cardEnding = false
 end
 
 local effects = {}
@@ -56,9 +58,11 @@ effects.add_card = {
 }
 effects.place_building = {
     exec = function(card, index)
+        print("HERE")
         local c = scripts.gameobjects.cards[menu.cardData]
         local effect = c.effects[index]
         scripts.gameobjects.buildings[effect.building]:build(STATE)
+        menu.cardEnding = true
     end,
     draw = function(card, index, time)
     end,
@@ -128,8 +132,10 @@ function menu:update(dt, wait)
                     table.remove(STATE.hand, menu.card)
                 end
             end
-            if not scripts.gameobjects.cards[menu.cardData].is_creeper then
+            if not scripts.gameobjects.cards[menu.cardData].is_creeper or menu.cardEnding then
                 Gamestate.pop()
+            else
+                menu.cardDone = true
             end
         end
     end
@@ -151,7 +157,7 @@ function menu:draw()
 end
 
 function menu:mousepressed(x, y, click)
-    if scripts.gameobjects.cards[menu.cardData].is_creeper then
+    if scripts.gameobjects.cards[menu.cardData].is_creeper and menu.cardDone then
         Gamestate.pop()
     else
         scripts.rendering.renderUI.mousePressed(x, y, click)

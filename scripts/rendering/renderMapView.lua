@@ -46,6 +46,32 @@ mapView.draw = function(lowest)
     end
 
     local objects = {}
+
+    local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
+    local b = scripts.helpers.calculations.hasBuilding(STATE, x, y)
+    if b and b.building then
+        -- calculate neighbours with adjacency
+        for _, effect in ipairs(scripts.gameobjects.buildings[b.building].effects) do
+            if effect.type == "adjacent" then
+                for _, i in ipairs({ -1, 0, 1 }) do
+                    for _, j in ipairs({ -1, 0, 1 }) do
+                        local zf = scripts.helpers.calculations.hasBuilding(STATE, x + i, y + j)
+                        if zf then
+                            local keepTrack = false
+                            for _, filter in ipairs(effect.filter) do
+                                keepTrack = keepTrack or filter == zf.building
+                            end
+                            zf = keepTrack
+                        end
+                        if not (i == 0 and j == 0) and zf  then
+                            objects[#objects + 1] = { position = { x = (b.x + i) * 64 + 32, y = (b.y + j) * 64, z = 0, r = 0 }, texture = "normalCursor" }
+                        end
+                    end
+                end
+            end
+        end
+    end
+
     for _, v in pairs(helis) do
         if math.floor(v.timer) == 0 then
             objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 60, r = v.direction * math.pi / 2 }, texture = "heli1" }
@@ -60,7 +86,7 @@ mapView.draw = function(lowest)
 
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    love.graphics.setColor(167/256, 188/256, 119/256)
+    love.graphics.setColor(167 / 256, 188 / 256, 119 / 256)
     love.graphics.rectangle("fill", 0, 0, 1366, 768)
     love.graphics.setColor(1, 1, 1)
     for _, v in ipairs(STATE.cars) do
@@ -79,7 +105,7 @@ mapView.draw = function(lowest)
     end
     if CAMERA.focus then
         local v = CAMERA.focus
-        if not scripts.helpers.calculations.hasBuilding(STATE, CAMERA.focus.x, CAMERA.focus.y) and scripts.helpers.calculations.neighbouring(STATE, CAMERA.focus.x, CAMERA.focus.y) then
+        if not b and scripts.helpers.calculations.neighbouring(STATE, CAMERA.focus.x, CAMERA.focus.y) then
             objects[#objects + 1] = { position = { x = v.x * 64 + 32, y = v.y * 64, z = 0, r = (v.x * 3 * v.y * 5) % 4 * math.pi / 2 }, texture = "underConstruction" }
         else
 

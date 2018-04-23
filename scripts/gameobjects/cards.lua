@@ -271,8 +271,8 @@ cards.loan = {
             value = 100,
         },
         {
-            type = "add_card",
-            card="payback",
+            type = "place_building",
+            building="taxCollection",
         },
     },
     requirements = {{type="resource", property="money", relation="lt", value=-10}},

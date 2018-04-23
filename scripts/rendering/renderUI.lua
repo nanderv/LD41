@@ -62,7 +62,6 @@ R.drawBuilding = function(state)
     local x, y = scripts.helpers.calculations.getCoordinatesFromScreenPosition(love.mouse.getPosition())
     local b = scripts.helpers.calculations.hasBuilding(state, x, y)
     if CAMERA.buildingFocus then
-
         b = { building = CAMERA.buildingFocus }
     end
 

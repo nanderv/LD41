@@ -407,6 +407,19 @@ buildings.start = {
     },
 }
 
+buildings.taxCollection = {
+    name = "Tax Collection",
+    size = { x = 1, y = 1 },
+    asset = "tax_building",
+    effects = {
+        {
+            type = "resource",
+            resource = "money_per_turn",
+            value = -10,
+        },
+    },
+}
+
 for k, v in pairs(buildings) do
     v.key = k
     function v:build(state)
