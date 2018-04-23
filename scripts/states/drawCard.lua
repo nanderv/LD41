@@ -37,9 +37,9 @@ function menu:update(dt, bo)
 
             if card.is_creeper then
                 if card:verifyRequirements(STATE) then
-                    Gamestate.push(scripts.states.creeperNothingHappened, STATE, nil,  c)
+                    Gamestate.push(scripts.states.creeperNothingHappened, STATE, nil, c)
                 else
-                    Gamestate.push(scripts.states.runCard, STATE, nil,  c)
+                    Gamestate.push(scripts.states.runCard, STATE, nil, c)
                 end
                 table.remove(STATE.drawPile, 1)
             else
@@ -50,15 +50,18 @@ function menu:update(dt, bo)
 
         else
             -- TODO: ADD DISCARD PILE SHUFFLING
-            if menu.hasShuffled then
+            if #STATE.discardPile > 0 then
+                Gamestate.push(scripts.states.shuffleDiscardPile)
+                c = STATE.drawPile[1]
+                menu.hasShuffled = true
+            else
                 Gamestate.pop()
             end
-            Gamestate.push(scripts.states.shuffleDiscardPile)
-            c = STATE.drawPile[1]
-            menu.hasShuffled = true
+
         end
     end
 end
+
 function menu:mousepressed(x, y, click)
     scripts.rendering.renderUI.mousePressed(x, y, click)
 end

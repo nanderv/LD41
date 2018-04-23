@@ -9,8 +9,7 @@ local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
     -- setup entities here
-    STATE.drawPile = scripts.helpers.gamerules.shuffle(STATE.discardPile)
-    STATE.discardPile = {}
+
     menu.animation = 1
 end
 
@@ -29,6 +28,8 @@ end
 function menu:update(dt)
     menu.animation = menu.animation - dt
     if menu.animation < 0 then
+        STATE.drawPile = scripts.helpers.gamerules.shuffle(STATE.discardPile)
+        STATE.discardPile = {}
         Gamestate.pop()
     end
     menu.prev:update(dt, true)
