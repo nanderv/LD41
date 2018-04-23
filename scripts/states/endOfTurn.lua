@@ -8,7 +8,7 @@
 local menu = {} -- previously: Gamestate.new()
 function menu:enter(prev)
     menu.prev = prev
-    menu.changes = scripts.helpers.gamerules.endTurn(STATE)
+    menu.changes, menu.creepers = scripts.helpers.gamerules.endTurn(STATE)
     scripts.helpers.gamerules.startTurn(STATE)
     -- setup entities here
     menu.t = 0.3
@@ -19,7 +19,13 @@ function menu:draw()
 end
 function menu:update(dt)
     scripts.rendering.renderUI.updateMove(dt)
-    menu.t = menu.t - dt
+    if #menu.creepers > 0 then
+        Gamestate.push(scripts.states.showCreepers)
+        menu.creepers = {}
+    else
+        menu.t = menu.t - dt
+    end
+
     if menu.t< 0 then
         menu.t = 0.7
         local c = STATE.hand[1]

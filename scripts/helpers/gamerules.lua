@@ -213,8 +213,14 @@ function gamerules.endTurn(state)
     elseif beforeTurn.money < nextMoney then
         table.insert(changed, "money_up_green")
     end
+    local creepers = {}
+    for _, card in pairs(scripts.gameobjects.cards) do
+        if card.autoadd and card:verifyRequirements(state) then
+            table.insert(creepers, card)
+        end
+    end
 
-    return changed
+    return changed, creepers
 end
 gamerules.resources = {}
 
