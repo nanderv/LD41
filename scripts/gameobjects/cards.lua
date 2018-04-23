@@ -246,8 +246,9 @@ cards.blackout = {
             value = -10,
         },
     },
-    requirements = {{type="resource", property="power", relation="gt", value=30}},
+    requirements = {{type="resource", property="power", relation="lt", value=30}},
     costs = {},
+    autoadd=true,
     is_creeper = true,
 }
 
