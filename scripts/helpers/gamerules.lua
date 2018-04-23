@@ -230,6 +230,7 @@ gamerules.resources.happiness = gamerules.getHappiness
 gamerules.resources.relaxation = gamerules.getRelaxation
 gamerules.resources.nuisance = gamerules.getNuisance
 
+gamerules.resources.money = function(state) return state.properties.money end
 
 
 return gamerules
