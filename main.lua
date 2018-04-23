@@ -37,6 +37,10 @@ Gamestate = require "lib.gamestate"
 function love.load()
     scripts.rendering.renderMap()
     scripts.rendering.loadAssets()
+    local music = love.audio.newSource("assets/main.mp3", "stream")
+    music:setVolume(0.7)
+    music:setLooping(true)
+    music:play()
     atlas = Atlas(1, 1, true, '', nil, false, false)
     for _, v in pairs(GFX) do
         v:addQuads()
