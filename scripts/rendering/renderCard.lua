@@ -8,7 +8,11 @@
 
 local R = {}
 local font = love.graphics.newFont(20)
-local titleFont = love.graphics.newFont("assets/fonts/American Purpose.ttf", 24)
+local fonts = {}
+local fontData = require "assets.fonts.settings"
+for k,v in pairs(fontData) do
+    fonts[k] = love.graphics.newFont("assets/fonts/"..v.font, v.size)
+end
 R.renderEventCard = function(card, x, y, scale, building) --named card for copy-paste reasons.
     love.graphics.setDefaultFilter("linear", "linear", 2)
 
@@ -56,7 +60,7 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
         end
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(titleFont)
+    love.graphics.setFont(fonts["cardTitle"])
     love.graphics.print(card.name, x / scale + 80, (y) / scale + 5)
     love.graphics.pop()
     love.graphics.setDefaultFilter("nearest", "nearest")
@@ -71,7 +75,7 @@ R.cardBack = function(card, x, y, scale, building) --named card for copy-paste r
 
     love.graphics.draw(ICONS["backCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(titleFont)
+    love.graphics.setFont(fonts["cardTitle"])
     love.graphics.print(card.name, x / scale + 80, (y) / scale + 120)
     love.graphics.pop()
 end
@@ -104,7 +108,7 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
         love.graphics.setColor(0, 0, 0)
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(titleFont)
+    love.graphics.setFont(fonts["cardTitle"])
     love.graphics.print(card.name, x / scale + 80, (y) / scale + 5)
     love.graphics.pop()
     love.graphics.setDefaultFilter("nearest", "nearest")
@@ -141,7 +145,7 @@ R.renderCreeper = function(card, x, y, scale)
         end
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(titleFont)
+    love.graphics.setFont(fonts["cardTitle"])
     love.graphics.print(card.name, x / scale + 80, (y) / scale + 5)
     love.graphics.pop()
     love.graphics.setDefaultFilter("nearest", "nearest")
@@ -204,7 +208,7 @@ R.renderBuildingCard = function(card, x, y, scale, building)
         love.graphics.setColor(0, 0, 0)
     end
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(titleFont)
+    love.graphics.setFont(fonts["cardTitle"])
     love.graphics.print(card.name, x / scale + 80, (y) / scale + 5)
     love.graphics.pop()
     love.graphics.setDefaultFilter("nearest", "nearest")

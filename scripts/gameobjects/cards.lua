@@ -16,7 +16,7 @@ cards.small_generator = {
             building = "small_generator",
         }
     },
-    requirements = { { type = "resource", property = "power", relation = "gt", value = 5 } },
+    requirements = { { type = "resource", property = "power", relation = "gt", value = 15 } },
     costs = { type = "money", value = 4 },
     is_creeper = false,
 }
