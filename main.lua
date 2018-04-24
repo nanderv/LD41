@@ -34,8 +34,8 @@ function love.load()
         v:addQuads()
     end
     Gamestate.registerEvents()
-    Gamestate.switch(scripts.states.dealHand)
-    scripts.helpers.gamerules.startTurn(STATE)
+    Gamestate.switch(scripts.states.menu)
+
     if DEBUG then
         local inspect = require "lib.inspect"
         require "lib.lovebird".monfn = function()

@@ -41,7 +41,7 @@ effects.add_cost = {
     end,
     draw = function(card, index, time)
     end,
-    duration = 1,
+    duration = 0,
     small = false,
 }
 effects.add_card = {
@@ -101,7 +101,7 @@ function menu:update(dt, wait)
         menu.time = menu.time + dt
 
         if menu.showing == "costs" then
-            if menu.time > 1 then
+            if menu.time > 0.2 then
                 menu.time = 0
                 menu.item = 1
                 menu.showing = "effects"

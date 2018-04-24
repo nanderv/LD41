@@ -54,9 +54,17 @@ R.drawCard = function(state, card, running, fromTheAir)
     end
 end
 R.drawMessage = function(message)
+    love.graphics.setColor(15/16, 15/16, 15/16)
     love.graphics.rectangle("fill", 300, 538, 766, 30)
     love.graphics.setColor(0, 0, 0)
     love.graphics.print(message, 320, 538)
+    love.graphics.setColor(1, 1, 1)
+end
+R.drawMessageDown = function(message)
+    love.graphics.setColor(15/16, 15/16, 15/16)
+    love.graphics.rectangle("fill", 300, 738, 766, 30)
+    love.graphics.setColor(0, 0, 0)
+    love.graphics.print(message, 320, 738)
     love.graphics.setColor(1, 1, 1)
 end
 local iconOffset = function(index)
@@ -144,7 +152,10 @@ R.drawStats = function(state)
             str = "Money is created by the employed population, and is used by buildings (Money per turn)."
         end
         if str ~= "" then
-            love.graphics.draw(ICONS.backdrop_top.image, 0, 30, 0, 1, 2)
+            love.graphics.setColor(15/16, 15/16, 15/16)
+            love.graphics.rectangle("fill", 0, 30, 1366, 60)
+
+
         end
         love.graphics.setColor(0, 0, 0)
         love.graphics.print(str, 40, 45)
