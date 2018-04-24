@@ -8,3 +8,4 @@ love.conf = function(t)
     t.fullscreen=false
     t.window.vsync = true
 end
+print(" TEST" )
