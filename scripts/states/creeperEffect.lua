@@ -83,9 +83,10 @@ effects.resource = {
     exec = function(card, index)
         local c = scripts.gameobjects.cards[menu.cardData]
         local effect = c.effects[index]
-        --        pprint(STATE.properties)
-        --        pprint(effect)
-        STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
+
+        if effect.resource and STATE.properties[effect.resource] then
+            STATE.properties[effect.resource] = STATE.properties[effect.resource] + effect.value
+        end
     end,
     draw = function(card, index, time)
     end,

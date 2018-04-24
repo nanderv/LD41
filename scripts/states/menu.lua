@@ -23,6 +23,7 @@ function menu:draw()
 
     scripts.rendering.renderMapView.draw(0, true)
     love.graphics.print("Card Major", 500,180)
+
     love.graphics.setFont(fonts["subtitle"])
     scripts.rendering.renderUI.drawMessageDown("                    Click to start\n\n A game by Peter van Dijk, Rolf van Kleef, Simon Struck, Nander Voortman\n\nWe hope you enjoy this game.")
     love.graphics.setFont(f)
@@ -31,7 +32,7 @@ function menu:draw()
 end
 
 function menu:update(dt, b)
-    CAMERA.r = CAMERA.r + 0.05*dt
+    CAMERA.r = CAMERA.r + 0.01*dt
 end
 
 function menu:keypressed(key)

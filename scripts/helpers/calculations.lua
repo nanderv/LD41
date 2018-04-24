@@ -71,15 +71,19 @@ function z.neighbouring(state, x, y)
     end
     return false
 end
+
 local nameChanger = {
-    money = {"Money", 1},
-    work = {"Work", -1},
-    nuisance = {"Nuisance", 1},
-    relaxation = {"Relaxation", 1},
-    housing = {"Housing", 1},
-    power = {"Power", 1},
-    money_per_turn = {"Money per turn", 1},
-    draw = {"Hand limit: ", 1},
+    money = { "Money", 1 },
+    work = { "Work", -1 },
+    nuisance = { "Nuisance", 1 },
+    relaxation = { "Relaxation", 1 },
+    happiness = { "Happiness", 1 },
+    housing = { "Housing", 1 },
+    excessHousing = { "Excesshousing", 1 },
+
+    power = { "Power", 1 },
+    money_per_turn = { "Money per turn", 1 },
+    draw = { "Hand limit: ", 1 },
 }
 local opTable = {
     gt = "greater than",
@@ -92,8 +96,12 @@ function z.requirementToString(requirement)
     if requirement.type == "resource" then
         --{ type = "resource", property = "power", relation = "gt", value = 5 }
         local row = (nameChanger[requirement.property])
-        if not row then print(requirement.property) end
-        return row[1] .. " " .. opTable[requirement.relation] .. " " .. row[2]*requirement.value
+        return row[1] .. " " .. opTable[requirement.relation] .. " " .. row[2] * requirement.value
+    end
+    if requirement.type == "building_count" then
+        --{ type = "resource", property = "power", relation = "gt", value = 5 }
+
+        return "Building count for buildings " .. opTable[requirement.relation] .. " " .. requirement.value
     end
 end
 
@@ -142,13 +150,13 @@ function z.effectToString(effect)
     if effect.type == "resource" then
         local row = (nameChanger[effect.resource])
 
-        return row[1] .. ": " .. row[2]*effect.value
+        return row[1] .. ": " .. row[2] * effect.value
     end
     if effect.type == "adjacent" then
         local acount = 2
         local str = "For every adjacent:\n"
         for _, v in ipairs(effect.filter) do
-            str = str .. "> " .. scripts.gameobjects.buildings[v].name.."\n"
+            str = str .. "> " .. scripts.gameobjects.buildings[v].name .. "\n"
             acount = acount + 1
         end
         str = str .. "do\n"
@@ -158,8 +166,6 @@ function z.effectToString(effect)
             acount = acount + 1 + (l or 0)
         end
         return str, acount
-
-
     end
     return ".."
 end

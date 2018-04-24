@@ -179,7 +179,7 @@ end
 
 R.updateMove = function(dt)
     local carsToRemove = {}
-    for i, car in ipairs(STATE.helis) do
+    for i, car in pairs(STATE.helis) do
         if car.direction == 1 then
             car.y = car.y + dt * 0.3
         end

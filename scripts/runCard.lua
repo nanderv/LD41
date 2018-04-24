@@ -66,5 +66,3 @@ end
 
 -- {property = "nuisance", value = 4}
 local c = Card("a", { { type = "resource", property = "population", relation = "lte", value = 5 } }, {{property="nuisance", value=4}}, {}, false)
-pprint(c:run(STATE))
-pprint(STATE)

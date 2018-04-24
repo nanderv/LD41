@@ -4,7 +4,7 @@ function table.clone(org)
     return { table.unpack(org) }
 end
 
-DEBUG = true
+DEBUG = false
 STATE = {
     properties = { population = 0, money = 50 },
     buildings = {
