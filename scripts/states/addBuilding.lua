@@ -20,7 +20,7 @@ function addBuilding:draw()
     addBuilding.prev.prev:draw(true)
     love.graphics.push()
     love.graphics.scale(GLOBSCALE())
-    scripts.rendering.renderUI.drawMessage("Place building .. " .. addBuilding.building)
+    scripts.rendering.renderUI.drawMessage("Place building .. " .. scripts.gameobjects.buildings[addBuilding.building].name)
     love.graphics.pop()
 end
 
