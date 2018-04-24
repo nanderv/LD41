@@ -213,7 +213,6 @@ function gamerules.endTurn(state)
     end
 
     local nextMoney = state.properties.money + gamerules.getMoneyPerTurn(state) + math.min ( -gamerules.getTotalResource(state, "work"), state.properties.population)
-    print(nextMoney, beforeTurn.money)
     if beforeTurn.money > nextMoney then
         table.insert(changed, "money_down_red")
     elseif beforeTurn.money < nextMoney then

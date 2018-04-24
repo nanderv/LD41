@@ -7,7 +7,11 @@
 --
 
 local R = { updates = {} }
-
+local fonts = {}
+local fontData = require "assets.fonts.settings"
+for k, v in pairs(fontData) do
+    fonts[k] = love.graphics.newFont("assets/fonts/" .. v.font, v.size)
+end
 R.renderBackdrop = function()
     -- Draw top bar
     love.graphics.draw(ICONS.backdrop_top.image, 0, 0)
@@ -77,6 +81,8 @@ R.drawStats = function(state)
     R.drawBuilding(state)
     local gamerules = scripts.helpers.gamerules
     love.graphics.getFont():setFilter("linear", "linear")
+    love.graphics.setFont(fonts["topBar"])
+
     love.graphics.setColor(1, 1, 1)
     love.graphics.draw(ICONS.population.image, iconOffset(0), .5, 0, 0.15)
     love.graphics.draw(ICONS.energy.image, iconOffset(1), .5, 0, 0.15)

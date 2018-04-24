@@ -58,7 +58,6 @@ effects.add_card = {
 }
 effects.place_building = {
     exec = function(card, index)
-        print("HERE")
         local c = scripts.gameobjects.cards[menu.cardData]
         local effect = c.effects[index]
         scripts.gameobjects.buildings[effect.building]:build(STATE)

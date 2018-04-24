@@ -8,7 +8,7 @@ DEBUG = true
 STATE = {
     properties = { population = 0, money = 50 },
     buildings = {
-        { x = 1, y = 1, building = "medium_generator" },
+        { x = 1, y = 1, building = "small_park" },
     },
     hand = {},
     discardPile = { },

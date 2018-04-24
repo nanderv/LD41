@@ -19,7 +19,7 @@ R.renderEventCard = function(card, x, y, scale, building) --named card for copy-
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.draw(ICONS["eventCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
@@ -77,12 +77,12 @@ R.cardBack = function(card, x, y, scale, building) --named card for copy-paste r
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.draw(ICONS["backCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(1, 1, 1)
-    love.graphics.setFont(fonts["cardTitle"])
-    love.graphics.print(card.name, x / scale + 80, (y) / scale + 120)
+    love.graphics.setFont(fonts["cardText2"])
+    love.graphics.print(card.name, x / scale + 70, (y) / scale + 120)
     love.graphics.pop()
 end
 R.renderBuilding = function(card, x, y, scale, building) --named card for copy-paste reasons.
@@ -91,7 +91,7 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.draw(ICONS["buildingHover"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
@@ -99,11 +99,15 @@ R.renderBuilding = function(card, x, y, scale, building) --named card for copy-p
     love.graphics.setFont(font)
     if card.effects then
         love.graphics.setFont(fonts["cardSectionTitle"])
-        love.graphics.print("Effects", (x) / scale + 200, (y) / scale + 190)
+        love.graphics.print("Effects", (x) / scale + 10, (y) / scale + 190)
         love.graphics.setFont(fonts["cardText"])
-
+        j = 0
         for i, effect in ipairs(card.effects) do
-            love.graphics.print(scripts.helpers.calculations.effectToString(effect), (x) / scale + 10, (y) / scale + 170 + 20 * i)
+            local s = scripts.helpers.calculations.effectToString(effect)
+            for z in s:gmatch("[^\r\n]+") do
+                love.graphics.print(z, (x) / scale + 10, (y) / scale + 210 + 20 * j)
+                j = j + 1
+            end
         end
     end
     if building then
@@ -171,7 +175,7 @@ R.renderBuildingCard = function(card, x, y, scale, building)
     love.graphics.push()
     love.graphics.scale(scale)
 
-    love.graphics.setColor(1,1,1)
+    love.graphics.setColor(1, 1, 1)
 
     love.graphics.draw(ICONS["buildingCard"].image, x / scale, y / scale, 0)
     love.graphics.setColor(0, 0, 0)
@@ -199,7 +203,6 @@ R.renderBuildingCard = function(card, x, y, scale, building)
         if #card.requirements > 0 then
             love.graphics.setFont(fonts["cardSectionTitle"])
             love.graphics.print("Requires", (x) / scale + 40, (y) / scale + 38)
-
         end
         love.graphics.setFont(fonts["cardText"])
 

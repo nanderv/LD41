@@ -38,7 +38,7 @@ buildings.small_generator = {
 }
 
 buildings.medium_generator = {
-    name = "Medium powerplant",
+    name = "Power plant",
     size = { x = 1, y = 1 },
     asset = "medium_generator",
     effects = {
