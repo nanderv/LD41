@@ -22,9 +22,10 @@ function menu:draw()
     love.graphics.setFont(fonts["title"])
 
     scripts.rendering.renderMapView.draw(0, true)
-    love.graphics.print("Card Major", 500,180)
+    love.graphics.print("Card Mayor", 500,180)
 
     love.graphics.setFont(fonts["subtitle"])
+
     scripts.rendering.renderUI.drawMessageDown("                    Click to start\n\n A game by Peter van Dijk, Rolf van Kleef, Simon Struck, Nander Voortman\n\nWe hope you enjoy this game.")
     love.graphics.setFont(f)
 

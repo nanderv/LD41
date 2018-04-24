@@ -267,28 +267,13 @@ cards.loan = {
     is_creeper = true,
 }
 
-cards.football_match = {
-    name = "Football match",
-    effects = {
-        {
-            type = "resource",
-            resource="happiness",
-            value = 30,
-        },
-    },
-    requirements = {{type="resource", property="happiness", relation="gt", value=30}},
-    costs = {},
-    autoadd=true,
-    is_creeper = true,
-}
-
 cards.demonstration = {
     name = "Demonstration",
     effects = {
         {
             type = "resource",
-            resource="nuisance",
-            value = 30,
+            resource="population",
+            value = -5,
         },
     },
     requirements = {{type="building_count", filter={"small_generator", "medium_generator"}, relation="gt", value=9}},
@@ -302,8 +287,8 @@ cards.vacancy = {
     effects = {
         {
             type = "resource",
-            resource = "nuisance",
-            value = 30,
+            resource = "money",
+            value = -10,
         },
     },
     requirements = {{type="resource", property="excessHousing", relation="gt", value=20}},
